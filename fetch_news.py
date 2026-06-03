@@ -164,35 +164,65 @@ def club_emoji(text: str) -> str:
 
 def generate_script(title: str, summary: str) -> list[str]:
     """
-    Generate a BallBlitz-style 8-10 line script from a title + summary.
+    Generate a BallBlitz-style 10-line script from a title + summary.
+    Always produces a full script — fills gaps with dramatic commentary.
     """
-    lines = []
-    em = club_emoji(title + " " + summary)
+    em  = club_emoji(title + " " + summary)
     cat = categorize(title, summary)
+    t   = (title + " " + summary).lower()
 
-    lines.append(f"{em} {title.upper()}")
-    lines.append("")
-
+    # Pull real sentences from summary
     sentences = re.split(r"(?<=[.!?])\s+", summary)
-    sentences = [s.strip() for s in sentences if len(s.strip()) > 20][:6]
+    sentences = [s.strip() for s in sentences if len(s.strip()) > 25][:4]
+
+    # Dynamic reaction line based on category
+    if "transfer" in cat.lower():
+        reaction   = "Bro… this transfer saga just got WILD. 🤯"
+        follow_up  = "The fee? The contract? The drama? It's ALL here. 💰"
+        opinion    = "Is this the signing of the season — or a MASSIVE mistake? 🤔"
+    elif "drama" in cat.lower():
+        reaction   = "Football Twitter is LOSING IT over this one. 💥"
+        follow_up  = "This is the kind of story that breaks the internet. 🌍"
+        opinion    = "Who's in the right here? Drop your honest take. 🗣️"
+    elif "injury" in cat.lower():
+        reaction   = "This is GUTTING news for fans everywhere. 😤"
+        follow_up  = "The timing could NOT be worse for this club. ⏰"
+        opinion    = "How big a blow is this on a scale of 1-10? 🤕"
+    elif "world cup" in cat.lower():
+        reaction   = "The World Cup drama is HEATING UP. 🏆🔥"
+        follow_up  = "Every match, every squad decision — it all matters now. 🌍"
+        opinion    = "Who do YOU think wins it all? Let us know below. 👇"
+    else:
+        reaction   = "This is one of the biggest football stories RIGHT NOW. ⚽"
+        follow_up  = "And the football world is paying close attention. 👀"
+        opinion    = "What do you think about this? Tell us below. 💬"
+
+    lines = [
+        f"{em} {title.upper()}",
+        "",
+        reaction,
+    ]
 
     if sentences:
-        lines.append(f"Here's everything you need to know... {em}")
-        for s in sentences[:4]:
+        lines.append(f"Here's the full breakdown... {em}")
+        for s in sentences:
             lines.append(f"👉 {s}")
+        # Fill remaining slots if fewer than 4 sentences
+        fillers = [follow_up, opinion]
+        for f in fillers:
+            if len([l for l in lines if l]) < 7:
+                lines.append(f)
     else:
-        lines.append(f"This is one of the BIGGEST stories in football right now.")
-        lines.append(f"And trust me — you need to hear this. 👀")
+        lines.append(follow_up)
+        lines.append(f"👉 {title}")
+        lines.append(f"👉 This story is developing — stay close for updates.")
+        lines.append(opinion)
 
     lines.append("")
-    lines.append(f"Category: {cat}")
-    lines.append(f"💬 Drop your take below — are YOU surprised? 👇")
-    lines.append(f"🔔 Follow for daily football drops!")
+    lines.append(f"🔥 Category: {cat}")
+    lines.append(f"💬 Drop your take below 👇  |  🔔 Follow for daily drops!")
 
-    # Pad to at least 8 lines
-    while len(lines) < 8:
-        lines.append("")
-
+    # Guarantee exactly 10 non-empty-padded lines
     return lines[:10]
 
 
