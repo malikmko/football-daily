@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚽ Football Daily Drop · June 03, 2026 · 10:11 UTC</title>
+<style>
+  :root {
+    --bg:      #0d0d0d;
+    --surface: #161616;
+    --card:    #1c1c1e;
+    --accent:  #ff3b30;
+    --gold:    #ffd60a;
+    --text:    #f2f2f7;
+    --muted:   #8e8e93;
+    --border:  #2c2c2e;
+    --green:   #30d158;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: linear-gradient(135deg, #1a0000 0%, #0d0d0d 60%, #001a33 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 28px 20px 22px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  header .logo { font-size: 2rem; letter-spacing: -1px; font-weight: 900; }
+  header .logo span { color: var(--accent); }
+  header .subtitle {
+    color: var(--muted);
+    font-size: .85rem;
+    margin-top: 4px;
+    letter-spacing: .5px;
+  }
+  .live-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+  /* ── Layout ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 30px 16px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ── Stats bar ── */
+  .stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: .8rem;
+    color: var(--muted);
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+  }
+  .stat strong { display: block; font-size: 1.4rem; color: var(--gold); }
+
+  /* ── Card ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 20px 18px;
+    transition: border-color .2s, transform .15s;
+  }
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .cat-badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .6px;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .time { color: var(--muted); font-size: .75rem; }
+
+  .story-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.35;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  /* ── Script block ── */
+  .script-block {
+    background: #111;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .script-label {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .sl {
+    font-size: .88rem;
+    color: #ddd;
+    margin-bottom: 4px;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ── Meta ── */
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .78rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .read-more {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: .3px;
+  }
+  .read-more:hover { text-decoration: underline; }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: .78rem;
+    padding: 30px 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 500px) {
+    .story-title { font-size: 1rem; }
+    header .logo { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">⚽ FOOTBALL DAILY <span>DROP</span> <span class="live-badge">LIVE</span></div>
+  <div class="subtitle">Last 24 hours · Top Stories · Transfers · Drama · World Cup</div>
+  <div class="subtitle" style="margin-top:6px;color:#555">Generated: June 03, 2026 · 10:11 UTC</div>
+</header>
+
+<main>
+  <div class="stats">
+    <div class="stat"><strong>20</strong>Stories Today</div>
+    <div class="stat"><strong>24h</strong>Window</div>
+    <div class="stat"><strong>10+</strong>Sources</div>
+    <div class="stat"><strong>🏆</strong>World Cup Mode</div>
+  </div>
+
+  
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 03 · 09:41 UTC</span>
+          </div>
+          <h2 class="story-title">🔵🔴 Marcus Rashford heads to World Cup in limbo despite proving his value to Barcelona</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔵🔴 MARCUS RASHFORD HEADS TO WORLD CUP IN LIMBO DESPITE PROVING HIS VALUE TO BARCELONA</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔵🔴</p>
+<p class='sl'>👉 Forward has generally thrived at the Camp Nou but Gordon’s arrival plus his salary and United’s transfer demands mean next move is not obvious The next chapter of Marcus Rashford’s dysfunctional relationship with Manchester United may involve a long summer waiting to discover where he plays next season.</p>
+<p class='sl'>👉 A state of limbo for a forward expected to start England’s World Cup opener against Croatia on 17 June in Dallas is an unusual predicament.</p>
+<p class='sl'>👉 Yet this is the latest juncture in a period of career uncertainty that began when the former head coach Ruben Amorim excluded Rashford from his first-team</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 The Guardian Football</span>
+            <a class="read-more" href="https://www.theguardian.com/football/2026/jun/03/marcus-rashford-heads-to-world-cup-in-limbo-despite-proving-his-value-to-barcelona" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 02 · 21:09 UTC</span>
+          </div>
+          <h2 class="story-title">🔴🦅 Liverpool agree deal in principle with Andoni Iraola for two-year contract</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔴🦅 LIVERPOOL AGREE DEAL IN PRINCIPLE WITH ANDONI IRAOLA FOR TWO-YEAR CONTRACT</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔴🦅</p>
+<p class='sl'>👉 Negotiations with Spaniard have progressed quickly Assistants Tommy Elphick and Shaun Cooper to join too Andoni Iraola is close to being confirmed as Liverpool’s new head coach after agreeing a deal in principle to succeed Arne Slot.</p>
+<p class='sl'>👉 Iraola has been in talks with Liverpool’s sporting director, Richard Hughes, over replacing Slot after the Dutchman was sacked on Saturday.</p>
+<p class='sl'>👉 As expected, negotiations have progressed quickly and the Spaniard is set to sign a two-year contract at Anfield.</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 The Guardian Football</span>
+            <a class="read-more" href="https://www.theguardian.com/football/2026/jun/02/liverpool-opened-talks-with-andoni-iraola-over-becoming-head-coach" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 02 · 14:14 UTC</span>
+          </div>
+          <h2 class="story-title">🔵🗼 Ligue 1 season awards: the big hits, misses, shocks and flops of 2025-26</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔵🗼 LIGUE 1 SEASON AWARDS: THE BIG HITS, MISSES, SHOCKS AND FLOPS OF 2025-26</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔵🗼</p>
+<p class='sl'>👉 It was a season to remember for Vitinha, Pierre Sage and Florian Thauvin but one to forget for Paul Pogba and Nice By Get French Football News “I like feeling the match go through me,” said Vitinha at the end of December.</p>
+<p class='sl'>👉 It’s an apt way for the 26-year-old to interpret his role at PSG, given that everything the team produces on the pitch involves him in some way or another.</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 The Guardian Football</span>
+            <a class="read-more" href="https://www.theguardian.com/football/2026/jun/02/ligue-1-season-awards-hits-misses-shocks-flops-2025-26-vitinha-sage-paul-pogba-nice" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 03 · 07:52 UTC</span>
+          </div>
+          <h2 class="story-title">🔵🔴 Transfer news LIVE: Barcelona remain keen on Marcus Rashford, Arsenal hunt German defender</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔵🔴 TRANSFER NEWS LIVE: BARCELONA REMAIN KEEN ON MARCUS RASHFORD, ARSENAL HUNT GERMAN DEFENDER</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔵🔴</p>
+<p class='sl'>👉 The summer transfer window is approaching quickly on the horizon and clubs are already busy working on deals to acquire their top targets.</p>
+<p class='sl'>👉 For most clubs, planning will already be complete and they...</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 Transfermarkt News</span>
+            <a class="read-more" href="https://www.transfermarkt.us/transfer-news-live-barcelona-remain-keen-on-rashford-arsenal-hunt-german-defender/view/news/445145" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 02 · 20:56 UTC</span>
+          </div>
+          <h2 class="story-title">🔴🦅 Liverpool agree deal with Iraola to succeed Slot</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔴🦅 LIVERPOOL AGREE DEAL WITH IRAOLA TO SUCCEED SLOT</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔴🦅</p>
+<p class='sl'>👉 Liverpool reach a verbal agreement with Andoni Iraola to take over as head coach following the sacking of Arne Slot.</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 BBC Sport Football</span>
+            <a class="read-more" href="https://www.bbc.com/sport/football/articles/c4gv1ydm4yro?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 02 · 22:24 UTC</span>
+          </div>
+          <h2 class="story-title">🔴😈 Man Utd agree £35m fee for Atalanta&#x27;s Ederson</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔴😈 MAN UTD AGREE £35M FEE FOR ATALANTA&#x27;S EDERSON</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔴😈</p>
+<p class='sl'>👉 Atalanta&#x27;s Brazilian midfielder Ederson is set to become Michael Carrick&#x27;s first signing after Manchester United agreed a £35m deal for the 26-year-old</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 BBC Sport Football</span>
+            <a class="read-more" href="https://www.bbc.com/sport/football/articles/c78q2dxv89go?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 02 · 16:15 UTC</span>
+          </div>
+          <h2 class="story-title">⚪👑 Konate close to joining Real Madrid after Liverpool exit</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>⚪👑 KONATE CLOSE TO JOINING REAL MADRID AFTER LIVERPOOL EXIT</p>
+<p class='sl'>Here&#x27;s everything you need to know... ⚪👑</p>
+<p class='sl'>👉 France defender Ibrahima Konate is in advanced talks with Real Madrid about joining the La Liga club on a free transfer.</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 BBC Sport Football</span>
+            <a class="read-more" href="https://www.bbc.com/sport/football/articles/cx218elj1v0o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 03 · 07:14 UTC</span>
+          </div>
+          <h2 class="story-title">🔴🦅 Sources: Liverpool reach deal to appoint Iraola</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔴🦅 SOURCES: LIVERPOOL REACH DEAL TO APPOINT IRAOLA</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔴🦅</p>
+<p class='sl'>👉 Liverpool have reached an agreement to appoint Andoni Iraola as their new head coach, sources confirmed to ESPN.</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 ESPN Soccer</span>
+            <a class="read-more" href="https://www.espn.com/soccer/story/_/id/48951109/liverpool-agreement-andoni-iraola-new-head-coach" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 03 · 08:28 UTC</span>
+          </div>
+          <h2 class="story-title">🔴⚪ Transfer rumors, news: Arsenal, Bayern battle for ...</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔴⚪ TRANSFER RUMORS, NEWS: ARSENAL, BAYERN BATTLE FOR ...</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔴⚪</p>
+<p class='sl'>👉 Eintracht Frankfurt full back Nathaniel Brown is of interest to Bayern Munich and Arsenal.</p>
+<p class='sl'>👉 Transfer Talk has the latest.</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 ESPN Soccer</span>
+            <a class="read-more" href="https://www.espn.com/soccer/story/_/id/48954336/transfer-rumors-news-arsenal-bayern-munich-battle-germany-defender-nathaniel-brown" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 02 · 17:51 UTC</span>
+          </div>
+          <h2 class="story-title">🔴😈 Ella Toone weighs up Manchester United future after tough campaign</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔴😈 ELLA TOONE WEIGHS UP MANCHESTER UNITED FUTURE AFTER TOUGH CAMPAIGN</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔴😈</p>
+<p class='sl'>👉 ‘Right now, I’m a Manchester United player’ says striker Toone back in England camp after injury absences Ella Toone has said she will have to decide “what’s best for me” as she weighs up her long-term future with one year remaining on her Manchester United contract.</p>
+<p class='sl'>👉 The England midfielder, speaking before Friday’s crucial Women’s World Cup qualifier in Spain, was asked about her club future and implied she would hold discussions with United this summer.</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 The Guardian Football</span>
+            <a class="read-more" href="https://www.theguardian.com/football/2026/jun/02/ella-toone-weighs-up-manchester-united-future-after-tough-campaign" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 02 · 12:00 UTC</span>
+          </div>
+          <h2 class="story-title">🏆🌍 Has the World Cup arrived yet? In the US, it depends on who you ask</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🏆🌍 HAS THE WORLD CUP ARRIVED YET? IN THE US, IT DEPENDS ON WHO YOU ASK</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🏆🌍</p>
+<p class='sl'>👉 Just days away from the opener, the tournament has yet to feel fully real for fans and even some players Sign up for the World Behind The Cup newsletter Organizationally speaking, the 2026 World Cup began on 13 June 2018, when then-Fifa general secretary Fatma Samoura sternly instructed the delegates to cast their vote in a cavernous conference hall in Moscow.</p>
+<p class='sl'>👉 Yet mere days away from the tournament’s kickoff in Mexico City, it doesn’t really feel like the thing is here yet.</p>
+<p class='sl'>👉 At least, not in the United States.</p>
+<p class='sl'>👉 And not in New York, the host city for the final.</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 The Guardian Football</span>
+            <a class="read-more" href="https://www.theguardian.com/football/2026/jun/02/world-cup-arrival-usa-2026" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">📰 LATEST</span>
+            <span class="time">Jun 02 · 15:39 UTC</span>
+          </div>
+          <h2 class="story-title">⚪👑 Fulham confirm Marco Silva is leaving as head coach amid Benfica interest</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>⚪👑 FULHAM CONFIRM MARCO SILVA IS LEAVING AS HEAD COACH AMID BENFICA INTEREST</p>
+<p class='sl'>Here&#x27;s everything you need to know... ⚪👑</p>
+<p class='sl'>👉 Silva had been in charge at Fulham for five years Benfica poised to lose José Mourinho for Madrid job Fulham have announced that Marco Silva is leaving after five years as their head coach.</p>
+<p class='sl'>👉 The Portuguese is wanted by Benfica, who are poised to lose José Mourinho to Real Madrid.</p>
+<p class='sl'>👉 Silva departs having led Fulham to 11th in the Premier League for the second successive season, the fourth time the club have finished mid-table since winning promotion in Silva’s first campaign.</p>
+<p class='sl'>👉 He also took the team to the Carabao Cup semi-finals in 2023‑24, losing over two legs to Liverpool, as well as to their reco</p>
+<p class='sl'>Category: 📰 LATEST</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 The Guardian Football</span>
+            <a class="read-more" href="https://www.theguardian.com/football/2026/jun/02/fulham-marco-silva-leaving-head-coach-benfica" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 03 · 08:26 UTC</span>
+          </div>
+          <h2 class="story-title">🔵🔴 Anthony Gordon climbs the list - the highest accumulated transfer fees for English players</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔵🔴 ANTHONY GORDON CLIMBS THE LIST - THE HIGHEST ACCUMULATED TRANSFER FEES FOR ENGLISH PLAYERS</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔵🔴</p>
+<p class='sl'>👉 The first mega-money transfer of what looks set to be a busy summer window saw Barcelona swiftly wrap up the signing of Newcastle winger Anthony Gordon.</p>
+<p class='sl'>👉 The Catalan giants paid an initial €80...</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 Transfermarkt News</span>
+            <a class="read-more" href="https://www.transfermarkt.us/anthony-gordon-climbs-the-list-the-highest-accumulated-transfer-fees-for-english-players/view/news/480447" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">💥 DRAMA</span>
+            <span class="time">Jun 02 · 14:02 UTC</span>
+          </div>
+          <h2 class="story-title">🔵🔴 Four clubs who could sign Chelsea&#x27;s Marc Cucurella this summer including Barcelona &amp; Manchester City</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔵🔴 FOUR CLUBS WHO COULD SIGN CHELSEA&#x27;S MARC CUCURELLA THIS SUMMER INCLUDING BARCELONA &amp; MANCHESTER CITY</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔵🔴</p>
+<p class='sl'>👉 As is usually the case for Chelsea, it looks set to be another busy summer at Stamford Bridge.</p>
+<p class='sl'>👉 Xabi Alonso will arrive as the new manager, after both Enzo Maresca and Liam Rosenior were sacked last...</p>
+<p class='sl'>Category: 💥 DRAMA</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 Transfermarkt News</span>
+            <a class="read-more" href="https://www.transfermarkt.us/interest-from-spain-amp-pl-four-clubs-who-could-sign-chelseas-marc-cucurella-this-summer/view/news/480430" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">💥 DRAMA</span>
+            <span class="time">Jun 02 · 12:13 UTC</span>
+          </div>
+          <h2 class="story-title">🔵🗼 Messi 2nd, Kvaratshkhelia 4th: Biggest market value upgrades in history</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔵🗼 MESSI 2ND, KVARATSHKHELIA 4TH: BIGGEST MARKET VALUE UPGRADES IN HISTORY</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔵🗼</p>
+<p class='sl'>👉 It was another famous season for PSG as they retained their Champions League crown with Khvicha Kvaratskhelia their talisman.</p>
+<p class='sl'>👉 The Georgian winger won the French giants the penalty, which Ousmane...</p>
+<p class='sl'>Category: 💥 DRAMA</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 Transfermarkt News</span>
+            <a class="read-more" href="https://www.transfermarkt.us/messi-2nd-kvaratshkhelia-4th-biggest-market-value-upgrades-in-single-update/view/news/480422" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 03 · 10:03 UTC</span>
+          </div>
+          <h2 class="story-title">🔴😈 Ederson contract details revealed as Manchester United seal first summer transfer: report</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔴😈 EDERSON CONTRACT DETAILS REVEALED AS MANCHESTER UNITED SEAL FIRST SUMMER TRANSFER: REPORT</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔴😈</p>
+<p class='sl'>👉 The Brazilian will make an Old Trafford arrival this summer</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 FourFourTwo</span>
+            <a class="read-more" href="https://www.fourfourtwo.com/transfer/ederson-contract-details-revealed-as-manchester-united-seal-first-summer-transfer-report" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">💥 DRAMA</span>
+            <span class="time">Jun 02 · 14:06 UTC</span>
+          </div>
+          <h2 class="story-title">🏆🌍 FIFA World Cup spot-fixing scandal emerges as yellow card suspicions revealed: report</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🏆🌍 FIFA WORLD CUP SPOT-FIXING SCANDAL EMERGES AS YELLOW CARD SUSPICIONS REVEALED: REPORT</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🏆🌍</p>
+<p class='sl'>👉 The players involved are set to feature in this summer&#x27;s World Cup</p>
+<p class='sl'>Category: 💥 DRAMA</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 FourFourTwo</span>
+            <a class="read-more" href="https://www.fourfourtwo.com/competition/fifa-world-cup-spot-fixing-scandal-emerges-as-yellow-card-suspicions-revealed" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">💥 DRAMA</span>
+            <span class="time">Jun 02 · 22:45 UTC</span>
+          </div>
+          <h2 class="story-title">🏆🌍 Sciver-Brunt &#x27;ready to go&#x27; for T20 World Cup - but &#x27;probably&#x27; won&#x27;t bowl</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🏆🌍 SCIVER-BRUNT &#x27;READY TO GO&#x27; FOR T20 WORLD CUP - BUT &#x27;PROBABLY&#x27; WON&#x27;T BOWL</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🏆🌍</p>
+<p class='sl'>👉 England head coach Charlotte Edwards says captain Nat Sciver-Brunt is &quot;ready to go&quot; for the home T20 World Cup - but unlikely to bowl.</p>
+<p class='sl'>Category: 💥 DRAMA</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 Sky Sports Football</span>
+            <a class="read-more" href="https://www.skysports.com/cricket/news/12040/13550286/england-captain-nat-sciver-brunt-ready-to-go-for-t20-world-cup-but-probably-wont-bowl-says-coach-charlotte-edwards" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 02 · 22:30 UTC</span>
+          </div>
+          <h2 class="story-title">🔴😈 Man Utd agree deal to sign Ederson</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>🔴😈 MAN UTD AGREE DEAL TO SIGN EDERSON</p>
+<p class='sl'>Here&#x27;s everything you need to know... 🔴😈</p>
+<p class='sl'>👉 Manchester United have agreed a deal to sign Atalanta midfielder Ederson.</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 Sky Sports Football</span>
+            <a class="read-more" href="https://www.skysports.com/football/news/12040/13548678/man-utd-agree-ederson-deal-atalanta-midfielder-set-for-old-trafford-in-38m-transfer" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-header">
+            <span class="cat-badge">🔥 TRANSFER</span>
+            <span class="time">Jun 03 · 07:57 UTC</span>
+          </div>
+          <h2 class="story-title">⚽ Leclerc signs two-year contract extension with Ferrari</h2>
+          <div class="script-block">
+            <div class="script-label">📝 SHORT SCRIPT (copy-ready)</div>
+            <p class='sl'>⚽ LECLERC SIGNS TWO-YEAR CONTRACT EXTENSION WITH FERRARI</p>
+<p class='sl'>Here&#x27;s everything you need to know... ⚽</p>
+<p class='sl'>👉 Charles Leclerc has signed a two-year contract extension with Ferrari that keeps him with the team until the end of the 2028 Formula 1 season, Sky Sports News understands.</p>
+<p class='sl'>Category: 🔥 TRANSFER</p>
+<p class='sl'>💬 Drop your take below — are YOU surprised? 👇</p>
+<p class='sl'>🔔 Follow for daily football drops!</p>
+          </div>
+          <div class="meta">
+            <span class="source">📡 Sky Sports Football</span>
+            <a class="read-more" href="https://www.skysports.com/f1/news/12040/13550326/charles-leclerc-ferrari-driver-signs-two-year-contact-extension-until-2028-with-team-ahead-of-home-monaco-grand-prix" target="_blank" rel="noopener">
+              Read Full Story →
+            </a>
+          </div>
+        </article>
+        
+</main>
+
+<footer>
+  ⚽ Football Daily Drop · Auto-updated every 24 hours · Research powered by RSS + AI scripting
+</footer>
+
+</body>
+</html>
