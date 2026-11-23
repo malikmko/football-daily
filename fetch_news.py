@@ -322,7 +322,7 @@ def generate_script(title: str, summary: str) -> dict:
     }
 
 
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 AI_PICKS = 12          # how many stories Gemini keeps
 AI_CANDIDATES = 40     # how many keyword-ranked stories Gemini chooses from
 
