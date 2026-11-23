@@ -493,6 +493,12 @@ STORIES:
             title = str(p["title"]).strip()
             if not script or not title:
                 continue
+            tags = [str(h).strip() for h in (p.get("hashtags") or []) if str(h).strip()]
+            # Gemini sometimes repeats hashtags inside the title: move them to the tag row
+            m = re.search(r"(?:\s+#\w+)+\s*$", title)
+            if m:
+                tags = tags or re.findall(r"#\w+", m.group(0))
+                title = title[:m.start()].rstrip()
             a = dict(cands[i])
             a["ai"] = {
                 "format":    _fmt_key(p.get("format", "")) or "BallBlitz",
@@ -500,7 +506,7 @@ STORIES:
                 "why_viral": str(p.get("why_viral", "")).strip(),
                 "title":     title,
                 "caption":   str(p.get("caption", "") or "").strip(),
-                "hashtags":  [str(h).strip() for h in (p.get("hashtags") or []) if str(h).strip()],
+                "hashtags":  tags,
                 "script":    script,
             }
             used.add(i)
