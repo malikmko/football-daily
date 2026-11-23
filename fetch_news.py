@@ -321,6 +321,96 @@ def generate_script(title: str, summary: str) -> dict:
     }
 
 
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+AI_PICKS = 12          # how many stories Gemini keeps
+AI_CANDIDATES = 40     # how many keyword-ranked stories Gemini chooses from
+
+_VALID_CATS = {
+    "TRANSFER": "🔥 TRANSFER", "DRAMA": "💥 DRAMA", "INJURY": "🤕 INJURY",
+    "WORLD CUP": "🌍 WORLD CUP", "LATEST": "📰 LATEST",
+}
+
+
+def ai_rank_and_script(articles: list[dict]) -> list[dict]:
+    """
+    Sends the top keyword-ranked stories to Gemini in ONE call. Gemini picks the
+    most viral AI_PICKS stories and writes a BallBlitz-style 4-act script for each.
+    Returns the chosen articles with an "ai" dict attached. Returns [] when no
+    API key is set or anything fails, so the caller falls back to keyword mode.
+    """
+    key = os.environ.get("GEMINI_API_KEY", "").strip()
+    if not key:
+        print("  [ai] GEMINI_API_KEY not set - using keyword mode")
+        return []
+
+    cands = articles[:AI_CANDIDATES]
+    listing = "\n".join(
+        f"[{i}] ({a['source']}) {a['title']} - {a['summary'][:300]}"
+        for i, a in enumerate(cands)
+    )
+    prompt = f"""You are a football short-form video producer in the BallBlitz90 / FutVibes style.
+Below are football stories from the last 24 hours. Pick the {AI_PICKS} stories most likely to go
+viral as 60-second shorts (shock, drama, big transfers, World Cup, huge names), skipping
+duplicates of the same story. For each pick, write a script using ONLY facts present in the
+story text - never invent quotes, fees or results.
+
+Return a JSON array of {AI_PICKS} objects, best first, each with exactly these keys:
+  "index": the [number] of the story,
+  "category": one of "TRANSFER", "DRAMA", "INJURY", "WORLD CUP", "LATEST",
+  "viral_title": punchy headline ending in 2 emojis,
+  "hook": one sentence, 0-3s, punchline first,
+  "context": 1-2 sentences, 4-15s, why viewers should care,
+  "reveal": array of 3-4 short punchy factual lines, 16-50s,
+  "punchline": one opinionated sentence, 50-60s,
+  "cta": a comment-bait question plus "Follow for daily football drops."
+
+STORIES:
+{listing}"""
+
+    body = json.dumps({
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"responseMimeType": "application/json", "temperature": 0.8},
+    }).encode("utf-8")
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
+    req = urllib.request.Request(
+        url, data=body, method="POST",
+        headers={"Content-Type": "application/json", "x-goog-api-key": key},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=90) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        text = data["candidates"][0]["content"]["parts"][0]["text"]
+        picks = json.loads(text)
+    except Exception as e:
+        print(f"  [ai] Gemini failed ({type(e).__name__}) - using keyword mode")
+        return []
+
+    chosen, used = [], set()
+    for p in picks if isinstance(picks, list) else []:
+        try:
+            i = int(p["index"])
+            if i in used or not 0 <= i < len(cands):
+                continue
+            reveal = [str(x).strip() for x in p["reveal"] if str(x).strip()]
+            cat = _VALID_CATS.get(str(p.get("category", "")).upper(), "📰 LATEST")
+            a = dict(cands[i])
+            a["ai"] = {
+                "viral_title": str(p["viral_title"]).strip(),
+                "hook":        "[0–3s] " + str(p["hook"]).strip(),
+                "context":     "[4–15s] " + str(p["context"]).strip(),
+                "reveal":      "[16–50s]\n" + "\n".join(f"  👉 {r}" for r in reveal),
+                "punchline":   "[50–60s] " + str(p["punchline"]).strip(),
+                "cta":         str(p["cta"]).strip(),
+                "cat":         cat,
+            }
+            used.add(i)
+            chosen.append(a)
+        except Exception:
+            continue
+    print(f"  [ai] Gemini ({GEMINI_MODEL}) picked {len(chosen)} stories")
+    return chosen
+
+
 def _cat_css(cat: str) -> str:
     if "TRANSFER" in cat:   return "cat-transfer"
     if "DRAMA"    in cat:   return "cat-drama"
@@ -336,7 +426,7 @@ def build_html(articles: list[dict], generated_at: str) -> str:
         if shown >= 20:
             break
 
-        sc = generate_script(a["title"], a["summary"])
+        sc = a.get("ai") or generate_script(a["title"], a["summary"])
 
         # Format time
         try:
@@ -686,6 +776,10 @@ if __name__ == "__main__":
     print("Football Daily Drop -- fetching last 24h stories...")
     articles = fetch_articles(hours=24)
     print(f"   Found {len(articles)} articles")
+
+    ai_articles = ai_rank_and_script(articles)
+    if ai_articles:
+        articles = ai_articles
 
     now = datetime.now(timezone.utc).strftime("%B %d, %Y · %H:%M UTC")
     page = build_html(articles, now)

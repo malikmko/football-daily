@@ -25,6 +25,8 @@ jobs:
         run: pip install feedparser
 
       - name: Run football research
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python fetch_news.py
 
       - name: Deploy to GitHub Pages
