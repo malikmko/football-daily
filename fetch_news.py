@@ -12,6 +12,7 @@ import html
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 import urllib.request
+import urllib.error
 import urllib.parse
 
 # ── RSS sources ────────────────────────────────────────────────────────────────
@@ -381,8 +382,12 @@ STORIES:
             data = json.loads(resp.read().decode("utf-8"))
         text = data["candidates"][0]["content"]["parts"][0]["text"]
         picks = json.loads(text)
+    except urllib.error.HTTPError as e:
+        detail = e.read().decode("utf-8", "replace")[:400]
+        print(f"  [ai] Gemini HTTP {e.code}: {detail} - using keyword mode")
+        return []
     except Exception as e:
-        print(f"  [ai] Gemini failed ({type(e).__name__}) - using keyword mode")
+        print(f"  [ai] Gemini failed ({type(e).__name__}: {e}) - using keyword mode")
         return []
 
     chosen, used = [], set()
