@@ -3,843 +3,350 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Football Daily Drop · November 23, 2026 · 05:07 UTC</title>
+<title>Football Daily Drop · November 23, 2026 · 05:24 UTC</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg:       #0a0a0a;
-    --bg2:      #111111;
-    --bg3:      #1a1a1a;
-    --border:   rgba(255,255,255,0.07);
-    --text:     #f0f0f0;
-    --muted:    #888;
-    --orange:   #FF6B35;
-    --blue:     #00C9FF;
-    --green:    #1DB954;
-    --yellow:   #F5C518;
-    --red:      #E53935;
+    --bg:#0a0a0a; --bg2:#121212; --bg3:#1b1b1b; --border:rgba(255,255,255,.08);
+    --text:#f2f2f2; --muted:#8a8a8a; --orange:#FF6B35; --blue:#00C9FF; --green:#1DB954;
+    --yellow:#F5C518; --red:#E53935; --pink:#ff4fa3; --purple:#a77bff;
   }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    font-size: 15px;
-  }
-
-  /* ── HEADER ── */
-  .hero {
-    padding: 50px 40px 36px;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '⚽';
-    position: absolute;
-    right: -10px; top: -20px;
-    font-size: 200px;
-    opacity: 0.04;
-    pointer-events: none;
-  }
-  .hero-label {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 10px;
-  }
-  .hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(26px, 4vw, 48px);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 10px;
-  }
-  .hero h1 span { color: var(--orange); }
-  .hero p { color: var(--muted); font-size: 13px; max-width: 540px; }
-  .live-pill {
-    display: inline-block;
-    background: var(--red);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-left: 10px;
-    vertical-align: middle;
-    animation: blink 2s infinite;
-  }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.5} }
-
-  /* ── STATS ── */
-  .stats-bar {
-    display: flex;
-    gap: 10px;
-    padding: 20px 40px;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
-  .stat-chip {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 18px;
-    flex: 1;
-    min-width: 110px;
-    text-align: center;
-  }
-  .stat-chip .sv {
-    font-family: 'Syne', sans-serif;
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--yellow);
-    display: block;
-  }
-  .stat-chip .sl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-
-  /* ── MAIN ── */
-  main { max-width: 900px; margin: 0 auto; padding: 30px 24px 70px; display: flex; flex-direction: column; gap: 22px; }
-
-  /* ── CARD ── */
-  .card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    overflow: hidden;
-    transition: border-color .2s, transform .15s;
-  }
-  .card:hover { border-color: rgba(255,107,53,0.4); transform: translateY(-2px); }
-
-  .card-top {
-    padding: 18px 20px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .cat-badge {
-    font-family: 'Syne', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 20px;
-    border: 1px solid;
-  }
-  .cat-transfer  { color: var(--yellow); border-color: rgba(245,197,24,0.3); background: rgba(245,197,24,0.07); }
-  .cat-drama     { color: var(--orange); border-color: rgba(255,107,53,0.3); background: rgba(255,107,53,0.07); }
-  .cat-injury    { color: var(--blue);   border-color: rgba(0,201,255,0.3);  background: rgba(0,201,255,0.07); }
-  .cat-worldcup  { color: var(--green);  border-color: rgba(29,185,84,0.3);  background: rgba(29,185,84,0.07); }
-  .cat-latest    { color: var(--muted);  border-color: var(--border);        background: var(--bg3); }
-  .pub-time { font-size: 12px; color: var(--muted); }
-
-  .raw-title {
-    padding: 10px 20px 0;
-    font-size: 11px;
-    color: var(--muted);
-    font-style: italic;
-  }
-  .viral-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.15rem;
-    font-weight: 800;
-    line-height: 1.3;
-    padding: 8px 20px 16px;
-    color: var(--text);
-  }
-
-  /* ── SCRIPT BLOCK ── */
-  .script-wrap {
-    border-top: 1px solid var(--border);
-    background: #0d0d0d;
-  }
-  .script-top-label {
-    padding: 8px 16px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--orange);
-    background: rgba(255,107,53,0.06);
-    border-bottom: 1px solid var(--border);
-  }
-  .act {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-    line-height: 1.6;
-  }
-  .act:last-child { border-bottom: none; }
-  .act-label {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-    padding: 2px 7px;
-    border-radius: 4px;
-  }
-  .act-hook     .act-label { background: rgba(229,57,53,0.15);   color: var(--red); }
-  .act-context  .act-label { background: rgba(0,201,255,0.12);   color: var(--blue); }
-  .act-reveal   .act-label { background: rgba(29,185,84,0.12);   color: var(--green); }
-  .act-punchline .act-label{ background: rgba(245,197,24,0.12);  color: var(--yellow); }
-  .act-cta      .act-label { background: rgba(255,107,53,0.12);  color: var(--orange); }
-
-  .act p { color: #ccc; }
-  .act-reveal-header { color: var(--muted); font-size: 11px; margin-bottom: 6px; }
-  .reveal-list { list-style: none; padding: 0; margin: 0; }
-  .reveal-list li {
-    color: #ddd;
-    padding: 3px 0 3px 16px;
-    position: relative;
-    font-size: 13px;
-  }
-  .reveal-list li::before { content: '→'; position: absolute; left: 0; color: var(--green); }
-  .act-cta p { color: var(--orange); font-weight: 500; }
-
-  /* ── META ── */
-  .meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
-    font-size: 12px;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
-    flex-wrap: wrap;
-    gap: 6px;
-    background: var(--bg2);
-  }
-  .read-more {
-    color: var(--green);
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .read-more:hover { text-decoration: underline; }
-
-  /* ── FOOTER ── */
-  footer {
-    text-align: center;
-    color: var(--muted);
-    font-size: 12px;
-    padding: 28px 20px;
-    border-top: 1px solid var(--border);
-  }
-
-  @media (max-width: 600px) {
-    .hero { padding: 36px 20px 28px; }
-    .stats-bar { padding: 16px 20px; }
-    main { padding: 20px 14px 50px; }
-  }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; font-size:15px; }
+  .hero { padding:44px 28px 26px; max-width:1000px; margin:0 auto; }
+  .hero-label { font-family:'Syne',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--green); margin-bottom:8px; }
+  .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(26px,4.5vw,46px); font-weight:800; line-height:1.1; }
+  .hero h1 span { color:var(--orange); }
+  .hero p { color:var(--muted); font-size:13px; max-width:620px; margin-top:8px; }
+  .toolbar { max-width:1000px; margin:0 auto; padding:0 28px 18px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .chip { background:var(--bg3); border:1px solid var(--border); color:#ccc; border-radius:20px; padding:5px 13px;
+          font-size:12px; cursor:pointer; font-family:inherit; }
+  .chip:hover { border-color:rgba(255,255,255,.25); }
+  .chip.on { background:var(--orange); border-color:var(--orange); color:#111; font-weight:700; }
+  .toolbar .count { margin-left:auto; color:var(--muted); font-size:12px; }
+  main { max-width:1000px; margin:0 auto; padding:6px 28px 70px; display:grid; grid-template-columns:repeat(auto-fill,minmax(440px,1fr)); gap:20px; }
+  .card { background:var(--bg2); border:1px solid var(--border); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
+  .card.hide { display:none; }
+  .card-head { padding:16px 18px 0; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .rank { font-family:'Syne',sans-serif; font-weight:800; font-size:13px; color:#111; background:var(--yellow); border-radius:6px; padding:1px 8px; }
+  .fmt { font-family:'Syne',sans-serif; font-size:11px; font-weight:800; letter-spacing:.5px; padding:3px 11px; border-radius:20px; border:1px solid; }
+  .f0{color:#ff8a5c;border-color:#ff8a5c55;background:#ff8a5c14}.f1{color:#ff4fa3;border-color:#ff4fa355;background:#ff4fa314}
+  .f2{color:#00C9FF;border-color:#00C9FF55;background:#00C9FF14}.f3{color:#F5C518;border-color:#F5C51855;background:#F5C51814}
+  .f4{color:#a77bff;border-color:#a77bff55;background:#a77bff14}.f5{color:#7ee0a6;border-color:#7ee0a655;background:#7ee0a614}
+  .f6{color:#ffb347;border-color:#ffb34755;background:#ffb34714}.f7{color:#9ad0ff;border-color:#9ad0ff55;background:#9ad0ff14}
+  .f8{color:#f28bb3;border-color:#f28bb355;background:#f28bb314}
+  .cat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 9px; border-radius:20px; border:1px solid var(--border); color:var(--muted); }
+  .cat-transfer{color:var(--yellow)}.cat-drama{color:var(--orange)}.cat-injury{color:var(--blue)}.cat-worldcup{color:var(--green)}
+  .pub-time { margin-left:auto; font-size:11px; color:var(--muted); }
+  .title { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; line-height:1.3; padding:12px 18px 4px; }
+  .caption { padding:0 18px; font-size:13px; color:#bbb; }
+  .tags { padding:8px 18px 0; display:flex; flex-wrap:wrap; gap:5px; }
+  .tag { font-size:11px; color:var(--blue); }
+  .why { margin:12px 18px 0; font-size:12px; color:var(--muted); border-left:3px solid var(--orange); padding-left:10px; }
+  .script { margin:14px 0 0; border-top:1px solid var(--border); background:#0d0d0d; padding:12px 18px 14px; flex:1; }
+  .script-label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; }
+  .copy { background:none; border:1px solid var(--border); color:#bbb; border-radius:6px; font-size:11px; padding:2px 9px; cursor:pointer; font-family:inherit; }
+  .copy:hover { border-color:var(--green); color:var(--green); }
+  .script ol { list-style:none; counter-reset:l; }
+  .script li { counter-increment:l; font-size:13px; color:#d6d6d6; padding:3px 0 3px 24px; position:relative; }
+  .script li::before { content:counter(l); position:absolute; left:0; top:4px; font-size:10px; color:var(--muted); width:16px; text-align:right; }
+  .meta { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; padding:11px 18px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); }
+  .meta .raw { font-style:italic; flex:1 1 100%; font-size:11px; }
+  .read-more { color:var(--green); text-decoration:none; font-weight:600; }
+  .read-more:hover { text-decoration:underline; }
+  footer { text-align:center; color:var(--muted); font-size:12px; padding:26px 20px; border-top:1px solid var(--border); }
+  @media (max-width:520px) { main { grid-template-columns:1fr; padding:6px 14px 50px; } .hero,.toolbar { padding-left:14px; padding-right:14px; } }
 </style>
 </head>
 <body>
-
 <div class="hero">
-  <div class="hero-label">Daily Research Report · Football Shorts</div>
-  <h1>Football Daily <span>Drop</span> <span class="live-pill">LIVE</span></h1>
-  <p>Top stories, transfers, drama &amp; World Cup news from the last 24 hours — scripted in BallBlitz / FutVibes short-form style. Copy-ready.</p>
-  <p style="margin-top:8px; font-size:12px; color:#555;">Generated: November 23, 2026 · 05:07 UTC</p>
+  <div class="hero-label">Daily Viral Research · Football Shorts</div>
+  <h1>Football Daily <span>Top 12</span></h1>
+  <p>The 12 stories most likely to go viral in the last 24 hours, each written in the short-form format that fits it best. Generated: November 23, 2026 · 05:24 UTC</p>
 </div>
-
-<div class="stats-bar">
-  <div class="stat-chip"><span class="sv">12</span><span class="sl">Stories</span></div>
-  <div class="stat-chip"><span class="sv">24h</span><span class="sl">Window</span></div>
-  <div class="stat-chip"><span class="sv">10+</span><span class="sl">Sources</span></div>
-  <div class="stat-chip"><span class="sv">4-Act</span><span class="sl">Scripts</span></div>
-  <div class="stat-chip"><span class="sv">🏆</span><span class="sl">World Cup</span></div>
+<div class="toolbar">
+  <button class="chip on" data-f="all">All</button>
+  <button class="chip" data-f="BallBlitz">BallBlitz</button><button class="chip" data-f="FutVibes">FutVibes</button><button class="chip" data-f="GoalLine">GoalLine</button><button class="chip" data-f="Mide Talks Football">Mide Talks Football</button><button class="chip" data-f="Chilena TV">Chilena TV</button><button class="chip" data-f="Narrative of the Exception">Narrative of the Exception</button>
+  <span class="count" id="count">12 stories</span>
 </div>
-
 <main>
+
+<article class="card" data-f="Chilena TV">
+  <div class="card-head">
+    <span class="rank">#1</span>
+    <span class="fmt f4">FORMAT · Chilena TV</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 22 · 21:31 UTC</span>
+  </div>
+  <h2 class="title">Manchester United Just Reached An UNCOMFORTABLE New Low PT.1</h2>
   
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-drama">💥 DRAMA</span>
-            <span class="pub-time">Nov 22 · 21:31 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 ‘It’s painful for me’: Pochettino criticises Yoro red card in Anfield humiliation</div>
-
-          <h2 class="viral-title">POCHETTINO ANFIELD NIGHTMARE 🚨💀</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Mauricio Pochettino just suffered the joint-heaviest debut defeat in Manchester United history!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>His first match in charge of Manchester United ended in a 4-0 humiliation against rivals Liverpool at Anfield. The new boss was left furious over key refereeing decisions that derailed his opening day.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Leny Yoro was handed an early red card after just eight minutes of play.</li><li>Pochettino argued after the match that Yoro was wrongly sent off.</li><li>The United boss also insisted his team were denied a clear penalty earlier in the contest.</li><li>The 4-0 rout matches the heaviest debut defeat any United manager has ever endured.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>Taking over this Manchester United side right now looks like an impossible mission.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Was the referee wrong to send off Leny Yoro? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 The Guardian Football</span>
-            <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/mauricio-pochettino-manchester-united-reign-begins-with-anfield-humiliation-liverpool" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-transfer">🔥 TRANSFER</span>
-            <span class="pub-time">Nov 22 · 21:04 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 Man Utd plotting Toney move - Monday&#x27;s gossip</div>
-
-          <h2 class="viral-title">MAN UTD EYE TONEY MOVE 💣👀</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Manchester United are plotting a sensational transfer swoop for Ivan Toney!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>Following their nightmare start to the season, United are desperate to find firepower in the transfer market. Major moves are brewing across Europe as top clubs scramble for attacking reinforcements.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Manchester United have set their sights on Al-Ahli striker Ivan Toney.</li><li>Paris St-Germain could accelerate their pursuit of Eli Junior Kroupi.</li><li>Fulham are in active contract talks with defender Calvin Bassey.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>Ivan Toney might be the only striker brave enough to handle the pressure at Old Trafford.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Would Ivan Toney fix Manchester United&#x27;s attack? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 BBC Sport Football</span>
-            <a class="read-more" href="https://www.bbc.co.uk/sport/football/articles/ck053nyl6399o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-drama">💥 DRAMA</span>
-            <span class="pub-time">Nov 22 · 11:33 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 Bruno Fernandes reveals talks over new Manchester United contract are on hold</div>
-
-          <h2 class="viral-title">BRUNO FREEZES CONTRACT TALKS 🛑😱</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Bruno Fernandes has officially put his Manchester United contract extension on hold!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>The club captain was formally offered a new deal by the Old Trafford board. However, Fernandes has refused to sign on the dotted line while the club is in total crisis.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Fernandes confirmed Manchester United have offered him a brand-new deal.</li><li>The captain insisted that now is not the right moment to discuss negotiations.</li><li>He declared the team must focus entirely on fixing their terrible start to the season.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>When your own captain refuses to negotiate, you know the dressing room is in deep trouble.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Is Bruno right to pause contract talks? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 The Guardian Football</span>
-            <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/bruno-fernandes-reveals-talks-over-new-manchester-united-contract-are-on-hold" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-injury">🤕 INJURY</span>
-            <span class="pub-time">Nov 22 · 15:50 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 PSG&#x27;s Doue to have surgery on ruptured ACL</div>
-
-          <h2 class="viral-title">PSG STAR RUPTURES ACL 💔🏥</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Paris Saint-Germain have suffered a massive blow as Desire Doue ruptures his ACL!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>The French champions are facing a major injury crisis in attack during a pivotal stretch of their campaign. The young forward has sustained the most dreaded setback in football.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Desire Doue ruptured the anterior cruciate ligament in his right knee.</li><li>The PSG attacker will undergo surgery later this month.</li><li>The long-term injury leaves Paris Saint-Germain depleted in forward positions.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>Sustaining an ACL rupture at this stage of a young player&#x27;s rise is pure heartbreak.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Can PSG survive this season without Doue? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 BBC Sport Football</span>
-            <a class="read-more" href="https://www.bbc.co.uk/sport/football/articles/cw0k6x0764ero?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-drama">💥 DRAMA</span>
-            <span class="pub-time">Nov 22 · 20:25 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 Gary Neville on De Ligt selection and &#x27;negligent&#x27; Man Utd</div>
-
-          <h2 class="viral-title">NEVILLE CALLS BOARD NEGLIGENT 🤬🔥</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Gary Neville has branded Manchester United&#x27;s hierarchy completely negligent!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>A 4-0 thrashing by Liverpool at Anfield has laid bare the massive issues inside Old Trafford. Neville did not hold back when analyzing the club&#x27;s disastrous recruitment and team selection.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Neville accused United&#x27;s hierarchy of negligence for failing to fix their defensive line.</li><li>The 4-0 loss to Liverpool leaves United with the worst defensive record in all of Europe.</li><li>Matthijs de Ligt&#x27;s selection over other options backfired as the defense was shredded.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>Having the worst defensive record in European football is an absolute disgrace for United.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Is the board to blame for United&#x27;s defensive mess? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 Sky Sports Football</span>
-            <a class="read-more" href="https://www.skysports.com/football/news/12040/13615413/liverpool-4-0-man-utd-gary-neville-on-matthijs-de-ligt-selection-and-negligent-red-devils" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-drama">💥 DRAMA</span>
-            <span class="pub-time">Nov 22 · 18:58 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 &#x27;No chance!&#x27; - Poch and Mainoo fume at &#x27;unfair&#x27; Yoro red card</div>
-
-          <h2 class="viral-title">MAINOO FUMES AT RED CARD 😡🟥</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Kobbie Mainoo says there was no chance Leny Yoro should have been sent off at Anfield!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>Manchester United players and staff are furious after an early dismissal destroyed their game plan against Liverpool. The controversial call completely altered the derby within minutes of kick-off.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Leny Yoro was dismissed early on during Manchester United&#x27;s 4-0 loss to Liverpool.</li><li>Mauricio Pochettino hit out at the decision, calling the red card totally unfair.</li><li>Kobbie Mainoo gave a blunt two-word reaction to the call: &#x27;no chance&#x27;.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>Blaming early referee calls will not hide the fact that United folded without a fight.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Did Leny Yoro deserve a straight red card? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 Sky Sports Football</span>
-            <a class="read-more" href="https://www.skysports.com/football/news/12040/13615402/leny-yoro-red-card-man-utd-boss-mauricio-pochettino-and-kobbie-mainoo-angry-at-sending-off-for-foul-on-liverpools-alexander-isak" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-latest">📰 LATEST</span>
-            <span class="pub-time">Nov 22 · 23:20 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 A &#x27;wow&#x27; player - why Ngumoha is already a Liverpool game-changer</div>
-
-          <h2 class="viral-title">LIVERPOOL WONDERKID TEARS UNITED APART 🌟🔥</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Match of the Day pundits are raving over Liverpool&#x27;s game-changing talent Rio Ngumoha!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>Liverpool&#x27;s 4-0 dismantling of Manchester United introduced fans to a standout young star. Pundits believe the attacker has already made a massive statement on the biggest stage.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Danny Murphy labelled Rio Ngumoha a genuine &#x27;wow&#x27; player after his display.</li><li>Ngumoha ran the show as Liverpool crushed ten-man Manchester United 4-0.</li><li>Pundits emphasized that the attacker proved to everyone exactly what he is capable of.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>Demolishing Manchester United is the quickest way to become an instant Anfield hero.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Will Ngumoha become Liverpool&#x27;s next superstar? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 BBC Sport Football</span>
-            <a class="read-more" href="https://www.bbc.co.uk/sport/football/articles/cmn80y5w84qqo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-latest">📰 LATEST</span>
-            <span class="pub-time">Nov 22 · 19:25 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 Iraola &#x27;enjoyed&#x27; big win over Man Utd</div>
-
-          <h2 class="viral-title">IRAOLA WARNS LIVERPOOL CAN IMPROVE 😳⚡</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Andoni Iraola loved beating Manchester United 4-0, but warned Liverpool can play even better!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>Liverpool head coach Andoni Iraola watched his side dismantle their fiercest rivals in front of an ecstatic Anfield crowd. Yet instead of celebrating, Iraola sent a chilling warning to the rest of the league.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Iraola confirmed he thoroughly enjoyed his team&#x27;s dominant win over Manchester United.</li><li>Liverpool ran out comfortable 4-0 winners against their ten-man rivals.</li><li>The head coach claimed his team are still nowhere near their highest ceiling.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>Crushing your biggest rival by four goals and demanding more is the ultimate flex.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Can Iraola lead Liverpool to the Premier League title? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 BBC Sport Football</span>
-            <a class="read-more" href="https://www.bbc.co.uk/sport/football/videos/c3y0x55ey81yo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-drama">💥 DRAMA</span>
-            <span class="pub-time">Nov 22 · 08:00 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 César Azpilicueta: ‘At Chelsea a draw was a catastrophe – if you can’t perform, you’re out’</div>
-
-          <h2 class="viral-title">AZPILICUETA DROPS CHELSEA TRUTHS 💥🗣️</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Cesar Azpilicueta reveals that just drawing a match at Chelsea was viewed as a total catastrophe!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>The former Chelsea captain opened up about the brutal standards required during the club&#x27;s trophy-laden era. His eye-opening memories show the ruthless mentality demanded in training.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Azpilicueta stated that drawing a match at Chelsea was treated like an absolute catastrophe.</li><li>He admitted that if a player could not perform at that level, they were instantly dropped.</li><li>The defender also revealed he regularly kicked Eden Hazard during intense training sessions.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>Modern dressing rooms would crumble under the brutal winning standards Chelsea used to have.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Do Chelsea miss Azpilicueta&#x27;s leadership today? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 The Guardian Football</span>
-            <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/cesar-azpilicueta-at-chelsea-a-draw-was-a-catastrophe-if-you-cant-perform-youre-out" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-latest">📰 LATEST</span>
-            <span class="pub-time">Nov 22 · 14:59 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 Manchester City’s WSL title bid hit by Spurs after Vinberg and Naz’s late double</div>
-
-          <h2 class="viral-title">SPURS SHOCK MAN CITY WOMEN 😱⚡</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Manchester City&#x27;s Women&#x27;s Super League title bid just suffered a catastrophic collapse!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>City missed a golden opportunity to climb back to the top of the table after suffering a shock defeat. Tottenham Hotspur stunned the league with a thrilling late comeback.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Manchester City were handed their second successive defeat in the league.</li><li>Tottenham turned the game upside down with late goals from Vinberg and Naz.</li><li>Spurs&#x27; sensational victory moved them within three points of the title mix.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>Back-to-back losses in a title race will destroy your championship dreams instantly.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Can Manchester City recover and win the WSL? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 The Guardian Football</span>
-            <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/manchester-city-tottenham-wsl-match-report" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-latest">📰 LATEST</span>
-            <span class="pub-time">Nov 22 · 08:00 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 Robins ‘aims for the stars’ as Stoke dream of Premier League return</div>
-
-          <h2 class="viral-title">STOKE KNOCK BIRMINGHAM OFF TOP 🚀👏</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Ten-man Stoke City have knocked Birmingham off the summit of the Championship!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>Mark Robins&#x27; side are riding an incredible wave of form and have mounted a genuine promotion charge. Stoke pulled off an improbable result while playing a man down.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Stoke City fought resiliently with ten men to secure a massive league victory.</li><li>The result officially knocked Birmingham City off the top of the Championship table.</li><li>Stoke climbed up to second place as Mark Robins admitted his team aims for the stars.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>Grinding out results with ten men is how promotion campaigns turn into reality.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Will Stoke City finally return to the Premier League? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 The Guardian Football</span>
-            <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/mark-robins-stoke-birmingham-championship-premier-league-promotion" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge cat-latest">📰 LATEST</span>
-            <span class="pub-time">Nov 22 · 17:30 UTC</span>
-          </div>
-
-          <div class="raw-title">📰 Arsenal frustrations grow as winless home run continues</div>
-
-          <h2 class="viral-title">ARSENAL CRISIS DEEPENS AT HOME 😬⚠️</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>Arsenal Women are still winless at home after a brutal stalemate against West Ham!</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>Frustrations are reaching boiling point for the Gunners as their home struggles continue to escalate. Scrutiny is mounting fast on interim boss Renee Slegers.</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">[16–50s]</p>
-              <ul class="reveal-list"><li>Arsenal were held to a scoreless 0-0 draw by West Ham in the WSL.</li><li>The result extends Arsenal&#x27;s agonizing wait for a single home league victory.</li><li>The pressure on Renee Slegers is growing rapidly as fans demand an immediate turnaround.</li></ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>A club with Arsenal&#x27;s resources going winless at home is completely indefensible.</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>Should Arsenal replace Renee Slegers now? Follow for daily football drops.</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 BBC Sport Football</span>
-            <a class="read-more" href="https://www.bbc.co.uk/sport/football/videos/cm8e0pdw70d8o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        
+  
+  <div class="why">🔥 Pochettino suffers the joint-heaviest debut defeat in Manchester United history with an Anfield humiliation.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · Chilena TV</span><button class="copy">Copy</button></div>
+    <ol><li>Someone genuinely needs to explain to me what Manchester United were thinking going into Anfield.</li><li>Because what just happened to Mauricio Pochettino is not just a bad afternoon.</li><li>It is an absolute historical catastrophe, and I will explain exactly why.</li><li>Pochettino walked out for his very first game as United head coach.</li><li>Eight minutes in, Leny Yoro is shown a straight red card for a foul on Alexander Isak.</li><li>From that exact second, Liverpool tore them apart and hammered them 4-0.</li><li>Do you understand the weight of that scoreline?</li><li>Pochettino has now equalled Lal Hilditch&#x27;s record from 1926 for the joint-heaviest debut defeat in Manchester United history.</li><li>That is ninety-nine years of club history, erased in ninety minutes.</li><li>To make matters far worse, United have now conceded thirty-four goals across all competitions.</li><li>Pochettino argued that United should have had a penalty earlier, and that the red card was totally wrong.</li><li>He even claimed that the best team in the world could lose 4-0 under those exact circumstances.</li><li>United are now sitting nineteenth in the Premier League table, one point above the bottom.</li><li>How do you spend this much money and end up in the relegation zone on day one?</li><li>Follow right now, because in part two we break down the tactical choices that destroyed this match before it even started.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 ‘It’s painful for me’: Pochettino criticises Yoro red card in Anfield humiliation</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/mauricio-pochettino-manchester-united-reign-begins-with-anfield-humiliation-liverpool" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="FutVibes">
+  <div class="card-head">
+    <span class="rank">#2</span>
+    <span class="fmt f1">FORMAT · FutVibes</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 22 · 20:15 UTC</span>
+  </div>
+  <h2 class="title">Cristiano Ronaldo was completely ignored by his own fans. 😭💀</h2>
+  
+  
+  <div class="why">🔥 Cristiano Ronaldo gets completely ignored by fans while offering autographs in an unprecedented viral clip.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · FutVibes</span><button class="copy">Copy</button></div>
+    <ol><li>Why is no one talking about what just happened to Cristiano Ronaldo?</li><li>You have to see this clip to actually believe it.</li><li>Ronaldo literally stood there and offered to sign autographs for the crowd.</li><li>He put his hand out, ready with the pen.</li><li>And the fans completely ignored him.</li><li>They just walked past and looked away like he was an ordinary stranger on the street.</li><li>Cristiano looked genuinely stunned standing there in total disbelief.</li><li>The man with hundreds of millions of followers worldwide could not give away a single signature.</li><li>The look on his face says everything.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Cristiano Ronaldo left stunned after fans ignore his offer to sign autographs in viral moment</span>
+    <span>📡 Marca (English)</span>
+    <a class="read-more" href="https://www.marca.com/en/football/2026/11/22/cristiano-ronaldo-left-stunned-after-fans-ignore-his-offer-to-sign-autographs-in-viral-moment-video.html" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="GoalLine">
+  <div class="card-head">
+    <span class="rank">#3</span>
+    <span class="fmt f2">FORMAT · GoalLine</span>
+    <span class="cat-badge cat-injury">🤕 INJURY</span>
+    <span class="pub-time">Nov 22 · 15:50 UTC</span>
+  </div>
+  <h2 class="title">DESIRE DOUE&#x27;S Season Faces A Devastating Turning Point #Ligue1 #PSG #Doue</h2>
+  
+  <div class="tags"><span class="tag">#Ligue1</span><span class="tag">#PSG</span><span class="tag">#Doue</span></div>
+  <div class="why">🔥 PSG&#x27;s rising star Desire Doue suffers a devastating ACL rupture requiring surgery.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · GoalLine</span><button class="copy">Copy</button></div>
+    <ol><li>Paris Saint-Germain&#x27;s dynamic attack just hit an unexpected medical wall.</li><li>Forward Desire Doue is scheduled for surgery later this month.</li><li>The French youngster has completely ruptured the anterior cruciate ligament in his right knee.</li><li>It brings an abrupt halt to the momentum he was building in Paris.</li><li>PSG now face a massive portion of their campaign without one of their brightest attacking sparks.</li><li>Football can be cruel, and Doue&#x27;s recovery clock begins right now.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 PSG&#x27;s Doue to have surgery on ruptured ACL</span>
+    <span>📡 BBC Sport Football</span>
+    <a class="read-more" href="https://www.bbc.co.uk/sport/football/articles/cw0k6x0764ero?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="FutVibes">
+  <div class="card-head">
+    <span class="rank">#4</span>
+    <span class="fmt f1">FORMAT · FutVibes</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 22 · 11:33 UTC</span>
+  </div>
+  <h2 class="title">Bruno Fernandes just halted his Manchester United contract talks. 😭🤔</h2>
+  
+  
+  <div class="why">🔥 Bruno Fernandes publicly admits Manchester United contract talks have been frozen due to terrible form.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · FutVibes</span><button class="copy">Copy</button></div>
+    <ol><li>Bruno Fernandes needs to be investigated for this interview because United fans are panicking.</li><li>Manchester United officially offered their club captain a brand new contract.</li><li>The papers were right there on the table.</li><li>His current deal runs until the end of this campaign, with a club option to extend until June 2028.</li><li>Yet Bruno announced negotiations are officially frozen.</li><li>He literally said this is not the right moment to talk about negotiations.</li><li>Instead, he wants all focus on fixing United&#x27;s terrible start to the season.</li><li>When your own captain refuses to sign a new deal during a crisis, alarms should be ringing.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Bruno Fernandes reveals talks over new Manchester United contract are on hold</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/bruno-fernandes-reveals-talks-over-new-manchester-united-contract-are-on-hold" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="FutVibes">
+  <div class="card-head">
+    <span class="rank">#5</span>
+    <span class="fmt f1">FORMAT · FutVibes</span>
+    <span class="cat-badge cat-transfer">🔥 TRANSFER</span>
+    <span class="pub-time">Nov 22 · 21:04 UTC</span>
+  </div>
+  <h2 class="title">Manchester United are preparing a shock move for Ivan Toney. 😭💀</h2>
+  
+  
+  <div class="why">🔥 Manchester United are shockingly plotting a move to bring Ivan Toney back from Saudi Arabia.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · FutVibes</span><button class="copy">Copy</button></div>
+    <ol><li>Why is no one talking about the wild transfer Manchester United are cooking right now?</li><li>Just when you thought United&#x27;s striker search was settled, reports confirm they are targeting Ivan Toney.</li><li>Toney is currently playing out in Saudi Arabia for Al-Ahli.</li><li>Yet United are already eyeing a dramatic move to bring him back into the Premier League.</li><li>With United languishing down in nineteenth and struggling for goals, the hierarchy are looking for emergency firepower.</li><li>Whether Al-Ahli will let him leave is another story entirely.</li><li>United turning to Toney proves absolute desperation has officially kicked in.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Man Utd plotting Toney move - Monday&#x27;s gossip</span>
+    <span>📡 BBC Sport Football</span>
+    <a class="read-more" href="https://www.bbc.co.uk/sport/football/articles/ck053nyl6399o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="Narrative of the Exception">
+  <div class="card-head">
+    <span class="rank">#6</span>
+    <span class="fmt f5">FORMAT · Narrative of the Exception</span>
+    <span class="cat-badge cat-worldcup">🌍 WORLD CUP</span>
+    <span class="pub-time">Nov 22 · 21:44 UTC</span>
+  </div>
+  <h2 class="title">The Longest Wait in British Football History Finally Has an Ending Date</h2>
+  
+  
+  <div class="why">🔥 The UK is set to host its first football World Cup since the iconic 1966 tournament.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · Narrative of the Exception</span><button class="copy">Copy</button></div>
+    <ol><li>Nineteen sixty-six has hung over British football for nearly sixty years like an untouchable ghost.</li><li>That final whistle at Wembley remained the only time the home of football ever welcomed the tournament.</li><li>Generation after generation watched bids collapse and decades slip away in silence.</li><li>Generations changed, stadiums evolved, but the global showpiece never returned.</li><li>Now, FIFA is set to confirm the United Kingdom as the host for the 2035 Women&#x27;s World Cup.</li><li>Sixty-nine years of waiting will officially come to an end.</li><li>It represents pure patience against decades of heartbreak.</li><li>British football finally gets its homecoming on the grandest stage of them all.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Fifa to confirm UK as host for 2035 Women&#x27;s World Cup</span>
+    <span>📡 BBC Sport Football</span>
+    <a class="read-more" href="https://www.bbc.co.uk/sport/football/articles/cx30g83716lzo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#7</span>
+    <span class="fmt f0">FORMAT · BallBlitz</span>
+    <span class="cat-badge cat-latest">📰 LATEST</span>
+    <span class="pub-time">Nov 22 · 22:20 UTC</span>
+  </div>
+  <h2 class="title">Barcelona pulled off the craziest comeback of the season! 😳😨</h2>
+  
+  
+  <div class="why">🔥 Barcelona overturned a two-goal deficit against Villarreal despite Lamine Yamal missing a penalty.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>Barcelona simply refuse to die this season, no matter how bad it looks!</li><li>They went two goals down inside seven minutes against Villarreal.</li><li>Tajon Buchanan and Tani Oluwaseyi silenced the entire Camp Nou in the opening moments.</li><li>Then things went from terrible to disastrous when Lamine Yamal stepped up and missed a first-half penalty.</li><li>Everyone thought the title race was wide open.</li><li>Instead, Hansi Flick&#x27;s squad fought all the way back to snatch a dramatic 3-2 victory.</li><li>They somehow restored their three-point lead at the top of La Liga.</li><li>Missing a penalty and still winning from two goals down is pure plot armor!</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 European football: Barcelona roar back from two goals down to sink Villarreal</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/european-football-barcelona-villarreal-juventus-milan-inter" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#8</span>
+    <span class="fmt f0">FORMAT · BallBlitz</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 22 · 08:00 UTC</span>
+  </div>
+  <h2 class="title">Cesar Azpilicueta revealed what Chelsea was really like! 🤣☠️</h2>
+  
+  
+  <div class="why">🔥 Cesar Azpilicueta reveals Chelsea&#x27;s cut-throat mentality and admits kicking Eden Hazard in training.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>Cesar Azpilicueta just exposed the brutal reality of playing for Chelsea!</li><li>The former Blues captain looked back on his nearly twenty-year career and held nothing back.</li><li>He revealed that back in his day, drawing a single match felt like a total catastrophe.</li><li>If you could not perform every week, you were out the door immediately.</li><li>He even admitted to kicking Eden Hazard in training just to keep the standard elite.</li><li>Imagine hacking down your best player in practice just to make sure he stays sharp.</li><li>Modern Chelsea players would not last twenty-four hours in that dressing room!</li><li>Standards were terrifying, but that is why Azpilicueta walked away with every single trophy.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 César Azpilicueta: ‘At Chelsea a draw was a catastrophe – if you can’t perform, you’re out’</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/cesar-azpilicueta-at-chelsea-a-draw-was-a-catastrophe-if-you-cant-perform-youre-out" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#9</span>
+    <span class="fmt f0">FORMAT · BallBlitz</span>
+    <span class="cat-badge cat-latest">📰 LATEST</span>
+    <span class="pub-time">Nov 22 · 14:59 UTC</span>
+  </div>
+  <h2 class="title">Manchester City choked the title race in the most embarrassing way! 🤡🤣</h2>
+  
+  
+  <div class="why">🔥 Tottenham stunned Manchester City with late goals, shattering City&#x27;s WSL title hopes.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>Manchester City just blew their golden opportunity to reclaim top spot!</li><li>Chelsea dropped points against Liverpool twenty-four hours earlier, leaving the door completely open.</li><li>All City had to do was win at home to go back to the summit of the table.</li><li>Instead, Tottenham produced an absolute masterclass to hand City their second successive defeat.</li><li>Late goals from Matilda Vinberg and Jessica Naz completely stunned the home crowd.</li><li>It was City&#x27;s very first home league failure of the entire campaign.</li><li>Spurs are now within three points of European qualification.</li><li>City had the title handed to them on a silver platter, and they completely tossed it in the trash!</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Manchester City’s WSL title bid hit by Spurs after Vinberg and Naz’s late double</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/manchester-city-tottenham-wsl-match-report" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="GoalLine">
+  <div class="card-head">
+    <span class="rank">#10</span>
+    <span class="fmt f2">FORMAT · GoalLine</span>
+    <span class="cat-badge cat-latest">📰 LATEST</span>
+    <span class="pub-time">Nov 22 · 16:10 UTC</span>
+  </div>
+  <h2 class="title">HULL CITY&#x27;S Stoppage-Time Shocker Dents Brighton #PremierLeague #HullCity #Brighton</h2>
+  
+  <div class="tags"><span class="tag">#PremierLeague</span><span class="tag">#HullCity</span><span class="tag">#Brighton</span></div>
+  <div class="why">🔥 Hull City produce a sensational 2-0 upset against high-flying Brighton with an added-time brace.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · GoalLine</span><button class="copy">Copy</button></div>
+    <ol><li>Brighton arrived at the MKM Stadium dreaming of title races, but reality hit hard.</li><li>Fabian Hurzeler&#x27;s ten-man side dominated possession, yet Hull goalkeeper Konstantinos Tzolakis was an impenetrable wall.</li><li>Then came the ninety minutes of frustration.</li><li>Oliver McBurnie struck twice deep into added time to seal an improbable 2-0 victory for Hull.</li><li>Brighton remain second, but leaving Hull empty-handed is a bitter pill to swallow.</li><li>Dominance without goals buys you nothing in this league.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 McBurnie’s added-time double snatches win for Hull to shock 10-man Brighton</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/hull-brighton-premier-league-match-report" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="Mide Talks Football">
+  <div class="card-head">
+    <span class="rank">#11</span>
+    <span class="fmt f3">FORMAT · Mide Talks Football</span>
+    <span class="cat-badge cat-latest">📰 LATEST</span>
+    <span class="pub-time">Nov 22 · 08:00 UTC</span>
+  </div>
+  <h2 class="title">Stoke City Are Quietly Cooking Something Special</h2>
+  <p class="caption">Mark Robins has Stoke City dreaming of a Premier League return after climbing into second. They held on with ten men to knock Birmingham off the top spot. Are Stoke finally the real deal this season?</p>
+  <div class="tags"><span class="tag">#StokeCity</span><span class="tag">#Championship</span><span class="tag">#MarkRobins</span><span class="tag">#BirminghamCity</span><span class="tag">#EFL</span><span class="tag">#FootballTok</span><span class="tag">#MideTalksFootball</span></div>
+  <div class="why">🔥 Mark Robins has Stoke dreaming of the Premier League after climbing to second in the Championship.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · Mide Talks Football</span><button class="copy">Copy</button></div>
+    <ol><li>I need to know if Stoke City fans are finally allowing themselves to believe.</li><li>Because Mark Robins has this team flying right now.</li><li>Stoke just climbed to second in the Championship after holding on with ten men to beat Birmingham and knock them right off the summit.</li><li>Now, we have seen false dawns before.</li><li>This exact time last year, Stoke were second around Christmas and then completely collapsed into a relegation scrap by spring.</li><li>Experience tells their supporters to stay cautious.</li><li>But Robins is openly talking about aiming for the stars, and the resilience with ten men showed serious backbone.</li><li>I need to know from EFL fans: are Stoke City actually going up this time, or are we going to see history repeat itself?</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Robins ‘aims for the stars’ as Stoke dream of Premier League return</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/mark-robins-stoke-birmingham-championship-premier-league-promotion" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="Mide Talks Football">
+  <div class="card-head">
+    <span class="rank">#12</span>
+    <span class="fmt f3">FORMAT · Mide Talks Football</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 22 · 15:12 UTC</span>
+  </div>
+  <h2 class="title">Blackburn Showed Pure Heart For Tony Mowbray</h2>
+  <p class="caption">Blackburn Rovers fought back twice to claim a 2-2 East Lancashire derby draw at Turf Moor. Coming right after Tony Mowbray stepped back for health reasons, this team showed incredible character. What a derby.</p>
+  <div class="tags"><span class="tag">#BlackburnRovers</span><span class="tag">#BurnleyFC</span><span class="tag">#EastLancashireDerby</span><span class="tag">#Championship</span><span class="tag">#TonyMowbray</span><span class="tag">#FootballTok</span><span class="tag">#MideTalksFootball</span></div>
+  <div class="why">🔥 Blackburn earn an emotional derby draw for Tony Mowbray after he stepped down due to health.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · Mide Talks Football</span><button class="copy">Copy</button></div>
+    <ol><li>I need to give massive respect to Blackburn Rovers for what they just did at Turf Moor.</li><li>This was their very first match since manager Tony Mowbray had to step back due to health issues.</li><li>Playing your fiercest rivals in an East Lancashire derby under that kind of emotional weight is impossible.</li><li>Burnley led twice through Largie Ramazani and Jaydon Banel.</li><li>Burnley were desperately hunting their first home win.</li><li>Yet Blackburn refused to roll over.</li><li>Andri Gudjohnsen scored an equaliser, won a penalty, and Todd Cantwell buried it to secure a 2-2 draw.</li><li>To fight back twice away from home for Mowbray is absolute character.</li><li>I need to know, is this the most emotional derby performance we will see all season?</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Blackburn earn derby draw for Mowbray and extend Burnley’s wait for home win</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/22/burnley-blackburn-championship-match-report" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
 </main>
-
-<footer>
-  ⚽ Football Daily Drop · Auto-updated every 24h · Scripts modelled on BallBlitz &amp; FutVibes · November 23, 2026 · 05:07 UTC
-</footer>
-
+<footer>⚽ Football Daily Drop · Auto-updated daily · 3 sources · November 23, 2026 · 05:24 UTC</footer>
+<script>
+  const chips = document.querySelectorAll('.chip'), cards = document.querySelectorAll('.card');
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.classList.remove('on')); c.classList.add('on');
+    let n = 0;
+    cards.forEach(card => {
+      const show = c.dataset.f === 'all' || card.dataset.f === c.dataset.f;
+      card.classList.toggle('hide', !show); if (show) n++;
+    });
+    document.getElementById('count').textContent = n + ' stories';
+  }));
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => {
+    const card = b.closest('.card');
+    const lines = [...card.querySelectorAll('.script li')].map(li => li.textContent).join('\n');
+    const t = card.querySelector('.title').textContent;
+    const cap = card.querySelector('.caption');
+    const tags = [...card.querySelectorAll('.tag')].map(x => x.textContent).join(' ');
+    const txt = t + '\n' + (cap ? cap.textContent + '\n' : '') + (tags ? tags + '\n' : '') + '\n' + lines;
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(
+      () => { b.textContent = 'Copied ✓'; setTimeout(() => b.textContent = 'Copy', 1500); },
+      () => { b.textContent = 'Copy failed'; });
+  }));
+</script>
 </body>
 </html>
