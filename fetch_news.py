@@ -548,7 +548,7 @@ _PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Football Daily Drop · __GENERATED__</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -556,10 +556,10 @@ _PAGE_TEMPLATE = """<!DOCTYPE html>
     --text:#f2f2f2; --muted:#8a8a8a; --orange:#FF6B35; --blue:#00C9FF; --green:#1DB954;
     --yellow:#F5C518; --red:#E53935; --pink:#ff4fa3; --purple:#a77bff;
   }
-  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; font-size:15px; }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; font-size:15px; -webkit-font-smoothing:antialiased; }
   .hero { padding:44px 28px 26px; max-width:1000px; margin:0 auto; }
-  .hero-label { font-family:'Syne',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--green); margin-bottom:8px; }
-  .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(26px,4.5vw,46px); font-weight:800; line-height:1.1; }
+  .hero-label { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--green); margin-bottom:8px; }
+  .hero h1 { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:clamp(26px,4.5vw,46px); font-weight:800; line-height:1.1; }
   .hero h1 span { color:var(--orange); }
   .hero p { color:var(--muted); font-size:13px; max-width:620px; margin-top:8px; }
   .toolbar { max-width:1000px; margin:0 auto; padding:0 28px 18px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
@@ -572,8 +572,9 @@ _PAGE_TEMPLATE = """<!DOCTYPE html>
   .card { background:var(--bg2); border:1px solid var(--border); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
   .card.hide { display:none; }
   .card-head { padding:16px 18px 0; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-  .rank { font-family:'Syne',sans-serif; font-weight:800; font-size:13px; color:#111; background:var(--yellow); border-radius:6px; padding:1px 8px; }
-  .fmt { font-family:'Syne',sans-serif; font-size:11px; font-weight:800; letter-spacing:.5px; padding:3px 11px; border-radius:20px; border:1px solid; }
+  .rank { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-weight:800; font-size:13px; color:#111; background:var(--yellow); border-radius:6px; padding:1px 8px; }
+  .fmt { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:13px; font-weight:700; padding:4px 13px; border-radius:20px; border:1px solid; }
+  .fmt small { font-size:10px; font-weight:600; letter-spacing:1.2px; opacity:.65; margin-right:7px; }
   .f0{color:#ff8a5c;border-color:#ff8a5c55;background:#ff8a5c14}.f1{color:#ff4fa3;border-color:#ff4fa355;background:#ff4fa314}
   .f2{color:#00C9FF;border-color:#00C9FF55;background:#00C9FF14}.f3{color:#F5C518;border-color:#F5C51855;background:#F5C51814}
   .f4{color:#a77bff;border-color:#a77bff55;background:#a77bff14}.f5{color:#7ee0a6;border-color:#7ee0a655;background:#7ee0a614}
@@ -582,18 +583,19 @@ _PAGE_TEMPLATE = """<!DOCTYPE html>
   .cat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 9px; border-radius:20px; border:1px solid var(--border); color:var(--muted); }
   .cat-transfer{color:var(--yellow)}.cat-drama{color:var(--orange)}.cat-injury{color:var(--blue)}.cat-worldcup{color:var(--green)}
   .pub-time { margin-left:auto; font-size:11px; color:var(--muted); }
-  .title { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; line-height:1.3; padding:12px 18px 4px; }
-  .caption { padding:0 18px; font-size:13px; color:#bbb; }
+  .title { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:1.35rem; font-weight:700; line-height:1.3; letter-spacing:-.01em; padding:14px 18px 6px; }
+  .caption { padding:0 18px; font-size:14px; color:#c4c4c4; line-height:1.6; }
   .tags { padding:8px 18px 0; display:flex; flex-wrap:wrap; gap:5px; }
-  .tag { font-size:11px; color:var(--blue); }
-  .why { margin:12px 18px 0; font-size:12px; color:var(--muted); border-left:3px solid var(--orange); padding-left:10px; }
-  .script { margin:14px 0 0; border-top:1px solid var(--border); background:#0d0d0d; padding:12px 18px 14px; flex:1; }
-  .script-label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; }
+  .tag { font-size:12px; color:var(--blue); }
+  .why { margin:14px 18px 0; font-size:13px; color:#b5b5b5; line-height:1.5; border-left:3px solid var(--orange); padding-left:11px; }
+  .script { margin:16px 0 0; border-top:1px solid var(--border); background:#0d0d0d; padding:14px 18px 16px; flex:1; }
+  .script-label { font-size:12px; letter-spacing:.8px; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
   .copy { background:none; border:1px solid var(--border); color:#bbb; border-radius:6px; font-size:11px; padding:2px 9px; cursor:pointer; font-family:inherit; }
   .copy:hover { border-color:var(--green); color:var(--green); }
   .script ol { list-style:none; counter-reset:l; }
-  .script li { counter-increment:l; font-size:13px; color:#d6d6d6; padding:3px 0 3px 24px; position:relative; }
-  .script li::before { content:counter(l); position:absolute; left:0; top:4px; font-size:10px; color:var(--muted); width:16px; text-align:right; }
+  .script li { counter-increment:l; font-size:15px; line-height:1.65; color:#e6e6e6; padding:6px 0 6px 30px; position:relative; border-bottom:1px solid rgba(255,255,255,.04); }
+  .script li:last-child { border-bottom:none; }
+  .script li::before { content:counter(l); position:absolute; left:0; top:9px; width:20px; height:20px; line-height:20px; text-align:center; font-size:11px; font-weight:600; color:var(--muted); background:var(--bg3); border-radius:50%; }
   .meta { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; padding:11px 18px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); }
   .meta .raw { font-style:italic; flex:1 1 100%; font-size:11px; }
   .read-more { color:var(--green); text-decoration:none; font-weight:600; }
@@ -672,7 +674,7 @@ def build_html(articles: list[dict], generated_at: str) -> str:
 <article class="card" data-f="{esc(ai['format'])}">
   <div class="card-head">
     <span class="rank">#{n}</span>
-    <span class="fmt {fclass[ai['format']]}">FORMAT · {esc(ai['format'])}</span>
+    <span class="fmt {fclass[ai['format']]}"><small>FORMAT</small>{esc(ai['format'])}</span>
     <span class="cat-badge {_cat_css(ai['cat'])}">{esc(ai['cat'])}</span>
     <span class="pub-time">{esc(time_str)}</span>
   </div>
