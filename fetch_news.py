@@ -323,7 +323,13 @@ def generate_script(title: str, summary: str) -> dict:
     }
 
 
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
+# Free tier (per your AI Studio limits): 3.8 Flash = 5 req/min, 20 req/day;
+# 3.1 Flash Lite = 15 req/min, 500 req/day. We make 1 request/day, so both are fine.
+# Override with env GEMINI_MODEL="modelA,modelB" (tried in order).
+GEMINI_MODELS = [
+    m.strip() for m in os.environ.get("GEMINI_MODEL", "gemini-3.8-flash,gemini-3.1-flash-lite").split(",")
+    if m.strip()
+]
 AI_PICKS = 12          # how many stories Gemini keeps
 AI_CANDIDATES = 30    # how many keyword-ranked stories Gemini chooses from
 
@@ -373,34 +379,36 @@ STORIES:
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"responseMimeType": "application/json", "temperature": 0.8},
     }).encode("utf-8")
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
-    req = urllib.request.Request(
-        url, data=body, method="POST",
-        headers={"Content-Type": "application/json", "x-goog-api-key": key},
-    )
-    try:
-        for attempt in range(1, 5):
-            try:
-                with urllib.request.urlopen(req, timeout=240) as resp:
-                    data = json.loads(resp.read().decode("utf-8"))
-                break
-            except (urllib.error.HTTPError, TimeoutError, urllib.error.URLError) as e:
-                code = getattr(e, "code", "timeout")
-                retriable = code in (429, 500, 503, "timeout")
-                if retriable and attempt < 3:
-                    wait = 15 * attempt
-                    print(f"  [ai] Gemini {code}, retrying in {wait}s ({attempt}/2)")
-                    time.sleep(wait)
-                    continue
-                raise
-        text = data["candidates"][0]["content"]["parts"][0]["text"]
-        picks = json.loads(text)
-    except urllib.error.HTTPError as e:
-        detail = e.read().decode("utf-8", "replace")[:400]
-        print(f"  [ai] Gemini HTTP {e.code}: {detail} - using keyword mode")
-        return []
-    except Exception as e:
-        print(f"  [ai] Gemini failed ({type(e).__name__}: {e}) - using keyword mode")
+    picks, used_model = None, None
+    for model in GEMINI_MODELS:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+        req = urllib.request.Request(
+            url, data=body, method="POST",
+            headers={"Content-Type": "application/json", "x-goog-api-key": key},
+        )
+        try:
+            for attempt in (1, 2):
+                try:
+                    with urllib.request.urlopen(req, timeout=240) as resp:
+                        data = json.loads(resp.read().decode("utf-8"))
+                    break
+                except (urllib.error.HTTPError, TimeoutError, urllib.error.URLError) as e:
+                    code = getattr(e, "code", "timeout")
+                    if attempt == 1 and code in (429, 500, 503, "timeout"):
+                        print(f"  [ai] {model}: {code}, retrying in 20s")
+                        time.sleep(20)
+                        continue
+                    raise
+            text = data["candidates"][0]["content"]["parts"][0]["text"]
+            picks, used_model = json.loads(text), model
+            break
+        except urllib.error.HTTPError as e:
+            detail = e.read().decode("utf-8", "replace")[:300]
+            print(f"  [ai] {model}: HTTP {e.code}: {detail}")
+        except Exception as e:
+            print(f"  [ai] {model}: failed ({type(e).__name__}: {e})")
+    if picks is None:
+        print("  [ai] all Gemini models failed - using keyword mode")
         return []
 
     chosen, used = [], set()
@@ -425,7 +433,7 @@ STORIES:
             chosen.append(a)
         except Exception:
             continue
-    print(f"  [ai] Gemini ({GEMINI_MODEL}) picked {len(chosen)} stories")
+    print(f"  [ai] Gemini ({used_model}) picked {len(chosen)} stories")
     return chosen
 
 
