@@ -330,21 +330,80 @@ GEMINI_MODELS = [
     m.strip() for m in os.environ.get("GEMINI_MODEL", "gemini-3.8-flash,gemini-3.1-flash-lite").split(",")
     if m.strip()
 ]
-AI_PICKS = 12          # how many stories Gemini keeps
-AI_CANDIDATES = 30    # how many keyword-ranked stories Gemini chooses from
+AI_PICKS = 12          # exactly how many stories the page shows
+AI_CANDIDATES = 40     # how many keyword-ranked stories Gemini chooses from
 
 _VALID_CATS = {
     "TRANSFER": "🔥 TRANSFER", "DRAMA": "💥 DRAMA", "INJURY": "🤕 INJURY",
     "WORLD CUP": "🌍 WORLD CUP", "LATEST": "📰 LATEST",
 }
 
+# ── The viral formats the user taught us (names shown on every card) ───────────
+FORMATS = {
+    "BallBlitz": (
+        "Hot-take short. TITLE: sentence case, one named star/club, strong claim, ends with '!' or '.', "
+        "then an emoji pair (😳💔 shock/sad, 🤡🤣 or 🤣☠️ mockery, 😳😨 scam/fear); optional bracket joke "
+        "like '(Bro stole from the thief! 🤣)'. Patterns: 'The real reason why...', '<X> should be banned/retire', "
+        "'<Club> did <Y> dirty', 'Biggest scam ever'. SCRIPT ~110-130 words, one idea per line: line 1 restates the "
+        "claim boldly, quick context with stats, build-up with a joke or quote, twist in the last 2 lines."),
+    "FutVibes": (
+        "Gossip shorts. TITLE: plain shocking claim about one named star, sentence case, ends with '.' then 😭 plus "
+        "a second emoji (🤔 suspicious, 💔 tragic, 💀 funny). No hashtags. SCRIPT ~90-110 words: open with 'Why is no "
+        "one talking about...' / '<Name> needs to be investigated' style provocation, teaser line, rapid facts with "
+        "minutes/ages/numbers, end on the punch image or reported twist."),
+    "GoalLine": (
+        "News clip, one incident. TITLE: ALL-CAPS key name or club + possessive, then Title Case teaser phrase that "
+        "hints the angle without the detail ('Says More Than You Think', 'Has One Awkward Problem'), then 3-4 topic "
+        "hashtags (competition, club, player). No emoji. SCRIPT ~70-90 words: witty framing line, incident in order "
+        "with names/numbers, one vivid detail, dry ironic closing line."),
+    "Mide Talks Football": (
+        "First-person fan opinion. TITLE = a Title Case headline (a take or contrast, no emoji). Put a 2-4 sentence "
+        "caption in the 'caption' field ending with a question or punchline. 7-10 hashtags (players, clubs, league, "
+        "#FootballTok, #MideTalksFootball). SCRIPT ~120-140 words in 'I' voice: hook ('I need to know...', 'Enough of "
+        "this...'), claim + stats, then a callback to the opening line, comment-bait last line."),
+    "Chilena TV": (
+        "Long-form analysis, PT. series. TITLE: Title Case with one ALL-CAPS power word (BREAKING, FAR WORSE, "
+        "TERRIFYING, EXACTLY, WARNED, UNCOMFORTABLE) and a 'PT.1' suffix. SCRIPT ~160-190 words: cold-open confusion "
+        "hook ('necesito que me expliquen algo' energy, in English), stack facts, promise ('I'll explain exactly why'), "
+        "context of how we got here, item-by-item with fee/stat and a rival angle, finish on a paradox/open loop for PT.2."),
+    "Narrative of the Exception": (
+        "Cinematic documentary narration. TITLE: Title Case thesis sentence, no emoji, no hashtags (superlative, "
+        "'Only', or 'REAL'). SCRIPT ~120-140 words: open on the strangest fact, a short pivot line, chronological "
+        "build with numbers, rhythmic contrasts ('Precision against imagination'), reframing line, closing sentence "
+        "that lands the theme."),
+    "Ahmed's Goal": (
+        "Calm curiosity explainer. TITLE: sentence-case question or 'Players/Transfers who...' promise, no emoji, "
+        "at most one ALL-CAPS word, then these exact hashtags: #FIFAWorldCup #FIFATikTokCreator #TikTokCampaign "
+        "#SoccerTikTok. SCRIPT ~110-130 words, one sentence per line: restate the question, setup with dates/numbers, "
+        "'But...' pivots, one soft line 'if you're enjoying the video, please hit the follow button' near the middle, "
+        "an ironic twist, one-line takeaway."),
+    "Lxthalfc Top 5": (
+        "Ranked list. ONLY use if the story text itself contains or clearly supports 5 items. TITLE: 'Top 5 <Player/"
+        "Topic> \"<Loaded Word>\" Moments in Football'. SCRIPT: 5 numbered items counting down, each one line with "
+        "a jab, ~100 words."),
+    "_esrbball Imagine": (
+        "Imagine-format sad edit. ONLY use for a young star whose story parallels a known legend's career tragedy. "
+        "TITLE: '<short lowercase sad line> man..<one emoji from 🥹🥲😢💔> || Watch till the end. ||' plus hashtags "
+        "#fyp #<youngStar> #<legend> #edit #trending. SCRIPT ~80-100 words: 'Imagine <star> becoming...', rise, 'But "
+        "then everything changes', fall, 'Luckily it's just my imagination, but it did happen to someone.'"),
+}
+FORMAT_NAMES = list(FORMATS.keys())
+
+
+def _fmt_key(name: str) -> str | None:
+    n = re.sub(r"[^a-z0-9]", "", str(name).lower())
+    for k in FORMAT_NAMES:
+        if re.sub(r"[^a-z0-9]", "", k.lower()) == n:
+            return k
+    return None
+
 
 def ai_rank_and_script(articles: list[dict]) -> list[dict]:
     """
-    Sends the top keyword-ranked stories to Gemini in ONE call. Gemini picks the
-    most viral AI_PICKS stories and writes a BallBlitz-style 4-act script for each.
-    Returns the chosen articles with an "ai" dict attached. Returns [] when no
-    API key is set or anything fails, so the caller falls back to keyword mode.
+    ONE Gemini call: picks the AI_PICKS stories most likely to go viral (drama, shock,
+    big names, transfers, World Cup) and writes each as a title + script in the best
+    fitting teaching format. Returns articles with an "ai" dict, or [] on any failure
+    (caller falls back to keyword mode).
     """
     key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not key:
@@ -353,24 +412,36 @@ def ai_rank_and_script(articles: list[dict]) -> list[dict]:
 
     cands = articles[:AI_CANDIDATES]
     listing = "\n".join(
-        f"[{i}] ({a['source']}) {a['title']} - {a['summary'][:300]}"
+        f"[{i}] ({a['source']}) {a['title']} - {a['summary'][:500]}"
         for i, a in enumerate(cands)
     )
-    prompt = f"""You are a football short-form video producer in the BallBlitz90 / FutVibes style.
-Below are football stories from the last 24 hours. Pick the {AI_PICKS} stories most likely to go
-viral as 60-second shorts (shock, drama, big transfers, World Cup, huge names), skipping
-duplicates of the same story. For each pick, write a script using ONLY facts present in the
-story text - never invent quotes, fees or results.
+    format_guide = "\n".join(f"- {name}: {rules}" for name, rules in FORMATS.items())
+    prompt = f"""You are a football short-form video producer. Below are football stories from the last 24 hours.
 
-Return a JSON array of {AI_PICKS} objects, best first, each with exactly these keys:
+TASK: pick exactly {AI_PICKS} DIFFERENT stories (skip duplicates of the same event) with the highest viral
+potential: drama, rows, shocks, big transfers, injuries to stars, World Cup, controversy, huge names. Skip routine
+match reports unless something dramatic happened. For each pick, choose the ONE format below that fits the story
+best and write the title and script in that format's style.
+
+FORMATS (use these exact names):
+{format_guide}
+
+RULES
+- Use at least 5 different formats across the {AI_PICKS} picks and no format more than 3 times.
+- FACTS: use ONLY facts present in the story text. Never invent quotes, fees, stats, scores or events. If the text
+  is thin, write a shorter script rather than making things up. Exaggerated tone is fine, false facts are not.
+- Scripts are SPOKEN narration: short lines, no stage directions, no timestamps, no hashtags inside the script.
+- Order picks by viral potential, best first.
+
+Return a JSON array of exactly {AI_PICKS} objects, each with exactly these keys:
   "index": the [number] of the story,
+  "format": one of the format names above, exactly,
   "category": one of "TRANSFER", "DRAMA", "INJURY", "WORLD CUP", "LATEST",
-  "viral_title": punchy headline ending in 2 emojis,
-  "hook": one sentence, 0-3s, punchline first,
-  "context": 1-2 sentences, 4-15s, why viewers should care,
-  "reveal": array of 3-4 short punchy factual lines, 16-50s,
-  "punchline": one opinionated sentence, 50-60s,
-  "cta": a comment-bait question plus "Follow for daily football drops."
+  "why_viral": one short sentence on why this will spread,
+  "title": the title in that format's style (no hashtags in it),
+  "caption": a caption if the format uses one (Mide Talks Football), otherwise "",
+  "hashtags": array of hashtags if the format uses them, otherwise [],
+  "script": array of strings, one spoken line each.
 
 STORIES:
 {listing}"""
@@ -379,6 +450,7 @@ STORIES:
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"responseMimeType": "application/json", "temperature": 0.8},
     }).encode("utf-8")
+
     picks, used_model = None, None
     for model in GEMINI_MODELS:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
@@ -417,24 +489,43 @@ STORIES:
             i = int(p["index"])
             if i in used or not 0 <= i < len(cands):
                 continue
-            reveal = [str(x).strip() for x in p["reveal"] if str(x).strip()]
-            cat = _VALID_CATS.get(str(p.get("category", "")).upper(), "📰 LATEST")
+            script = [str(x).strip() for x in p["script"] if str(x).strip()]
+            title = str(p["title"]).strip()
+            if not script or not title:
+                continue
             a = dict(cands[i])
             a["ai"] = {
-                "viral_title": str(p["viral_title"]).strip(),
-                "hook":        "[0–3s] " + str(p["hook"]).strip(),
-                "context":     "[4–15s] " + str(p["context"]).strip(),
-                "reveal":      "[16–50s]\n" + "\n".join(f"  👉 {r}" for r in reveal),
-                "punchline":   "[50–60s] " + str(p["punchline"]).strip(),
-                "cta":         str(p["cta"]).strip(),
-                "cat":         cat,
+                "format":    _fmt_key(p.get("format", "")) or "BallBlitz",
+                "cat":       _VALID_CATS.get(str(p.get("category", "")).upper(), "📰 LATEST"),
+                "why_viral": str(p.get("why_viral", "")).strip(),
+                "title":     title,
+                "caption":   str(p.get("caption", "") or "").strip(),
+                "hashtags":  [str(h).strip() for h in (p.get("hashtags") or []) if str(h).strip()],
+                "script":    script,
             }
             used.add(i)
             chosen.append(a)
         except Exception:
             continue
-    print(f"  [ai] Gemini ({used_model}) picked {len(chosen)} stories")
+    chosen = chosen[:AI_PICKS]
+    print(f"  [ai] Gemini ({used_model}) picked {len(chosen)} stories in formats: "
+          + ", ".join(sorted({a['ai']['format'] for a in chosen})))
     return chosen
+
+
+def keyword_fallback(a: dict) -> dict:
+    """Same shape as the AI result, built from the old template generator."""
+    sc = generate_script(a["title"], a["summary"])
+    strip = lambda s: re.sub(r"^\[[^\]]*\]\s*", "", s).strip()
+    lines = [strip(sc["hook"]), strip(sc["context"])]
+    lines += [ln.replace("👉", "").strip() for ln in sc["reveal"].split("\n")[1:] if ln.strip()]
+    lines += [strip(sc["punchline"]), sc["cta"]]
+    out = dict(a)
+    out["ai"] = {
+        "format": "BallBlitz", "cat": sc["cat"], "why_viral": "Keyword-scored (Gemini unavailable).",
+        "title": sc["viral_title"], "caption": "", "hashtags": [], "script": lines,
+    }
+    return out
 
 
 def _cat_css(cat: str) -> str:
@@ -445,355 +536,164 @@ def _cat_css(cat: str) -> str:
     return "cat-latest"
 
 
-def build_html(articles: list[dict], generated_at: str) -> str:
-    cards_html = ""
-    shown = 0
-    for a in articles[:25]:
-        if shown >= 20:
-            break
-
-        sc = a.get("ai") or generate_script(a["title"], a["summary"])
-
-        # Format time
-        try:
-            pub_dt = datetime.fromisoformat(a["pub"])
-            time_str = pub_dt.strftime("%b %d · %H:%M UTC")
-        except Exception:
-            time_str = ""
-
-        def esc(s): return html.escape(s)
-
-        # Reveal lines as individual <li> items
-        reveal_lines = sc["reveal"].split("\n")
-        reveal_header = esc(reveal_lines[0]) if reveal_lines else ""
-        reveal_items  = "".join(
-            f"<li>{esc(ln.replace('  👉 ','').strip())}</li>"
-            for ln in reveal_lines[1:] if ln.strip()
-        )
-
-        cards_html += f"""
-        <article class="card">
-          <div class="card-top">
-            <span class="cat-badge {_cat_css(sc['cat'])}">{sc['cat']}</span>
-            <span class="pub-time">{esc(time_str)}</span>
-          </div>
-
-          <div class="raw-title">📰 {esc(a['title'])}</div>
-
-          <h2 class="viral-title">{esc(sc['viral_title'])}</h2>
-
-          <div class="script-wrap">
-            <div class="script-top-label">📝 COPY-READY SHORT SCRIPT · BallBlitz / FutVibes Style</div>
-
-            <div class="act act-hook">
-              <span class="act-label">🎣 HOOK · 0–3s</span>
-              <p>{esc(sc['hook'].replace('[0–3s] ',''))}</p>
-            </div>
-
-            <div class="act act-context">
-              <span class="act-label">📖 CONTEXT · 4–15s</span>
-              <p>{esc(sc['context'].replace('[4–15s] ',''))}</p>
-            </div>
-
-            <div class="act act-reveal">
-              <span class="act-label">💥 REVEAL · 16–50s</span>
-              <p class="act-reveal-header">{reveal_header}</p>
-              <ul class="reveal-list">{reveal_items}</ul>
-            </div>
-
-            <div class="act act-punchline">
-              <span class="act-label">🔁 PUNCHLINE · 50–60s</span>
-              <p>{esc(sc['punchline'].replace('[50–60s] ',''))}</p>
-            </div>
-
-            <div class="act act-cta">
-              <span class="act-label">📣 CTA</span>
-              <p>{esc(sc['cta'])}</p>
-            </div>
-          </div>
-
-          <div class="meta">
-            <span class="source">📡 {esc(a['source'])}</span>
-            <a class="read-more" href="{esc(a['link'])}" target="_blank" rel="noopener">
-              Read Full Story →
-            </a>
-          </div>
-        </article>
-        """
-        shown += 1
-
-    if not cards_html:
-        cards_html = "<p style='color:#aaa;text-align:center;margin-top:60px'>No stories found in the last 24 hours. Try again later.</p>"
-
-    return f"""<!DOCTYPE html>
+_PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Football Daily Drop · {generated_at}</title>
+<title>Football Daily Drop · __GENERATED__</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
-  :root {{
-    --bg:       #0a0a0a;
-    --bg2:      #111111;
-    --bg3:      #1a1a1a;
-    --border:   rgba(255,255,255,0.07);
-    --text:     #f0f0f0;
-    --muted:    #888;
-    --orange:   #FF6B35;
-    --blue:     #00C9FF;
-    --green:    #1DB954;
-    --yellow:   #F5C518;
-    --red:      #E53935;
-  }}
-  body {{
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    font-size: 15px;
-  }}
-
-  /* ── HEADER ── */
-  .hero {{
-    padding: 50px 40px 36px;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }}
-  .hero::before {{
-    content: '⚽';
-    position: absolute;
-    right: -10px; top: -20px;
-    font-size: 200px;
-    opacity: 0.04;
-    pointer-events: none;
-  }}
-  .hero-label {{
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 10px;
-  }}
-  .hero h1 {{
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(26px, 4vw, 48px);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 10px;
-  }}
-  .hero h1 span {{ color: var(--orange); }}
-  .hero p {{ color: var(--muted); font-size: 13px; max-width: 540px; }}
-  .live-pill {{
-    display: inline-block;
-    background: var(--red);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-left: 10px;
-    vertical-align: middle;
-    animation: blink 2s infinite;
-  }}
-  @keyframes blink {{ 0%,100%{{opacity:1}} 50%{{opacity:.5}} }}
-
-  /* ── STATS ── */
-  .stats-bar {{
-    display: flex;
-    gap: 10px;
-    padding: 20px 40px;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-  }}
-  .stat-chip {{
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 18px;
-    flex: 1;
-    min-width: 110px;
-    text-align: center;
-  }}
-  .stat-chip .sv {{
-    font-family: 'Syne', sans-serif;
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--yellow);
-    display: block;
-  }}
-  .stat-chip .sl {{ font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }}
-
-  /* ── MAIN ── */
-  main {{ max-width: 900px; margin: 0 auto; padding: 30px 24px 70px; display: flex; flex-direction: column; gap: 22px; }}
-
-  /* ── CARD ── */
-  .card {{
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    overflow: hidden;
-    transition: border-color .2s, transform .15s;
-  }}
-  .card:hover {{ border-color: rgba(255,107,53,0.4); transform: translateY(-2px); }}
-
-  .card-top {{
-    padding: 18px 20px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-  }}
-  .cat-badge {{
-    font-family: 'Syne', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 20px;
-    border: 1px solid;
-  }}
-  .cat-transfer  {{ color: var(--yellow); border-color: rgba(245,197,24,0.3); background: rgba(245,197,24,0.07); }}
-  .cat-drama     {{ color: var(--orange); border-color: rgba(255,107,53,0.3); background: rgba(255,107,53,0.07); }}
-  .cat-injury    {{ color: var(--blue);   border-color: rgba(0,201,255,0.3);  background: rgba(0,201,255,0.07); }}
-  .cat-worldcup  {{ color: var(--green);  border-color: rgba(29,185,84,0.3);  background: rgba(29,185,84,0.07); }}
-  .cat-latest    {{ color: var(--muted);  border-color: var(--border);        background: var(--bg3); }}
-  .pub-time {{ font-size: 12px; color: var(--muted); }}
-
-  .raw-title {{
-    padding: 10px 20px 0;
-    font-size: 11px;
-    color: var(--muted);
-    font-style: italic;
-  }}
-  .viral-title {{
-    font-family: 'Syne', sans-serif;
-    font-size: 1.15rem;
-    font-weight: 800;
-    line-height: 1.3;
-    padding: 8px 20px 16px;
-    color: var(--text);
-  }}
-
-  /* ── SCRIPT BLOCK ── */
-  .script-wrap {{
-    border-top: 1px solid var(--border);
-    background: #0d0d0d;
-  }}
-  .script-top-label {{
-    padding: 8px 16px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--orange);
-    background: rgba(255,107,53,0.06);
-    border-bottom: 1px solid var(--border);
-  }}
-  .act {{
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-    line-height: 1.6;
-  }}
-  .act:last-child {{ border-bottom: none; }}
-  .act-label {{
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-    padding: 2px 7px;
-    border-radius: 4px;
-  }}
-  .act-hook     .act-label {{ background: rgba(229,57,53,0.15);   color: var(--red); }}
-  .act-context  .act-label {{ background: rgba(0,201,255,0.12);   color: var(--blue); }}
-  .act-reveal   .act-label {{ background: rgba(29,185,84,0.12);   color: var(--green); }}
-  .act-punchline .act-label{{ background: rgba(245,197,24,0.12);  color: var(--yellow); }}
-  .act-cta      .act-label {{ background: rgba(255,107,53,0.12);  color: var(--orange); }}
-
-  .act p {{ color: #ccc; }}
-  .act-reveal-header {{ color: var(--muted); font-size: 11px; margin-bottom: 6px; }}
-  .reveal-list {{ list-style: none; padding: 0; margin: 0; }}
-  .reveal-list li {{
-    color: #ddd;
-    padding: 3px 0 3px 16px;
-    position: relative;
-    font-size: 13px;
-  }}
-  .reveal-list li::before {{ content: '→'; position: absolute; left: 0; color: var(--green); }}
-  .act-cta p {{ color: var(--orange); font-weight: 500; }}
-
-  /* ── META ── */
-  .meta {{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
-    font-size: 12px;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
-    flex-wrap: wrap;
-    gap: 6px;
-    background: var(--bg2);
-  }}
-  .read-more {{
-    color: var(--green);
-    text-decoration: none;
-    font-weight: 600;
-  }}
-  .read-more:hover {{ text-decoration: underline; }}
-
-  /* ── FOOTER ── */
-  footer {{
-    text-align: center;
-    color: var(--muted);
-    font-size: 12px;
-    padding: 28px 20px;
-    border-top: 1px solid var(--border);
-  }}
-
-  @media (max-width: 600px) {{
-    .hero {{ padding: 36px 20px 28px; }}
-    .stats-bar {{ padding: 16px 20px; }}
-    main {{ padding: 20px 14px 50px; }}
-  }}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#0a0a0a; --bg2:#121212; --bg3:#1b1b1b; --border:rgba(255,255,255,.08);
+    --text:#f2f2f2; --muted:#8a8a8a; --orange:#FF6B35; --blue:#00C9FF; --green:#1DB954;
+    --yellow:#F5C518; --red:#E53935; --pink:#ff4fa3; --purple:#a77bff;
+  }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; font-size:15px; }
+  .hero { padding:44px 28px 26px; max-width:1000px; margin:0 auto; }
+  .hero-label { font-family:'Syne',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--green); margin-bottom:8px; }
+  .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(26px,4.5vw,46px); font-weight:800; line-height:1.1; }
+  .hero h1 span { color:var(--orange); }
+  .hero p { color:var(--muted); font-size:13px; max-width:620px; margin-top:8px; }
+  .toolbar { max-width:1000px; margin:0 auto; padding:0 28px 18px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .chip { background:var(--bg3); border:1px solid var(--border); color:#ccc; border-radius:20px; padding:5px 13px;
+          font-size:12px; cursor:pointer; font-family:inherit; }
+  .chip:hover { border-color:rgba(255,255,255,.25); }
+  .chip.on { background:var(--orange); border-color:var(--orange); color:#111; font-weight:700; }
+  .toolbar .count { margin-left:auto; color:var(--muted); font-size:12px; }
+  main { max-width:1000px; margin:0 auto; padding:6px 28px 70px; display:grid; grid-template-columns:repeat(auto-fill,minmax(440px,1fr)); gap:20px; }
+  .card { background:var(--bg2); border:1px solid var(--border); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
+  .card.hide { display:none; }
+  .card-head { padding:16px 18px 0; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .rank { font-family:'Syne',sans-serif; font-weight:800; font-size:13px; color:#111; background:var(--yellow); border-radius:6px; padding:1px 8px; }
+  .fmt { font-family:'Syne',sans-serif; font-size:11px; font-weight:800; letter-spacing:.5px; padding:3px 11px; border-radius:20px; border:1px solid; }
+  .f0{color:#ff8a5c;border-color:#ff8a5c55;background:#ff8a5c14}.f1{color:#ff4fa3;border-color:#ff4fa355;background:#ff4fa314}
+  .f2{color:#00C9FF;border-color:#00C9FF55;background:#00C9FF14}.f3{color:#F5C518;border-color:#F5C51855;background:#F5C51814}
+  .f4{color:#a77bff;border-color:#a77bff55;background:#a77bff14}.f5{color:#7ee0a6;border-color:#7ee0a655;background:#7ee0a614}
+  .f6{color:#ffb347;border-color:#ffb34755;background:#ffb34714}.f7{color:#9ad0ff;border-color:#9ad0ff55;background:#9ad0ff14}
+  .f8{color:#f28bb3;border-color:#f28bb355;background:#f28bb314}
+  .cat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 9px; border-radius:20px; border:1px solid var(--border); color:var(--muted); }
+  .cat-transfer{color:var(--yellow)}.cat-drama{color:var(--orange)}.cat-injury{color:var(--blue)}.cat-worldcup{color:var(--green)}
+  .pub-time { margin-left:auto; font-size:11px; color:var(--muted); }
+  .title { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; line-height:1.3; padding:12px 18px 4px; }
+  .caption { padding:0 18px; font-size:13px; color:#bbb; }
+  .tags { padding:8px 18px 0; display:flex; flex-wrap:wrap; gap:5px; }
+  .tag { font-size:11px; color:var(--blue); }
+  .why { margin:12px 18px 0; font-size:12px; color:var(--muted); border-left:3px solid var(--orange); padding-left:10px; }
+  .script { margin:14px 0 0; border-top:1px solid var(--border); background:#0d0d0d; padding:12px 18px 14px; flex:1; }
+  .script-label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; }
+  .copy { background:none; border:1px solid var(--border); color:#bbb; border-radius:6px; font-size:11px; padding:2px 9px; cursor:pointer; font-family:inherit; }
+  .copy:hover { border-color:var(--green); color:var(--green); }
+  .script ol { list-style:none; counter-reset:l; }
+  .script li { counter-increment:l; font-size:13px; color:#d6d6d6; padding:3px 0 3px 24px; position:relative; }
+  .script li::before { content:counter(l); position:absolute; left:0; top:4px; font-size:10px; color:var(--muted); width:16px; text-align:right; }
+  .meta { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; padding:11px 18px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); }
+  .meta .raw { font-style:italic; flex:1 1 100%; font-size:11px; }
+  .read-more { color:var(--green); text-decoration:none; font-weight:600; }
+  .read-more:hover { text-decoration:underline; }
+  footer { text-align:center; color:var(--muted); font-size:12px; padding:26px 20px; border-top:1px solid var(--border); }
+  @media (max-width:520px) { main { grid-template-columns:1fr; padding:6px 14px 50px; } .hero,.toolbar { padding-left:14px; padding-right:14px; } }
 </style>
 </head>
 <body>
-
 <div class="hero">
-  <div class="hero-label">Daily Research Report · Football Shorts</div>
-  <h1>Football Daily <span>Drop</span> <span class="live-pill">LIVE</span></h1>
-  <p>Top stories, transfers, drama &amp; World Cup news from the last 24 hours — scripted in BallBlitz / FutVibes short-form style. Copy-ready.</p>
-  <p style="margin-top:8px; font-size:12px; color:#555;">Generated: {generated_at}</p>
+  <div class="hero-label">Daily Viral Research · Football Shorts</div>
+  <h1>Football Daily <span>Top __COUNT__</span></h1>
+  <p>The __COUNT__ stories most likely to go viral in the last 24 hours, each written in the short-form format that fits it best. Generated: __GENERATED__</p>
 </div>
-
-<div class="stats-bar">
-  <div class="stat-chip"><span class="sv">{shown}</span><span class="sl">Stories</span></div>
-  <div class="stat-chip"><span class="sv">24h</span><span class="sl">Window</span></div>
-  <div class="stat-chip"><span class="sv">10+</span><span class="sl">Sources</span></div>
-  <div class="stat-chip"><span class="sv">4-Act</span><span class="sl">Scripts</span></div>
-  <div class="stat-chip"><span class="sv">🏆</span><span class="sl">World Cup</span></div>
+<div class="toolbar">
+  <button class="chip on" data-f="all">All</button>
+  __CHIPS__
+  <span class="count" id="count">__COUNT__ stories</span>
 </div>
-
 <main>
-  {cards_html}
+__CARDS__
 </main>
-
-<footer>
-  ⚽ Football Daily Drop · Auto-updated every 24h · Scripts modelled on BallBlitz &amp; FutVibes · {generated_at}
-</footer>
-
+<footer>⚽ Football Daily Drop · Auto-updated daily · __SRC__ sources · __GENERATED__</footer>
+<script>
+  const chips = document.querySelectorAll('.chip'), cards = document.querySelectorAll('.card');
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.classList.remove('on')); c.classList.add('on');
+    let n = 0;
+    cards.forEach(card => {
+      const show = c.dataset.f === 'all' || card.dataset.f === c.dataset.f;
+      card.classList.toggle('hide', !show); if (show) n++;
+    });
+    document.getElementById('count').textContent = n + ' stories';
+  }));
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => {
+    const card = b.closest('.card');
+    const lines = [...card.querySelectorAll('.script li')].map(li => li.textContent).join('\\n');
+    const t = card.querySelector('.title').textContent;
+    const cap = card.querySelector('.caption');
+    const tags = [...card.querySelectorAll('.tag')].map(x => x.textContent).join(' ');
+    const txt = t + '\\n' + (cap ? cap.textContent + '\\n' : '') + (tags ? tags + '\\n' : '') + '\\n' + lines;
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(
+      () => { b.textContent = 'Copied ✓'; setTimeout(() => b.textContent = 'Copy', 1500); },
+      () => { b.textContent = 'Copy failed'; });
+  }));
+</script>
 </body>
 </html>"""
+
+
+def build_html(articles: list[dict], generated_at: str) -> str:
+    esc = html.escape
+    shown = articles[:AI_PICKS]
+    fmt_order = [f for f in FORMAT_NAMES if any(a["ai"]["format"] == f for a in shown)]
+    fclass = {f: f"f{FORMAT_NAMES.index(f)}" for f in FORMAT_NAMES}
+
+    chips = "".join(
+        f'<button class="chip" data-f="{esc(f)}">{esc(f)}</button>' for f in fmt_order
+    )
+
+    cards = ""
+    for n, a in enumerate(shown, 1):
+        ai = a["ai"]
+        try:
+            time_str = datetime.fromisoformat(a["pub"]).strftime("%b %d · %H:%M UTC")
+        except Exception:
+            time_str = ""
+        caption = f'<p class="caption">{esc(ai["caption"])}</p>' if ai["caption"] else ""
+        tags = (
+            '<div class="tags">' + "".join(f'<span class="tag">{esc(t)}</span>' for t in ai["hashtags"]) + "</div>"
+            if ai["hashtags"] else ""
+        )
+        why = f'<div class="why">🔥 {esc(ai["why_viral"])}</div>' if ai["why_viral"] else ""
+        lines = "".join(f"<li>{esc(ln)}</li>" for ln in ai["script"])
+        cards += f"""
+<article class="card" data-f="{esc(ai['format'])}">
+  <div class="card-head">
+    <span class="rank">#{n}</span>
+    <span class="fmt {fclass[ai['format']]}">FORMAT · {esc(ai['format'])}</span>
+    <span class="cat-badge {_cat_css(ai['cat'])}">{esc(ai['cat'])}</span>
+    <span class="pub-time">{esc(time_str)}</span>
+  </div>
+  <h2 class="title">{esc(ai['title'])}</h2>
+  {caption}
+  {tags}
+  {why}
+  <div class="script">
+    <div class="script-label"><span>📝 Script · {esc(ai['format'])}</span><button class="copy">Copy</button></div>
+    <ol>{lines}</ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 {esc(a['title'])}</span>
+    <span>📡 {esc(a['source'])}</span>
+    <a class="read-more" href="{esc(a['link'])}" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>"""
+
+    if not cards:
+        cards = "<p style='color:#aaa;text-align:center;margin-top:60px'>No stories found in the last 24 hours.</p>"
+
+    return (_PAGE_TEMPLATE
+            .replace("__GENERATED__", esc(generated_at))
+            .replace("__COUNT__", str(len(shown)))
+            .replace("__CHIPS__", chips)
+            .replace("__CARDS__", cards)
+            .replace("__SRC__", str(len({a["source"] for a in shown}) or len(FEEDS))))
 
 
 if __name__ == "__main__":
@@ -806,6 +706,8 @@ if __name__ == "__main__":
     ai_articles = ai_rank_and_script(articles)
     if ai_articles:
         articles = ai_articles
+    else:
+        articles = [keyword_fallback(a) for a in articles[:AI_PICKS]]
 
     now = datetime.now(timezone.utc).strftime("%B %d, %Y · %H:%M UTC")
     page = build_html(articles, now)
