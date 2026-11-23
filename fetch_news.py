@@ -8,6 +8,7 @@ import feedparser
 import json
 import os
 import re
+import time
 import html
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
@@ -378,8 +379,18 @@ STORIES:
         headers={"Content-Type": "application/json", "x-goog-api-key": key},
     )
     try:
-        with urllib.request.urlopen(req, timeout=90) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
+        for attempt in range(1, 5):
+            try:
+                with urllib.request.urlopen(req, timeout=90) as resp:
+                    data = json.loads(resp.read().decode("utf-8"))
+                break
+            except urllib.error.HTTPError as e:
+                if e.code in (429, 500, 503) and attempt < 4:
+                    wait = 15 * attempt
+                    print(f"  [ai] Gemini HTTP {e.code}, retrying in {wait}s ({attempt}/3)")
+                    time.sleep(wait)
+                    continue
+                raise
         text = data["candidates"][0]["content"]["parts"][0]["text"]
         picks = json.loads(text)
     except urllib.error.HTTPError as e:
