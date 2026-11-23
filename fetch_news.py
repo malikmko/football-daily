@@ -325,7 +325,7 @@ def generate_script(title: str, summary: str) -> dict:
 
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 AI_PICKS = 12          # how many stories Gemini keeps
-AI_CANDIDATES = 40     # how many keyword-ranked stories Gemini chooses from
+AI_CANDIDATES = 30    # how many keyword-ranked stories Gemini chooses from
 
 _VALID_CATS = {
     "TRANSFER": "🔥 TRANSFER", "DRAMA": "💥 DRAMA", "INJURY": "🤕 INJURY",
@@ -381,13 +381,15 @@ STORIES:
     try:
         for attempt in range(1, 5):
             try:
-                with urllib.request.urlopen(req, timeout=90) as resp:
+                with urllib.request.urlopen(req, timeout=240) as resp:
                     data = json.loads(resp.read().decode("utf-8"))
                 break
-            except urllib.error.HTTPError as e:
-                if e.code in (429, 500, 503) and attempt < 4:
+            except (urllib.error.HTTPError, TimeoutError, urllib.error.URLError) as e:
+                code = getattr(e, "code", "timeout")
+                retriable = code in (429, 500, 503, "timeout")
+                if retriable and attempt < 3:
                     wait = 15 * attempt
-                    print(f"  [ai] Gemini HTTP {e.code}, retrying in {wait}s ({attempt}/3)")
+                    print(f"  [ai] Gemini {code}, retrying in {wait}s ({attempt}/2)")
                     time.sleep(wait)
                     continue
                 raise
