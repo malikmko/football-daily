@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Football Daily Drop · November 24, 2026 · 18:37 UTC</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#0a0a0a; --bg2:#121212; --bg3:#1b1b1b; --border:rgba(255,255,255,.08);
+    --text:#f2f2f2; --muted:#8a8a8a; --orange:#FF6B35; --blue:#00C9FF; --green:#1DB954;
+    --yellow:#F5C518; --red:#E53935; --pink:#ff4fa3; --purple:#a77bff;
+  }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; font-size:15px; -webkit-font-smoothing:antialiased; }
+  .hero { padding:44px 28px 26px; max-width:1000px; margin:0 auto; }
+  .hero-label { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--green); margin-bottom:8px; }
+  .hero h1 { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:clamp(26px,4.5vw,46px); font-weight:800; line-height:1.1; }
+  .hero h1 span { color:var(--orange); }
+  .hero p { color:var(--muted); font-size:13px; max-width:620px; margin-top:8px; }
+  .toolbar { max-width:1000px; margin:0 auto; padding:0 28px 18px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .chip { background:var(--bg3); border:1px solid var(--border); color:#ccc; border-radius:20px; padding:5px 13px;
+          font-size:12px; cursor:pointer; font-family:inherit; }
+  .chip:hover { border-color:rgba(255,255,255,.25); }
+  .chip.on { background:var(--orange); border-color:var(--orange); color:#111; font-weight:700; }
+  .toolbar .count { margin-left:auto; color:var(--muted); font-size:12px; }
+  main { max-width:1000px; margin:0 auto; padding:6px 28px 70px; display:grid; grid-template-columns:repeat(auto-fill,minmax(440px,1fr)); gap:20px; }
+  .card { background:var(--bg2); border:1px solid var(--border); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
+  .card.hide { display:none; }
+  .card-head { padding:16px 18px 0; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .rank { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-weight:800; font-size:13px; color:#111; background:var(--yellow); border-radius:6px; padding:1px 8px; }
+  .fmt { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:13px; font-weight:700; padding:4px 13px; border-radius:20px; border:1px solid; }
+  .fmt small { font-size:10px; font-weight:600; letter-spacing:1.2px; opacity:.65; margin-right:7px; }
+  .f0{color:#ff8a5c;border-color:#ff8a5c55;background:#ff8a5c14}.f1{color:#ff4fa3;border-color:#ff4fa355;background:#ff4fa314}
+  .f2{color:#00C9FF;border-color:#00C9FF55;background:#00C9FF14}.f3{color:#F5C518;border-color:#F5C51855;background:#F5C51814}
+  .f4{color:#a77bff;border-color:#a77bff55;background:#a77bff14}.f5{color:#7ee0a6;border-color:#7ee0a655;background:#7ee0a614}
+  .f6{color:#ffb347;border-color:#ffb34755;background:#ffb34714}.f7{color:#9ad0ff;border-color:#9ad0ff55;background:#9ad0ff14}
+  .f8{color:#f28bb3;border-color:#f28bb355;background:#f28bb314}
+  .cat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 9px; border-radius:20px; border:1px solid var(--border); color:var(--muted); }
+  .cat-transfer{color:var(--yellow)}.cat-drama{color:var(--orange)}.cat-injury{color:var(--blue)}.cat-worldcup{color:var(--green)}
+  .pub-time { margin-left:auto; font-size:11px; color:var(--muted); }
+  .title { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:1.35rem; font-weight:700; line-height:1.3; letter-spacing:-.01em; padding:14px 18px 6px; }
+  .caption { padding:0 18px; font-size:14px; color:#c4c4c4; line-height:1.6; }
+  .tags { padding:8px 18px 0; display:flex; flex-wrap:wrap; gap:5px; }
+  .tag { font-size:12px; color:var(--blue); }
+  .why { margin:14px 18px 0; font-size:13px; color:#b5b5b5; line-height:1.5; border-left:3px solid var(--orange); padding-left:11px; }
+  .why.buzz { border-left-color:var(--blue); margin-top:8px; }
+  .script { margin:16px 0 0; border-top:1px solid var(--border); background:#0d0d0d; padding:14px 18px 16px; flex:1; }
+  .script-label { font-size:12px; letter-spacing:.8px; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
+  .copy { background:none; border:1px solid var(--border); color:#bbb; border-radius:6px; font-size:11px; padding:2px 9px; cursor:pointer; font-family:inherit; }
+  .copy:hover { border-color:var(--green); color:var(--green); }
+  .script ol { list-style:none; counter-reset:l; }
+  .script li { counter-increment:l; font-size:15px; line-height:1.65; color:#e6e6e6; padding:6px 0 6px 30px; position:relative; border-bottom:1px solid rgba(255,255,255,.04); }
+  .script li:last-child { border-bottom:none; }
+  .script li::before { content:counter(l); position:absolute; left:0; top:9px; width:20px; height:20px; line-height:20px; text-align:center; font-size:11px; font-weight:600; color:var(--muted); background:var(--bg3); border-radius:50%; }
+  .meta { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; padding:11px 18px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); }
+  .meta .raw { font-style:italic; flex:1 1 100%; font-size:11px; }
+  .read-more { color:var(--green); text-decoration:none; font-weight:600; }
+  .read-more:hover { text-decoration:underline; }
+  footer { text-align:center; color:var(--muted); font-size:12px; padding:26px 20px; border-top:1px solid var(--border); }
+  .pages { max-width:1000px; margin:0 auto; padding:18px 28px 0; display:flex; gap:8px; flex-wrap:wrap; }
+  .pg { text-decoration:none; color:#ccc; background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:7px 14px; font-size:13px; line-height:1.3; }
+  .pg b { display:block; font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:13px; color:var(--text); }
+  .pg small { font-size:11px; color:var(--muted); }
+  .pg:hover { border-color:rgba(255,255,255,.25); }
+  .pg.on { border-color:var(--green); background:#1DB95418; }
+  .pg.on b { color:var(--green); }
+  @media (max-width:520px) { main { grid-template-columns:1fr; padding:6px 14px 50px; } .hero,.toolbar,.pages { padding-left:14px; padding-right:14px; } }
+</style>
+</head>
+<body>
+<nav class="pages"><a class="pg" href="index.html"><b>Latest</b><small>Wed Nov 25 · 17:48 UTC</small></a><a class="pg" href="previous.html"><b>Previous</b><small>Wed Nov 25 · 14:07 UTC</small></a><a class="pg on" href="older.html"><b>2 refreshes ago</b><small>Tue Nov 24 · 18:37 UTC</small></a></nav>
+<div class="hero">
+  <div class="hero-label">Daily Viral Research · Football Shorts</div>
+  <h1>Football Daily <span>Top 12</span></h1>
+  <p>The 12 stories most likely to go viral in the last 24 hours, each written in the short-form format that fits it best. Generated: November 24, 2026 · 18:37 UTC</p>
+</div>
+<div class="toolbar">
+  <button class="chip on" data-f="all">All</button>
+  <button class="chip" data-f="BallBlitz">BallBlitz</button>
+  <span class="count" id="count">12 stories</span>
+</div>
+<main>
+
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#1</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-transfer">🔥 TRANSFER</span>
+    <span class="pub-time">Nov 24 · 16:16 UTC</span>
+  </div>
+  <h2 class="title">Football Daily | The game’s gone: has fantasy football been ruined by AI gafferbots? 😳💀</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>⚽ Football Daily | The game’s gone: has fantasy football been ruined by AI gafferbots? — and the football world is NOT ready for this.</li><li>Here&#x27;s what you need to know. Sometimes, the beautiful game can make Football Daily feel old.</li><li>Even Monday’s ostensibly old-school fixture between Brentford and Everton felt like the future destroying the past.</li><li>The analytics-coded hosts prevailed 4-0 and James Tarkowski was dismissed by the VAR overlords for a challenge that would have been considered “firm but fair” on the muddy pitches of our youth.</li><li>“I don’t think you can tackle like that in this day and age,” a misty-eyed David Moyes sighed after the game, before heading to the team bus to rewatch the Battle of Santiago</li><li>This transfer window is genuinely cooked. 💀 And we&#x27;re not even at the peak yet.</li><li>💬 Is this the deal of the summer — or the biggest mistake? Comment below 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Football Daily | The game’s gone: has fantasy football been ruined by AI gafferbots?</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/24/fpl-ruined-ai-football-daily-newsletter" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#2</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 24 · 14:22 UTC</span>
+  </div>
+  <h2 class="title">Why Senegal restored as Africa Cup of Nations champions after court ruling is NOT what you think. 🏆😳</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>💥 This is the story nobody in football wants to talk about. Senegal restored as Africa Cup of Nations champions after court ruling.</li><li>Here&#x27;s what you need to know. Senegal won January’s final 1-0 after walking off Result was overturned in March as 3-0 win for Morocco Senegal have been reinstated as the champions of Africa, and their controversial 1-0 victory against Morocco confirmed in the record books, after the scandal over January’s Africa Cup of Nations final was resolved in a Swiss courtroom.</li><li>The court of arbitration for sport (Cas) ruled that a decision to award the 2025 Afcon title to Morocco on appeal should be set aside.</li><li>Senegal celebrated with a social media post proclaiming the team to have won the title twice: first on the field and then at</li><li>Football drama never hits different than this. 💥 Genuinely one of the wildest stories of the season.</li><li>💬 Who&#x27;s in the wrong here? Drop your honest take 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Senegal restored as Africa Cup of Nations champions after court ruling</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/24/afcon-verdict-senegal-morocco-africa-cup-of-nations-champions-court-ruling-cas" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#3</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 24 · 17:13 UTC</span>
+  </div>
+  <h2 class="title">How &#x27;quick check&#x27; and unseen angle saw Timber&#x27;s Isak shirt-pull go unpunished 😳💀</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>💥 This is the story nobody in football wants to talk about. How &#x27;quick check&#x27; and unseen angle saw Timber&#x27;s Isak shirt-pull go unpunished.</li><li>Here&#x27;s what you need to know. Referees’ chief Howard Webb admitted it was a “quick check” by VAR for Arsenal defender Jurrien Timber’s unpunished shirt-pull on Liverpool striker Alexander Isak in the Gunners’ win at Anfield.</li><li>The story starts with something most fans completely ignored.</li><li>Then things escalated fast. And NOBODY stepped in to stop it.</li><li>By the time the club realized what was happening, the damage was done.</li><li>And football Twitter? Absolutely losing it.</li><li>Football drama never hits different than this. 💥 Genuinely one of the wildest stories of the season.</li><li>💬 Who&#x27;s in the wrong here? Drop your honest take 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 How &#x27;quick check&#x27; and unseen angle saw Timber&#x27;s Isak shirt-pull go unpunished</span>
+    <span>📡 Sky Sports Football</span>
+    <a class="read-more" href="https://www.skysports.com/football/news/12040/13616058/jurrien-timbers-shirt-pull-on-alexander-isak-ref-chief-howard-webb-admits-quick-check-in-arsenals-win-at-liverpool" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#4</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-transfer">🔥 TRANSFER</span>
+    <span class="pub-time">Nov 24 · 10:45 UTC</span>
+  </div>
+  <h2 class="title">Republic of Ireland boss Ward signs new contract — and nobody saw this coming. 🤯💰</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>⚽ Republic of Ireland boss Ward signs new contract — and the football world is NOT ready for this.</li><li>Here&#x27;s what you need to know. Republic of Ireland manager Carla Ward signs a contract extension until the conclusion of the side&#x27;s Euro 2029 campaign.</li><li>The fee being discussed? Absolutely insane.</li><li>The club involved did NOT see this coming.</li><li>And here&#x27;s the part that makes this even wilder — the player reportedly had other options.</li><li>But they chose THIS. And now everyone is asking why.</li><li>This transfer window is genuinely cooked. 💀 And we&#x27;re not even at the peak yet.</li><li>💬 Is this the deal of the summer — or the biggest mistake? Comment below 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Republic of Ireland boss Ward signs new contract</span>
+    <span>📡 BBC Sport Football</span>
+    <a class="read-more" href="https://www.bbc.co.uk/sport/football/articles/cm4gn31z553go?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#5</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-latest">📰 LATEST</span>
+    <span class="pub-time">Nov 24 · 17:16 UTC</span>
+  </div>
+  <h2 class="title">Man Utd&#x27;s Yoro red card appeal process explained 😳💀</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>⚽ Man Utd&#x27;s Yoro red card appeal process explained. Most people have no idea this is happening right now.</li><li>Here&#x27;s what you need to know. Sky Sports News’ Kaveh Solhekol explains Manchester United&#x27;s appeal successful appeal process for Leny Yoro&#x27;s red card, that the defender had picked up against Liverpool.</li><li>Here&#x27;s what actually happened behind the scenes.</li><li>The decision was made — and most people weren&#x27;t even told.</li><li>Now the fallout is starting to hit. And it&#x27;s messy.</li><li>This is the kind of story that only comes out weeks later. Except it&#x27;s happening NOW.</li><li>Football never stops delivering. And honestly? This is just the beginning. 😳💀</li><li>💬 What do you think about this? Let&#x27;s discuss 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Man Utd&#x27;s Yoro red card appeal process explained</span>
+    <span>📡 Sky Sports Football</span>
+    <a class="read-more" href="https://www.skysports.com/watch/video/13616062/explained-how-did-manchester-united-successfully-appeal-leny-yoros-red-card-picked-up-against-liverpool" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#6</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 24 · 17:00 UTC</span>
+  </div>
+  <h2 class="title">Ref chief Webb backs process around Yoro sending off despite successful appeal 😳💀</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>💥 This is the story nobody in football wants to talk about. Ref chief Webb backs process around Yoro sending off despite successful appeal.</li><li>Here&#x27;s what you need to know. Referees&#x27; chief Howard Webb has backed the process of the officials who sent off Manchester United defender Leny Yoro at Liverpool - despite the red card being overturned on appeal.</li><li>The story starts with something most fans completely ignored.</li><li>Then things escalated fast. And NOBODY stepped in to stop it.</li><li>By the time the club realized what was happening, the damage was done.</li><li>And football Twitter? Absolutely losing it.</li><li>Football drama never hits different than this. 💥 Genuinely one of the wildest stories of the season.</li><li>💬 Who&#x27;s in the wrong here? Drop your honest take 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Ref chief Webb backs process around Yoro sending off despite successful appeal</span>
+    <span>📡 Sky Sports Football</span>
+    <a class="read-more" href="https://www.skysports.com/football/news/12040/13616033/leny-yoro-red-card-ref-chief-howard-webb-backs-process-that-saw-man-utd-defender-sent-off-at-liverpool" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#7</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-transfer">🔥 TRANSFER</span>
+    <span class="pub-time">Nov 24 · 13:00 UTC</span>
+  </div>
+  <h2 class="title">Robinson signs for Nottinghamshire on three-year deal — and nobody saw this coming. 🤯💰</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>🦁⚪ Robinson signs for Nottinghamshire on three-year deal — and the football world is NOT ready for this.</li><li>Here&#x27;s what you need to know. Nottinghamshire have announced the signing of England bowler Ollie Robinson on a three-year all-format deal.</li><li>The fee being discussed? Absolutely insane.</li><li>The club involved did NOT see this coming.</li><li>And here&#x27;s the part that makes this even wilder — the player reportedly had other options.</li><li>But they chose THIS. And now everyone is asking why.</li><li>This transfer window is genuinely cooked. 💀 And we&#x27;re not even at the peak yet.</li><li>💬 Is this the deal of the summer — or the biggest mistake? Comment below 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Robinson signs for Nottinghamshire on three-year deal</span>
+    <span>📡 Sky Sports Football</span>
+    <a class="read-more" href="https://www.skysports.com/cricket/news/12040/13615966/ollie-robinson-signs-for-nottinghamshire-on-three-year-all-format-contract-as-england-bowler-ends-11-year-spell-at-sussex" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#8</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-latest">📰 LATEST</span>
+    <span class="pub-time">Nov 24 · 17:00 UTC</span>
+  </div>
+  <h2 class="title">Yoro red card overturned after successful Man Utd appeal 😳💀</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>⚽ Yoro red card overturned after successful Man Utd appeal. Most people have no idea this is happening right now.</li><li>Here&#x27;s what you need to know. Leny Yoro&#x27;s red card against Liverpool has been overturned following a successful appeal from Manchester United.</li><li>Here&#x27;s what actually happened behind the scenes.</li><li>The decision was made — and most people weren&#x27;t even told.</li><li>Now the fallout is starting to hit. And it&#x27;s messy.</li><li>This is the kind of story that only comes out weeks later. Except it&#x27;s happening NOW.</li><li>Football never stops delivering. And honestly? This is just the beginning. 😳💀</li><li>💬 What do you think about this? Let&#x27;s discuss 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Yoro red card overturned after successful Man Utd appeal</span>
+    <span>📡 Sky Sports Football</span>
+    <a class="read-more" href="https://www.skysports.com/football/news/12040/13616021/leny-yoros-red-card-for-manchester-united-against-liverpool-overturned-following-successful-appeal" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#9</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-transfer">🔥 TRANSFER</span>
+    <span class="pub-time">Nov 24 · 06:57 UTC</span>
+  </div>
+  <h2 class="title">The real reason behind this... 😳💀</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>🔵🌙 Why has De Bruyne struggled at Napoli as he returns to Man City? — and the football world is NOT ready for this.</li><li>Here&#x27;s what you need to know. Kevin de Bruyne&#x27;s move to Napoli last summer was supposed to mark a continuation of his glittering decade at Manchester City as he approaches the twilight years of his career.</li><li>The fee being discussed? Absolutely insane.</li><li>The club involved did NOT see this coming.</li><li>And here&#x27;s the part that makes this even wilder — the player reportedly had other options.</li><li>But they chose THIS. And now everyone is asking why.</li><li>This transfer window is genuinely cooked. 💀 And we&#x27;re not even at the peak yet.</li><li>💬 Is this the deal of the summer — or the biggest mistake? Comment below 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Why has De Bruyne struggled at Napoli as he returns to Man City?</span>
+    <span>📡 BBC Sport Football</span>
+    <a class="read-more" href="https://www.bbc.co.uk/sport/football/articles/cqglreexkk06o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#10</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 24 · 08:50 UTC</span>
+  </div>
+  <h2 class="title">Barnet forward Noel-Williams charged with rape 😳💀</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>💥 This is the story nobody in football wants to talk about. Barnet forward Noel-Williams charged with rape.</li><li>Here&#x27;s what you need to know. Isiah Noel-Williams, from St Albans, is remanded in custody charged with three rape offences.</li><li>The story starts with something most fans completely ignored.</li><li>Then things escalated fast. And NOBODY stepped in to stop it.</li><li>By the time the club realized what was happening, the damage was done.</li><li>And football Twitter? Absolutely losing it.</li><li>Football drama never hits different than this. 💥 Genuinely one of the wildest stories of the season.</li><li>💬 Who&#x27;s in the wrong here? Drop your honest take 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Barnet forward Noel-Williams charged with rape</span>
+    <span>📡 BBC Sport Football</span>
+    <a class="read-more" href="https://www.bbc.co.uk/news/articles/c8dx1v361vw7o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#11</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 24 · 18:19 UTC</span>
+  </div>
+  <h2 class="title">Manchester United win appeal over Yoro’s red card despite Webb backing decision 😳💀</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>💥 This is the story nobody in football wants to talk about. Manchester United win appeal over Yoro’s red card despite Webb backing decision.</li><li>Here&#x27;s what you need to know. Player now eligible to face Brentford on Saturday Referees’ chief Webb said it was ‘certainly not clearly wrong’ Manchester United have successfully appealed against Leny Yoro’s red card in their 4-0 defeat to Liverpool on the day referees’ chief Howard Webb gave his backing to the original decision.</li><li>The defender was dismissed for denying an obvious goalscoring opportunity (Dogso) after eight minutes, but this was found to be incorrect.</li><li>The Frenchman will no longer be required to serve a one-match suspension after a ruling by an independent panel.</li><li>He fouled Alexander Isak when the Liverpool fo</li><li>Football drama never hits different than this. 💥 Genuinely one of the wildest stories of the season.</li><li>💬 Who&#x27;s in the wrong here? Drop your honest take 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Manchester United win appeal over Yoro’s red card despite Webb backing decision</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/23/manchester-united-appeal-leny-yoro-red-card-liverpool" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#12</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 24 · 13:00 UTC</span>
+  </div>
+  <h2 class="title">‘I’m loving it at Brugge’: Freddie Potts on going from West Ham’s bench to Champions League 😳💀</h2>
+  
+  
+  <div class="why">🔥 Keyword-scored (Gemini unavailable).</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>💥 This is the story nobody in football wants to talk about. ‘I’m loving it at Brugge’: Freddie Potts on going from West Ham’s bench to Champions League.</li><li>Here&#x27;s what you need to know. Midfielder is preparing to face Liverpool after leaving the club he loves and overcoming a tough start in Belgium In April Freddie Potts was absorbing the disappointment of being substituted at half-time during West Ham’s FA Cup quarter-final defeat by Leeds.</li><li>The midfielder was out of favour under Nuno Espírito Santo and could not have imagined that he would be preparing to face Liverpool in the Champions League seven months later.</li><li>It is the 23-year-old’s reward for taking the difficult decision to leave his boyhood club last summer.</li><li>Potts noticed his minutes were drying up in pre-season, even</li><li>Football drama never hits different than this. 💥 Genuinely one of the wildest stories of the season.</li><li>💬 Who&#x27;s in the wrong here? Drop your honest take 👇 | 🔔 Follow for daily football drops.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 ‘I’m loving it at Brugge’: Freddie Potts on going from West Ham’s bench to Champions League</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/24/freddie-potts-brugge-champions-league-liverpool-west-ham" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+</main>
+<footer>⚽ Football Daily Drop · Auto-updated daily · 3 sources · November 24, 2026 · 18:37 UTC</footer>
+<script>
+  const chips = document.querySelectorAll('.chip'), cards = document.querySelectorAll('.card');
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.classList.remove('on')); c.classList.add('on');
+    let n = 0;
+    cards.forEach(card => {
+      const show = c.dataset.f === 'all' || card.dataset.f === c.dataset.f;
+      card.classList.toggle('hide', !show); if (show) n++;
+    });
+    document.getElementById('count').textContent = n + ' stories';
+  }));
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => {
+    const card = b.closest('.card');
+    const lines = [...card.querySelectorAll('.script li')].map(li => li.textContent).join('\n');
+    const t = card.querySelector('.title').textContent;
+    const cap = card.querySelector('.caption');
+    const tags = [...card.querySelectorAll('.tag')].map(x => x.textContent).join(' ');
+    const txt = t + '\n' + (cap ? cap.textContent + '\n' : '') + (tags ? tags + '\n' : '') + '\n' + lines;
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(
+      () => { b.textContent = 'Copied ✓'; setTimeout(() => b.textContent = 'Copy', 1500); },
+      () => { b.textContent = 'Copy failed'; });
+  }));
+</script>
+</body>
+</html>

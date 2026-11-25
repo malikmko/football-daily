@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Football Daily Drop · November 25, 2026 · 14:07 UTC</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#0a0a0a; --bg2:#121212; --bg3:#1b1b1b; --border:rgba(255,255,255,.08);
+    --text:#f2f2f2; --muted:#8a8a8a; --orange:#FF6B35; --blue:#00C9FF; --green:#1DB954;
+    --yellow:#F5C518; --red:#E53935; --pink:#ff4fa3; --purple:#a77bff;
+  }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; font-size:15px; -webkit-font-smoothing:antialiased; }
+  .hero { padding:44px 28px 26px; max-width:1000px; margin:0 auto; }
+  .hero-label { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--green); margin-bottom:8px; }
+  .hero h1 { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:clamp(26px,4.5vw,46px); font-weight:800; line-height:1.1; }
+  .hero h1 span { color:var(--orange); }
+  .hero p { color:var(--muted); font-size:13px; max-width:620px; margin-top:8px; }
+  .toolbar { max-width:1000px; margin:0 auto; padding:0 28px 18px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .chip { background:var(--bg3); border:1px solid var(--border); color:#ccc; border-radius:20px; padding:5px 13px;
+          font-size:12px; cursor:pointer; font-family:inherit; }
+  .chip:hover { border-color:rgba(255,255,255,.25); }
+  .chip.on { background:var(--orange); border-color:var(--orange); color:#111; font-weight:700; }
+  .toolbar .count { margin-left:auto; color:var(--muted); font-size:12px; }
+  main { max-width:1000px; margin:0 auto; padding:6px 28px 70px; display:grid; grid-template-columns:repeat(auto-fill,minmax(440px,1fr)); gap:20px; }
+  .card { background:var(--bg2); border:1px solid var(--border); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
+  .card.hide { display:none; }
+  .card-head { padding:16px 18px 0; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .rank { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-weight:800; font-size:13px; color:#111; background:var(--yellow); border-radius:6px; padding:1px 8px; }
+  .fmt { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:13px; font-weight:700; padding:4px 13px; border-radius:20px; border:1px solid; }
+  .fmt small { font-size:10px; font-weight:600; letter-spacing:1.2px; opacity:.65; margin-right:7px; }
+  .f0{color:#ff8a5c;border-color:#ff8a5c55;background:#ff8a5c14}.f1{color:#ff4fa3;border-color:#ff4fa355;background:#ff4fa314}
+  .f2{color:#00C9FF;border-color:#00C9FF55;background:#00C9FF14}.f3{color:#F5C518;border-color:#F5C51855;background:#F5C51814}
+  .f4{color:#a77bff;border-color:#a77bff55;background:#a77bff14}.f5{color:#7ee0a6;border-color:#7ee0a655;background:#7ee0a614}
+  .f6{color:#ffb347;border-color:#ffb34755;background:#ffb34714}.f7{color:#9ad0ff;border-color:#9ad0ff55;background:#9ad0ff14}
+  .f8{color:#f28bb3;border-color:#f28bb355;background:#f28bb314}
+  .cat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 9px; border-radius:20px; border:1px solid var(--border); color:var(--muted); }
+  .cat-transfer{color:var(--yellow)}.cat-drama{color:var(--orange)}.cat-injury{color:var(--blue)}.cat-worldcup{color:var(--green)}
+  .pub-time { margin-left:auto; font-size:11px; color:var(--muted); }
+  .title { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:1.35rem; font-weight:700; line-height:1.3; letter-spacing:-.01em; padding:14px 18px 6px; }
+  .caption { padding:0 18px; font-size:14px; color:#c4c4c4; line-height:1.6; }
+  .tags { padding:8px 18px 0; display:flex; flex-wrap:wrap; gap:5px; }
+  .tag { font-size:12px; color:var(--blue); }
+  .why { margin:14px 18px 0; font-size:13px; color:#b5b5b5; line-height:1.5; border-left:3px solid var(--orange); padding-left:11px; }
+  .why.buzz { border-left-color:var(--blue); margin-top:8px; }
+  .script { margin:16px 0 0; border-top:1px solid var(--border); background:#0d0d0d; padding:14px 18px 16px; flex:1; }
+  .script-label { font-size:12px; letter-spacing:.8px; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
+  .copy { background:none; border:1px solid var(--border); color:#bbb; border-radius:6px; font-size:11px; padding:2px 9px; cursor:pointer; font-family:inherit; }
+  .copy:hover { border-color:var(--green); color:var(--green); }
+  .script ol { list-style:none; counter-reset:l; }
+  .script li { counter-increment:l; font-size:15px; line-height:1.65; color:#e6e6e6; padding:6px 0 6px 30px; position:relative; border-bottom:1px solid rgba(255,255,255,.04); }
+  .script li:last-child { border-bottom:none; }
+  .script li::before { content:counter(l); position:absolute; left:0; top:9px; width:20px; height:20px; line-height:20px; text-align:center; font-size:11px; font-weight:600; color:var(--muted); background:var(--bg3); border-radius:50%; }
+  .meta { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; padding:11px 18px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); }
+  .meta .raw { font-style:italic; flex:1 1 100%; font-size:11px; }
+  .read-more { color:var(--green); text-decoration:none; font-weight:600; }
+  .read-more:hover { text-decoration:underline; }
+  footer { text-align:center; color:var(--muted); font-size:12px; padding:26px 20px; border-top:1px solid var(--border); }
+  .pages { max-width:1000px; margin:0 auto; padding:18px 28px 0; display:flex; gap:8px; flex-wrap:wrap; }
+  .pg { text-decoration:none; color:#ccc; background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:7px 14px; font-size:13px; line-height:1.3; }
+  .pg b { display:block; font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:13px; color:var(--text); }
+  .pg small { font-size:11px; color:var(--muted); }
+  .pg:hover { border-color:rgba(255,255,255,.25); }
+  .pg.on { border-color:var(--green); background:#1DB95418; }
+  .pg.on b { color:var(--green); }
+  @media (max-width:520px) { main { grid-template-columns:1fr; padding:6px 14px 50px; } .hero,.toolbar,.pages { padding-left:14px; padding-right:14px; } }
+</style>
+</head>
+<body>
+<nav class="pages"><a class="pg" href="index.html"><b>Latest</b><small>Wed Nov 25 · 17:48 UTC</small></a><a class="pg on" href="previous.html"><b>Previous</b><small>Wed Nov 25 · 14:07 UTC</small></a><a class="pg" href="older.html"><b>2 refreshes ago</b><small>Tue Nov 24 · 18:37 UTC</small></a></nav>
+<div class="hero">
+  <div class="hero-label">Daily Viral Research · Football Shorts</div>
+  <h1>Football Daily <span>Top 12</span></h1>
+  <p>The 12 stories most likely to go viral in the last 24 hours, each written in the short-form format that fits it best. Generated: November 25, 2026 · 14:07 UTC</p>
+</div>
+<div class="toolbar">
+  <button class="chip on" data-f="all">All</button>
+  <button class="chip" data-f="BallBlitz">BallBlitz</button><button class="chip" data-f="FutVibes">FutVibes</button><button class="chip" data-f="GoalLine">GoalLine</button><button class="chip" data-f="Mide Talks Football">Mide Talks Football</button><button class="chip" data-f="Chilena TV">Chilena TV</button><button class="chip" data-f="Narrative of the Exception">Narrative of the Exception</button><button class="chip" data-f="Ahmed&#x27;s Goal">Ahmed&#x27;s Goal</button>
+  <span class="count" id="count">12 stories</span>
+</div>
+<main>
+
+<article class="card" data-f="Chilena TV">
+  <div class="card-head">
+    <span class="rank">#1</span>
+    <span class="fmt f4"><small>FORMAT</small>Chilena TV</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 24 · 14:22 UTC</span>
+  </div>
+  <h2 class="title">The AFCON Final SCANDAL Is Finally Over PT.1</h2>
+  
+  
+  <div class="why">🔥 A 10-month legal battle over a continental title finally ending is massive for African football fans.</div><div class="why buzz">📡 Already buzzing: Ahmed&#x27;s Goal discussed the court&#x27;s role in this saga.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · Chilena TV</span><button class="copy">Copy</button></div>
+    <ol><li>I need you to understand exactly how insane this AFCON situation has been for the last ten months.</li><li>Senegal walked off the pitch in January after a controversial one-nil win against Morocco.</li><li>Then, the Confederation of African Football somehow stripped them of the title and handed it to Morocco in March.</li><li>It took three hundred and ten days and three separate legal proceedings in Switzerland to fix this.</li><li>The Court of Arbitration for Sport has now officially reinstated Senegal as the true 2025 champions.</li><li>They ruled that the referee&#x27;s original decision on the pitch must remain final and sacrosanct.</li><li>This has been the most embarrassing farrago in the sixty-nine-year history of the tournament.</li><li>But is this the end of the governance crisis or just a temporary fix for a broken system?</li><li>I&#x27;ll explain exactly why this ruling might trigger even more chaos for CAF in part two.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Senegal restored as Africa Cup of Nations champions after court ruling</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/24/afcon-verdict-senegal-morocco-africa-cup-of-nations-champions-court-ruling-cas" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="GoalLine">
+  <div class="card-head">
+    <span class="rank">#2</span>
+    <span class="fmt f2"><small>FORMAT</small>GoalLine</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 24 · 21:51 UTC</span>
+  </div>
+  <h2 class="title">POCHETTINO&#x27;S VAR Rant Has One Awkward Problem</h2>
+  
+  <div class="tags"><span class="tag">#manutd</span><span class="tag">#premierleague</span><span class="tag">#var</span></div>
+  <div class="why">🔥 Pochettino calling out the Premier League&#x27;s &#x27;unbelievable&#x27; VAR tech failure is instant clickbait.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · GoalLine</span><button class="copy">Copy</button></div>
+    <ol><li>Mauricio Pochettino is officially fed up with the state of officiating in English football.</li><li>After Leny Yoro’s red card against Liverpool was overturned, the United boss didn&#x27;t hold back.</li><li>He compared the Premier League&#x27;s VAR system to an unbelievable supercar that no one knows how to drive.</li><li>Despite the FA admitting the dismissal was a wrongful error, the four-nil defeat already happened.</li><li>It is a classic case of having the most expensive tools but absolutely zero ability to use them.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Pochettino criticises Premier League officiating after Yoro red card overturned</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/23/manchester-united-appeal-leny-yoro-red-card-liverpool" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#3</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 25 · 13:00 UTC</span>
+  </div>
+  <h2 class="title">Enzo Maresca is the biggest scam in the Premier League 🤡🤣</h2>
+  
+  
+  <div class="why">🔥 The pressure mounting on a high-profile manager like Maresca at a club like City is huge news.</div><div class="why buzz">📡 Already buzzing: @goallineshorts covered the tension around Maresca after the Napoli draw.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>Enzo Maresca is officially on thin ice at Manchester City.</li><li>They started the season looking like title contenders, but the form has completely fallen off a cliff.</li><li>The football looks like a grinding, slow machine that has completely run out of oil.</li><li>After that miserable Champions League draw against Napoli, the board is already looking for a replacement.</li><li>It is honestly embarrassing to see a squad this expensive struggle to string two passes together.</li><li>They were supposed to dominate Europe, but now they are just stalling in every single competition.</li><li>Maresca is clearly out of his depth at the Etihad.</li><li>The worst part is that the players don&#x27;t even look like they are trying to save him anymore.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Bombshell Manchester City report emerges, with Enzo Maresca fighting for job ALREADY</span>
+    <span>📡 FourFourTwo</span>
+    <a class="read-more" href="https://www.fourfourtwo.com/transfer/bombshell-manchester-city-report-emerges-with-enzo-maresca-fighting-for-job-already" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="Mide Talks Football">
+  <div class="card-head">
+    <span class="rank">#4</span>
+    <span class="fmt f3"><small>FORMAT</small>Mide Talks Football</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 25 · 11:34 UTC</span>
+  </div>
+  <h2 class="title">The Fall Of Raheem Sterling</h2>
+  <p class="caption">From leading England to the Euro final to standing in the dock for reckless driving. How did we get here? Is this the lowest point of his career?</p>
+  <div class="tags"><span class="tag">#RaheemSterling</span><span class="tag">#England</span><span class="tag">#PremierLeague</span><span class="tag">#FootballNews</span><span class="tag">#MideTalksFootball</span><span class="tag">#FootballTok</span></div>
+  <div class="why">🔥 A major former England star receiving a suspended jail sentence is a massive shock to the public.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · Mide Talks Football</span><button class="copy">Copy</button></div>
+    <ol><li>I need to know how we got from Euro finals to courtrooms for a player of this magnitude.</li><li>Raheem Sterling has just received a twelve-month suspended sentence for reckless driving while impaired.</li><li>Five years ago, he was the face of the Three Lions, carrying the hopes of a nation on his back.</li><li>Now, he is standing in the dock being told to perform community service just to avoid jail time.</li><li>It is a massive wake-up call for every young athlete who thinks the fame will last forever.</li><li>The transition from the pitch to the courtroom is something you never want to see.</li><li>I need to know, is this the end of his top-flight career as we know it?</li><li>Let me know if you think he can ever recover his reputation after this.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Raheem Sterling avoids jail over reckless driving while using nitrous oxide</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/25/raheem-sterling-avoids-jail-reckless-driving-nitrous-oxide-sentence" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="Ahmed&#x27;s Goal">
+  <div class="card-head">
+    <span class="rank">#5</span>
+    <span class="fmt f6"><small>FORMAT</small>Ahmed&#x27;s Goal</span>
+    <span class="cat-badge cat-latest">📰 LATEST</span>
+    <span class="pub-time">Nov 24 · 19:02 UTC</span>
+  </div>
+  <h2 class="title">How did Florian Wirtz find his best form again?</h2>
+  
+  <div class="tags"><span class="tag">#FIFAWorldCup</span><span class="tag">#FIFATikTokCreator</span><span class="tag">#TikTokCampaign</span><span class="tag">#SoccerTikTok</span></div>
+  <div class="why">🔥 Wirtz finding his best form under Iraola at Liverpool is a massive tactical talking point.</div><div class="why buzz">📡 Already buzzing: @goallineshorts mentioned the Iraola effect on Liverpool&#x27;s tactical setup.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · Ahmed&#x27;s Goal</span><button class="copy">Copy</button></div>
+    <ol><li>Why is Florian Wirtz finally looking like the best player in Europe again?</li><li>He moved to Liverpool in 2025 for a massive one hundred and sixteen million pound fee.</li><li>He struggled under Arne Slot and looked lost in the early weeks of this season.</li><li>But under Andoni Iraola, everything has suddenly clicked into place.</li><li>If you&#x27;re enjoying the video, please hit the follow button.</li><li>Wirtz himself says he is finally enjoying his football again at Anfield.</li><li>It turns out that having the right manager makes a hundred million pound player look like a bargain.</li><li>Sometimes, the problem isn&#x27;t the player, it&#x27;s the system.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Florian Wirtz hails Iraola and Klopp as he reaches new levels for Liverpool</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/24/florian-wirtz-hails-iraola-and-klopp-as-he-reaches-new-levels-for-liverpool" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="Narrative of the Exception">
+  <div class="card-head">
+    <span class="rank">#6</span>
+    <span class="fmt f5"><small>FORMAT</small>Narrative of the Exception</span>
+    <span class="cat-badge cat-latest">📰 LATEST</span>
+    <span class="pub-time">Nov 25 · 12:59 UTC</span>
+  </div>
+  <h2 class="title">The Real Brilliance Of Jude Bellingham</h2>
+  
+  
+  <div class="why">🔥 Bellingham being compared to Zidane is a massive narrative in the football world.</div><div class="why buzz">📡 Already buzzing: Míster Seitán has been covering the individual brilliance of stars like Raphinha and the Madrid setup.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · Narrative of the Exception</span><button class="copy">Copy</button></div>
+    <ol><li>Bernardo Silva sat on the pitch, watching a single moment of genius change the entire game.</li><li>Jude Bellingham didn&#x27;t just score; he silenced the Bernabéu before making it erupt.</li><li>The comparisons to Zinedine Zidane are already flooding the media.</li><li>Bellingham simply shrugged it off, claiming he has no idea how he even did it.</li><li>It is the classic contrast between the calculated precision of a midfielder and the raw imagination of a superstar.</li><li>He isn&#x27;t trying to be the next legend; he is simply creating his own standard.</li><li>When the manager calls you the best in the world, the stats usually back it up.</li><li>He is the exception that makes even the greatest players stop and stare.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 ‘He’s more elegant’: Bellingham downplays Zidane comparisons after wondergoal</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/25/jude-bellingham-downplays-comparisons-to-zidane-after-wondergoal" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="FutVibes">
+  <div class="card-head">
+    <span class="rank">#7</span>
+    <span class="fmt f1"><small>FORMAT</small>FutVibes</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 24 · 14:13 UTC</span>
+  </div>
+  <h2 class="title">Why Xabi Alonso is already finished at Chelsea. 😭💀</h2>
+  
+  
+  <div class="why">🔥 A manager like Xabi Alonso facing the sack at Chelsea is a massive story.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · FutVibes</span><button class="copy">Copy</button></div>
+    <ol><li>Why is no one talking about the fact that Chelsea is already looking for Xabi Alonso&#x27;s replacement?</li><li>The pressure is reaching a breaking point after that absolute hammering by Leeds United.</li><li>They spent millions, yet the form has been consistently poor for weeks.</li><li>Reports suggest the board is losing patience with his tactical approach.</li><li>If he can&#x27;t turn the results around immediately, we are looking at another mid-season managerial disaster.</li><li>It is suspicious how quickly these projects fall apart at Stamford Bridge.</li><li>The atmosphere at the club is toxic, and the fans have clearly had enough.</li><li>Watch this space, because the official announcement might be coming sooner than you think.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Chelsea preparing for Xabi Alonso sack, following poor form: report</span>
+    <span>📡 FourFourTwo</span>
+    <a class="read-more" href="https://www.fourfourtwo.com/transfer/chelsea-preparing-for-xabi-alonso-sack-following-poor-form-report" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="GoalLine">
+  <div class="card-head">
+    <span class="rank">#8</span>
+    <span class="fmt f2"><small>FORMAT</small>GoalLine</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 24 · 20:41 UTC</span>
+  </div>
+  <h2 class="title">MOROCCO AND COLOMBIA BRAWL Chaos At The Dwarf World Cup</h2>
+  
+  <div class="tags"><span class="tag">#worldcup</span><span class="tag">#morocco</span><span class="tag">#colombia</span></div>
+  <div class="why">🔥 A brawl at a World Cup event, even a Dwarf World Cup, is chaotic and highly shareable.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · GoalLine</span><button class="copy">Copy</button></div>
+    <ol><li>The 2026 Dwarf World Cup has officially descended into absolute chaos.</li><li>What was supposed to be a celebration of talent turned into a wild brawl between Morocco and Colombia.</li><li>Players from both sides erupted in the middle of the pitch, forcing officials to intervene immediately.</li><li>It is a shocking scene that has completely overshadowed the actual tournament.</li><li>It seems like the intensity of these international rivalries doesn&#x27;t care which version of the game you&#x27;re playing.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 2026 Dwarf World Cup descends into chaos as Morocco and Colombia players erupt into a wild brawl</span>
+    <span>📡 Marca (English)</span>
+    <a class="read-more" href="https://www.marca.com/en/football/2026/11/24/2026-dwarf-world-cup-descends-into-chaos-as-morocco-and-colombia-players-erupt-into-wild-brawl-video.html" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="BallBlitz">
+  <div class="card-head">
+    <span class="rank">#9</span>
+    <span class="fmt f0"><small>FORMAT</small>BallBlitz</span>
+    <span class="cat-badge cat-transfer">🔥 TRANSFER</span>
+    <span class="pub-time">Nov 25 · 10:54 UTC</span>
+  </div>
+  <h2 class="title">Arsenal did this star player dirty 😳💔</h2>
+  
+  
+  <div class="why">🔥 An Arsenal starter wanting to leave immediately after a big match is a massive red flag.</div><div class="why buzz">📡 Already buzzing: @goallineshorts has been tracking Arsenal&#x27;s internal team morale recently.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · BallBlitz</span><button class="copy">Copy</button></div>
+    <ol><li>An Arsenal first-team star is already looking for the exit door.</li><li>Even after starting against Dortmund, the reports say his bags are basically packed.</li><li>The Gunners are struggling to kill off games, and the internal tension is at an all-time high.</li><li>You have to wonder why a key player would want out when the project is supposedly moving forward.</li><li>Maybe the promises made in the summer transfer window weren&#x27;t actually kept.</li><li>It&#x27;s the classic Arsenal story of holding onto a talent just long enough for them to realize they can do better elsewhere.</li><li>The fans are going to be furious when the official transfer request drops.</li><li>Bro really looked at the project and decided to choose violence instead.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 &#x27;Unhappy&#x27; Arsenal star in talks to leave - despite starting against Dortmund: report</span>
+    <span>📡 FourFourTwo</span>
+    <a class="read-more" href="https://www.fourfourtwo.com/transfer/unhappy-arsenal-star-in-talks-to-leave-despite-starting-against-dortmund-report" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="Ahmed&#x27;s Goal">
+  <div class="card-head">
+    <span class="rank">#10</span>
+    <span class="fmt f6"><small>FORMAT</small>Ahmed&#x27;s Goal</span>
+    <span class="cat-badge cat-latest">📰 LATEST</span>
+    <span class="pub-time">Nov 25 · 08:00 UTC</span>
+  </div>
+  <h2 class="title">Can a footballer have an 11-year career gap?</h2>
+  
+  <div class="tags"><span class="tag">#FIFAWorldCup</span><span class="tag">#FIFATikTokCreator</span><span class="tag">#TikTokCampaign</span><span class="tag">#SoccerTikTok</span></div>
+  <div class="why">🔥 Ronaldinho returning after an 11-year gap is a wild, nostalgic story.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · Ahmed&#x27;s Goal</span><button class="copy">Copy</button></div>
+    <ol><li>Is it even possible for a professional footballer to return after eleven years away?</li><li>Ronaldinho just made his professional appearance for Ravenna in Serie C.</li><li>He hadn&#x27;t played in a professional match since September 2015 before this month.</li><li>If you&#x27;re enjoying the video, please hit the follow button.</li><li>The football world is currently debating if this is a record-breaking hiatus.</li><li>But it makes you wonder if the game has moved on too fast for the legends of the past.</li><li>It is a beautiful, ironic story for a player who defined an entire generation.</li><li>Sometimes, the magic never really leaves the boots.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Has a footballer had a longer career hiatus than Ronaldinho’s 11 year-gap? | The Knowledge</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/25/has-a-footballer-had-a-longer-career-hiatus-than-ronaldinhos-11-year-gap" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="Mide Talks Football">
+  <div class="card-head">
+    <span class="rank">#11</span>
+    <span class="fmt f3"><small>FORMAT</small>Mide Talks Football</span>
+    <span class="cat-badge cat-drama">💥 DRAMA</span>
+    <span class="pub-time">Nov 25 · 13:00 UTC</span>
+  </div>
+  <h2 class="title">The Sandpapergate Betrayal</h2>
+  <p class="caption">Usman Khawaja is hurt by Pat Cummins&#x27; comments. This is a massive internal rift in the Australian camp. Is the team culture actually broken?</p>
+  <div class="tags"><span class="tag">#Cricket</span><span class="tag">#Australia</span><span class="tag">#PatCummins</span><span class="tag">#Sandpapergate</span><span class="tag">#MideTalksFootball</span><span class="tag">#FootballTok</span></div>
+  <div class="why">🔥 Cricket&#x27;s Sandpapergate is a massive scandal, and the internal drama between Cummins and Khawaja is explosive.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · Mide Talks Football</span><button class="copy">Copy</button></div>
+    <ol><li>I need to know if the Australian cricket team is actually falling apart from the inside.</li><li>Usman Khawaja is publicly stating he is hurt by personal attacks from his own captain, Pat Cummins.</li><li>Cummins recently disputed claims that everyone knew about the sandpaper scandal in 2018.</li><li>This is a massive shift from the teammate Khawaja thought he knew for years.</li><li>The fact that this is coming out right before the England series is an absolute nightmare.</li><li>Enough of this fake professionalism; the cracks in the dressing room are wide open for everyone to see.</li><li>I need to know if Cummins can survive the backlash from his own team.</li><li>Is this the end of the current Australian leadership era?</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Khawaja &#x27;hurt&#x27; by &#x27;personal attacks&#x27; from Cummins in sandpaper denials</span>
+    <span>📡 Sky Sports Football</span>
+    <a class="read-more" href="https://www.skysports.com/cricket/news/12040/13616325/sandpapergate-usman-khawaja-hurt-by-personal-attacks-from-pat-cummins-as-he-details-cameron-bancroft-relationship" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+<article class="card" data-f="FutVibes">
+  <div class="card-head">
+    <span class="rank">#12</span>
+    <span class="fmt f1"><small>FORMAT</small>FutVibes</span>
+    <span class="cat-badge cat-latest">📰 LATEST</span>
+    <span class="pub-time">Nov 24 · 20:03 UTC</span>
+  </div>
+  <h2 class="title">Why Deniz Gul is the toughest player in the Champions League. 😭🤔</h2>
+  
+  
+  <div class="why">🔥 A player taking a boot to the face to win a game is a visceral, bloody detail fans love.</div>
+  <div class="script">
+    <div class="script-label"><span>📝 Script · FutVibes</span><button class="copy">Copy</button></div>
+    <ol><li>Why is no one talking about the absolute warrior performance from Deniz Gul in Istanbul?</li><li>He literally took a boot to the face from Nicolas Jackson while scoring the winner against Aston Villa.</li><li>The substitute had to be bandaged up just to finish the final minutes of the match.</li><li>Seventy-seven minutes of drama, and he ends it with a bloodied face and a victory.</li><li>Villa had visited Istanbul three times this year, but this loss was the most painful one yet.</li><li>Gul&#x27;s bravery is exactly the kind of intensity we need more of in Europe.</li><li>He sacrificed his face to condemn Villa to a brutal loss.</li><li>That is the kind of commitment that makes legends.</li></ol>
+  </div>
+  <div class="meta">
+    <span class="raw">📰 Gul takes pain for buoyant Galatasaray to condemn Aston Villa to Champions League loss</span>
+    <span>📡 The Guardian Football</span>
+    <a class="read-more" href="https://www.theguardian.com/football/2026/nov/24/galatasaray-aston-villa-champions-league-match-report" target="_blank" rel="noopener">Read Full Story →</a>
+  </div>
+</article>
+</main>
+<footer>⚽ Football Daily Drop · Auto-updated daily · 4 sources · November 25, 2026 · 14:07 UTC</footer>
+<script>
+  const chips = document.querySelectorAll('.chip'), cards = document.querySelectorAll('.card');
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.classList.remove('on')); c.classList.add('on');
+    let n = 0;
+    cards.forEach(card => {
+      const show = c.dataset.f === 'all' || card.dataset.f === c.dataset.f;
+      card.classList.toggle('hide', !show); if (show) n++;
+    });
+    document.getElementById('count').textContent = n + ' stories';
+  }));
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => {
+    const card = b.closest('.card');
+    const lines = [...card.querySelectorAll('.script li')].map(li => li.textContent).join('\n');
+    const t = card.querySelector('.title').textContent;
+    const cap = card.querySelector('.caption');
+    const tags = [...card.querySelectorAll('.tag')].map(x => x.textContent).join(' ');
+    const txt = t + '\n' + (cap ? cap.textContent + '\n' : '') + (tags ? tags + '\n' : '') + '\n' + lines;
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(
+      () => { b.textContent = 'Copied ✓'; setTimeout(() => b.textContent = 'Copy', 1500); },
+      () => { b.textContent = 'Copy failed'; });
+  }));
+</script>
+</body>
+</html>
