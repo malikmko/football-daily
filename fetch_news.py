@@ -155,12 +155,12 @@ def load_buzz(max_age_hours: int = 36) -> dict:
         d = json.loads(p.read_text(encoding="utf-8"))
         age = datetime.now(timezone.utc) - datetime.fromisoformat(d["generated"])
         if age > timedelta(hours=max_age_hours):
-            print(f"  [buzz] trends.json is {age} old - ignoring")
+            print(f"  [buzz] trends.json is {age} old - ignoring", flush=True)
             return {}
-        print(f"  [buzz] loaded {len(d.get('items', []))} creator/fan items, {d.get('counts')}")
+        print(f"  [buzz] loaded {len(d.get('items', []))} creator/fan items, {d.get('counts')}", flush=True)
         return d
     except Exception as e:
-        print(f"  [buzz] none ({type(e).__name__})")
+        print(f"  [buzz] none ({type(e).__name__})", flush=True)
         return {}
 
 
