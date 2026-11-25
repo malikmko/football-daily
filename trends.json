@@ -1,14 +1,18 @@
 {
- "generated": "2026-11-25T14:08:16+00:00",
+ "generated": "2026-11-25T20:01:17+00:00",
  "window_hours": 48,
  "counts": {
-  "youtube": 5,
-  "tiktok": 12
+  "tiktok": 13,
+  "youtube": 4
  },
  "top_terms": [
   [
+   "arsenal",
+   3
+  ],
+  [
    "barça",
-   4
+   3
   ],
   [
    "afcon",
@@ -16,10 +20,6 @@
   ],
   [
    "iraola",
-   2
-  ],
-  [
-   "arsenal",
    2
   ],
   [
@@ -39,15 +39,15 @@
    1
   ],
   [
+   "cherki",
+   1
+  ],
+  [
    "napoli",
    1
   ],
   [
    "maresca",
-   1
-  ],
-  [
-   "cherki",
    1
   ],
   [
@@ -63,15 +63,11 @@
    1
   ],
   [
-   "styles",
-   1
-  ],
-  [
    "dortmund",
    1
   ],
   [
-   "anfield",
+   "styles",
    1
   ],
   [
@@ -79,11 +75,11 @@
    1
   ],
   [
-   "alisson",
+   "anfield",
    1
   ],
   [
-   "haaland",
+   "alisson",
    1
   ],
   [
@@ -91,23 +87,15 @@
    1
   ],
   [
-   "looked",
-   1
-  ],
-  [
    "frustration",
    1
   ],
   [
-   "ngumoha",
+   "haaland",
    1
   ],
   [
-   "derby",
-   1
-  ],
-  [
-   "champions",
+   "looked",
    1
   ],
   [
@@ -115,7 +103,15 @@
    1
   ],
   [
+   "champions",
+   1
+  ],
+  [
    "varela",
+   1
+  ],
+  [
+   "intentaría",
    1
   ],
   [
@@ -127,7 +123,7 @@
    1
   ],
   [
-   "intentaría",
+   "villarreal",
    1
   ],
   [
@@ -135,39 +131,59 @@
    1
   ],
   [
-   "casi",
-   1
-  ],
-  [
    "habla",
    1
   ],
   [
-   "villarreal",
-   1
-  ],
-  [
-   "hernández",
-   1
-  ],
-  [
-   "arbitraje",
-   1
-  ],
-  [
-   "provocador",
-   1
-  ],
-  [
-   "flick",
+   "casi",
    1
   ],
   [
    "jong",
    1
+  ],
+  [
+   "awkward",
+   1
+  ],
+  [
+   "questioning",
+   1
+  ],
+  [
+   "personal",
+   1
+  ],
+  [
+   "city",
+   1
+  ],
+  [
+   "message",
+   1
+  ],
+  [
+   "højlund",
+   1
   ]
  ],
  "items": [
+  {
+   "platform": "tiktok",
+   "source": "@goallineshorts",
+   "title": "ONE Awkward Hug Has Arsenal Fans Questioning #premierleague #arsenal #arteta",
+   "engagement": 25300,
+   "published": "2026-11-25T18:05:00+00:00",
+   "url": "https://www.tiktok.com/@goallineshorts/video/7712128173349113109"
+  },
+  {
+   "platform": "tiktok",
+   "source": "@goallineshorts",
+   "title": "HØJLUND Had A Very Personal Message For City Fans #championsleague #premierleague #mancity #manchesterunited",
+   "engagement": 2370,
+   "published": "2026-11-25T14:05:00+00:00",
+   "url": "https://www.tiktok.com/@goallineshorts/video/7712095349652966676"
+  },
   {
    "platform": "youtube",
    "source": "Míster Seitán",
@@ -287,22 +303,6 @@
    "engagement": 6737,
    "published": "2026-11-23T21:05:00+00:00",
    "url": "https://www.tiktok.com/@goallineshorts/video/7711409095655378183"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@goallineshorts",
-   "title": "NGUMOHA Explained His Derby Gesture #premierleague #liverpool #ngumoha",
-   "engagement": 57800,
-   "published": "2026-11-23T18:05:00+00:00",
-   "url": "https://www.tiktok.com/@goallineshorts/video/7711378318079085831"
-  },
-  {
-   "platform": "youtube",
-   "source": "Míster Seitán",
-   "title": "FLICK ESTALLA CONTRA HERNÁNDEZ HERNÁNDEZ POR SU INTENTO DE ROBO AL BARÇA Y ARBITRAJE PROVOCADOR",
-   "engagement": 54669,
-   "published": "2026-11-23T17:07:30+00:00",
-   "url": "https://www.youtube.com/watch?v=VtkUFRU0Zy8"
   }
  ]
 }
