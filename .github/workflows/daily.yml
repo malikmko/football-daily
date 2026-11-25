@@ -24,6 +24,14 @@ jobs:
       - name: Install dependencies
         run: pip install feedparser
 
+      - name: Bring back the last refreshes (history.json from gh-pages)
+        run: |
+          if git fetch --depth=1 origin gh-pages && git show FETCH_HEAD:history.json > history.json; then
+            echo "history.json restored"
+          else
+            rm -f history.json; echo "no history yet"
+          fi
+
       - name: Run football research
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -35,4 +43,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
           publish_branch: gh-pages
-          exclude_assets: ".github,fetch_news.py,requirements.txt,*.json,*.md"
+          exclude_assets: ".github,.gitignore,fetch_news.py,requirements.txt,articles.json,trends.json,*.md"

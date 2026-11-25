@@ -652,10 +652,18 @@ _PAGE_TEMPLATE = """<!DOCTYPE html>
   .read-more { color:var(--green); text-decoration:none; font-weight:600; }
   .read-more:hover { text-decoration:underline; }
   footer { text-align:center; color:var(--muted); font-size:12px; padding:26px 20px; border-top:1px solid var(--border); }
-  @media (max-width:520px) { main { grid-template-columns:1fr; padding:6px 14px 50px; } .hero,.toolbar { padding-left:14px; padding-right:14px; } }
+  .pages { max-width:1000px; margin:0 auto; padding:18px 28px 0; display:flex; gap:8px; flex-wrap:wrap; }
+  .pg { text-decoration:none; color:#ccc; background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:7px 14px; font-size:13px; line-height:1.3; }
+  .pg b { display:block; font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:13px; color:var(--text); }
+  .pg small { font-size:11px; color:var(--muted); }
+  .pg:hover { border-color:rgba(255,255,255,.25); }
+  .pg.on { border-color:var(--green); background:#1DB95418; }
+  .pg.on b { color:var(--green); }
+  @media (max-width:520px) { main { grid-template-columns:1fr; padding:6px 14px 50px; } .hero,.toolbar,.pages { padding-left:14px; padding-right:14px; } }
 </style>
 </head>
 <body>
+__NAV__
 <div class="hero">
   <div class="hero-label">Daily Viral Research · Football Shorts</div>
   <h1>Football Daily <span>Top __COUNT__</span></h1>
@@ -697,7 +705,47 @@ __CARDS__
 </html>"""
 
 
-def build_html(articles: list[dict], generated_at: str) -> str:
+HISTORY_FILE = "history.json"   # kept on the gh-pages branch, carried between runs
+PAGE_FILES = ["index.html", "previous.html", "older.html"]
+PAGE_LABELS = ["Latest", "Previous", "2 refreshes ago"]
+
+
+def nav_html(history: list[dict], current: int) -> str:
+    esc = html.escape
+    links = ""
+    for i, rec in enumerate(history[:len(PAGE_FILES)]):
+        try:
+            when = datetime.fromisoformat(rec["generated"]).strftime("%a %b %d · %H:%M UTC")
+        except Exception:
+            when = rec.get("label", "")
+        on = " on" if i == current else ""
+        links += (f'<a class="pg{on}" href="{PAGE_FILES[i]}"><b>{PAGE_LABELS[i]}</b>'
+                  f'<small>{esc(when)}</small></a>')
+    return f'<nav class="pages">{links}</nav>'
+
+
+def update_history(articles: list[dict], generated_iso: str, label: str) -> list[dict]:
+    p = Path(__file__).parent / HISTORY_FILE
+    try:
+        hist = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        hist = []
+    hist = [h for h in hist if h.get("generated") != generated_iso]
+    hist.insert(0, {"generated": generated_iso, "label": label, "articles": articles[:AI_PICKS]})
+    hist = hist[:len(PAGE_FILES)]
+    p.write_text(json.dumps(hist, ensure_ascii=False, indent=1), encoding="utf-8")
+    return hist
+
+
+def write_pages(hist: list[dict]) -> None:
+    root = Path(__file__).parent
+    for i, rec in enumerate(hist[:len(PAGE_FILES)]):
+        page = build_html(rec["articles"], rec["label"], nav_html(hist, i))
+        (root / PAGE_FILES[i]).write_text(page, encoding="utf-8")
+        print(f"   ✅ {PAGE_FILES[i]} ← refresh of {rec['label']}")
+
+
+def build_html(articles: list[dict], generated_at: str, nav: str = "") -> str:
     esc = html.escape
     shown = articles[:AI_PICKS]
     fmt_order = [f for f in FORMAT_NAMES if any(a["ai"]["format"] == f for a in shown)]
@@ -750,6 +798,7 @@ def build_html(articles: list[dict], generated_at: str) -> str:
         cards = "<p style='color:#aaa;text-align:center;margin-top:60px'>No stories found in the last 24 hours.</p>"
 
     return (_PAGE_TEMPLATE
+            .replace("__NAV__", nav)
             .replace("__GENERATED__", esc(generated_at))
             .replace("__COUNT__", str(len(shown)))
             .replace("__CHIPS__", chips)
@@ -770,12 +819,11 @@ if __name__ == "__main__":
     else:
         articles = [keyword_fallback(a) for a in articles[:AI_PICKS]]
 
-    now = datetime.now(timezone.utc).strftime("%B %d, %Y · %H:%M UTC")
-    page = build_html(articles, now)
-
-    out = Path(__file__).parent / "index.html"
-    out.write_text(page, encoding="utf-8")
-    print(f"   ✅ Report saved → {out}")
+    now_dt = datetime.now(timezone.utc)
+    now = now_dt.strftime("%B %d, %Y · %H:%M UTC")
+    # Keep the last 3 refreshes as 3 pages: index.html, previous.html, older.html
+    hist = update_history(articles, now_dt.isoformat(timespec="seconds"), now)
+    write_pages(hist)
 
     # Also save raw JSON for debugging
     json_out = Path(__file__).parent / "articles.json"
