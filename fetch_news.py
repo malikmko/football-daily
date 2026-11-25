@@ -145,7 +145,55 @@ def fetch_articles(hours: int = 24) -> list[dict]:
 
 def _score(text: str) -> int:
     t = text.lower()
-    return sum(2 if kw in t else 0 for kw in HOT_KEYWORDS)
+    return sum(2 if kw in t else 0 for kw in HOT_KEYWORDS) + _buzz_score(t)
+
+
+# ── Creator / fan buzz (trends.json, pushed by the local "football intel" farm) ──
+def load_buzz(max_age_hours: int = 36) -> dict:
+    p = Path(__file__).parent / "trends.json"
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+        age = datetime.now(timezone.utc) - datetime.fromisoformat(d["generated"])
+        if age > timedelta(hours=max_age_hours):
+            print(f"  [buzz] trends.json is {age} old - ignoring")
+            return {}
+        print(f"  [buzz] loaded {len(d.get('items', []))} creator/fan items, {d.get('counts')}")
+        return d
+    except Exception as e:
+        print(f"  [buzz] none ({type(e).__name__})")
+        return {}
+
+
+BUZZ = load_buzz()
+BUZZ_TERMS = {t: n for t, n in BUZZ.get("top_terms", [])}
+
+
+def _buzz_score(t: str) -> int:
+    """+3 per buzz name in the story (more if several creators mention it), capped."""
+    s = sum(3 + min(n, 3) for term, n in BUZZ_TERMS.items()
+            if re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", t))
+    return min(s, 15)
+
+
+def buzz_block(limit: int = 60) -> str:
+    items = BUZZ.get("items", [])[:limit]
+    if not items:
+        return ""
+    lines = "\n".join(
+        f"- [{i['platform']}] {i['source']}: {i['title']} (engagement {i.get('engagement')})"
+        for i in items
+    )
+    return f"""
+CREATOR & FAN BUZZ (what the YouTube/TikTok creators and fan communities we follow posted in the last
+{BUZZ.get('window_hours', 48)}h; these are NOT stories, just demand signals):
+{lines}
+
+HOW TO USE THE BUZZ
+- Prefer stories that people are already talking about above (proven demand), especially ones with high engagement
+  or covered by several creators.
+- But find a DIFFERENT angle from the one those creators already used, and prefer details they missed.
+- Name in "buzz" which creators/communities touched the topic and the angle they took ("" if none).
+"""
 
 
 def categorize(title: str, summary: str) -> str:
@@ -432,12 +480,13 @@ RULES
   is thin, write a shorter script rather than making things up. Exaggerated tone is fine, false facts are not.
 - Scripts are SPOKEN narration: short lines, no stage directions, no timestamps, no hashtags inside the script.
 - Order picks by viral potential, best first.
-
+{buzz_block()}
 Return a JSON array of exactly {AI_PICKS} objects, each with exactly these keys:
   "index": the [number] of the story,
   "format": one of the format names above, exactly,
   "category": one of "TRANSFER", "DRAMA", "INJURY", "WORLD CUP", "LATEST",
   "why_viral": one short sentence on why this will spread,
+  "buzz": which followed creators/communities already covered it and their angle, or "",
   "title": the title in that format's style (no hashtags in it),
   "caption": a caption if the format uses one (Mide Talks Football), otherwise "",
   "hashtags": array of hashtags if the format uses them, otherwise [],
@@ -504,6 +553,7 @@ STORIES:
                 "format":    _fmt_key(p.get("format", "")) or "BallBlitz",
                 "cat":       _VALID_CATS.get(str(p.get("category", "")).upper(), "📰 LATEST"),
                 "why_viral": str(p.get("why_viral", "")).strip(),
+                "buzz":      str(p.get("buzz", "") or "").strip(),
                 "title":     title,
                 "caption":   str(p.get("caption", "") or "").strip(),
                 "hashtags":  tags,
@@ -588,6 +638,7 @@ _PAGE_TEMPLATE = """<!DOCTYPE html>
   .tags { padding:8px 18px 0; display:flex; flex-wrap:wrap; gap:5px; }
   .tag { font-size:12px; color:var(--blue); }
   .why { margin:14px 18px 0; font-size:13px; color:#b5b5b5; line-height:1.5; border-left:3px solid var(--orange); padding-left:11px; }
+  .why.buzz { border-left-color:var(--blue); margin-top:8px; }
   .script { margin:16px 0 0; border-top:1px solid var(--border); background:#0d0d0d; padding:14px 18px 16px; flex:1; }
   .script-label { font-size:12px; letter-spacing:.8px; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
   .copy { background:none; border:1px solid var(--border); color:#bbb; border-radius:6px; font-size:11px; padding:2px 9px; cursor:pointer; font-family:inherit; }
@@ -669,6 +720,8 @@ def build_html(articles: list[dict], generated_at: str) -> str:
             if ai["hashtags"] else ""
         )
         why = f'<div class="why">🔥 {esc(ai["why_viral"])}</div>' if ai["why_viral"] else ""
+        if ai.get("buzz"):
+            why += f'<div class="why buzz">📡 Already buzzing: {esc(ai["buzz"])}</div>'
         lines = "".join(f"<li>{esc(ln)}</li>" for ln in ai["script"])
         cards += f"""
 <article class="card" data-f="{esc(ai['format'])}">
