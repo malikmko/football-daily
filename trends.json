@@ -1,14 +1,14 @@
 {
- "generated": "2026-11-26T04:00:17+00:00",
+ "generated": "2026-11-26T12:01:27+00:00",
  "window_hours": 48,
  "counts": {
-  "youtube": 5,
-  "tiktok": 10
+  "tiktok": 12,
+  "youtube": 4
  },
  "top_terms": [
   [
    "barça",
-   4
+   3
   ],
   [
    "afcon",
@@ -31,6 +31,10 @@
    2
   ],
   [
+   "message",
+   2
+  ],
+  [
    "morocco",
    1
   ],
@@ -43,10 +47,6 @@
    1
   ],
   [
-   "napoli",
-   1
-  ],
-  [
    "cherki",
    1
   ],
@@ -55,7 +55,19 @@
    1
   ],
   [
+   "napoli",
+   1
+  ],
+  [
    "gyökeres",
+   1
+  ],
+  [
+   "konsa",
+   1
+  ],
+  [
+   "dortmund",
    1
   ],
   [
@@ -67,14 +79,6 @@
    1
   ],
   [
-   "dortmund",
-   1
-  ],
-  [
-   "konsa",
-   1
-  ],
-  [
    "anfield",
    1
   ],
@@ -83,19 +87,7 @@
    1
   ],
   [
-   "alisson",
-   1
-  ],
-  [
    "champions",
-   1
-  ],
-  [
-   "gustavo",
-   1
-  ],
-  [
-   "banda",
    1
   ],
   [
@@ -103,11 +95,15 @@
    1
   ],
   [
+   "banda",
+   1
+  ],
+  [
    "varela",
    1
   ],
   [
-   "villarreal",
+   "gustavo",
    1
   ],
   [
@@ -115,15 +111,15 @@
    1
   ],
   [
-   "habla",
-   1
-  ],
-  [
    "nadie",
    1
   ],
   [
-   "jong",
+   "habla",
+   1
+  ],
+  [
+   "villarreal",
    1
   ],
   [
@@ -135,7 +131,7 @@
    1
   ],
   [
-   "højlund",
+   "personal",
    1
   ],
   [
@@ -143,15 +139,7 @@
    1
   ],
   [
-   "message",
-   1
-  ],
-  [
-   "personal",
-   1
-  ],
-  [
-   "jesus",
+   "højlund",
    1
   ],
   [
@@ -159,15 +147,15 @@
    1
   ],
   [
-   "serio",
-   1
-  ],
-  [
    "gordon",
    1
   ],
   [
-   "adeyemi",
+   "jesus",
+   1
+  ],
+  [
+   "serio",
    1
   ],
   [
@@ -177,9 +165,101 @@
   [
    "gran",
    1
+  ],
+  [
+   "adeyemi",
+   1
+  ],
+  [
+   "received",
+   1
+  ],
+  [
+   "alonso",
+   1
+  ],
+  [
+   "terrifying",
+   1
+  ],
+  [
+   "xabi",
+   1
+  ],
+  [
+   "united",
+   1
+  ],
+  [
+   "opponent",
+   1
+  ],
+  [
+   "wasn’t",
+   1
+  ],
+  [
+   "green",
+   1
+  ],
+  [
+   "sporting",
+   1
+  ],
+  [
+   "wearing",
+   1
+  ],
+  [
+   "senne",
+   1
+  ],
+  [
+   "dropped",
+   1
+  ],
+  [
+   "goalkeeping",
+   1
+  ],
+  [
+   "another",
+   1
+  ],
+  [
+   "onana",
+   1
+  ],
+  [
+   "disasterclass",
+   1
   ]
  ],
  "items": [
+  {
+   "platform": "tiktok",
+   "source": "@goallineshorts",
+   "title": "XABI Alonso Just Received The Most Terrifying Message In Football #premierleague #chelsea #xabialonso",
+   "engagement": 5275,
+   "published": "2026-11-26T05:05:00+00:00",
+   "url": "https://www.tiktok.com/@goallineshorts/video/7712265988888153364"
+  },
+  {
+   "platform": "tiktok",
+   "source": "@goallineshorts",
+   "title": "UNITED’s Biggest Opponent Against Sporting Wasn’t Even Wearing Green #premierleague #championsleague #manchesterunited #",
+   "engagement": 19800,
+   "published": "2026-11-26T02:05:00+00:00",
+   "url": "https://www.tiktok.com/@goallineshorts/video/7712265055403855105"
+  },
+  {
+   "platform": "tiktok",
+   "source": "@goallineshorts",
+   "title": "SENNE Onana Just Dropped Another Goalkeeping Disasterclass #premierleague #championsleague #lammens #manchesterunited",
+   "engagement": 7733,
+   "published": "2026-11-25T22:49:48+00:00",
+   "url": "https://www.tiktok.com/@goallineshorts/video/7712245060292660532"
+  },
   {
    "platform": "youtube",
    "source": "Míster Seitán",
@@ -283,22 +363,6 @@
    "engagement": 14300,
    "published": "2026-11-24T14:05:00+00:00",
    "url": "https://www.tiktok.com/@goallineshorts/video/7711710371467267348"
-  },
-  {
-   "platform": "youtube",
-   "source": "Albert Blaya Sensat",
-   "title": "¿Y si el CENTRAL que busca el BARÇA es DE JONG?",
-   "engagement": 12998,
-   "published": "2026-11-24T10:47:49+00:00",
-   "url": "https://www.youtube.com/watch?v=IOY7Pfr25_k"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@goallineshorts",
-   "title": "ALISSON Has Found A Way To Influence A Goal #premierleague #liverpool #alisson",
-   "engagement": 28900,
-   "published": "2026-11-24T05:05:00+00:00",
-   "url": "https://www.tiktok.com/@goallineshorts/video/7711446884853828865"
   }
  ]
 }
