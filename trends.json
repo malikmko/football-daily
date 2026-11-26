@@ -1,18 +1,14 @@
 {
- "generated": "2026-11-25T20:01:17+00:00",
+ "generated": "2026-11-26T04:00:17+00:00",
  "window_hours": 48,
  "counts": {
-  "tiktok": 13,
-  "youtube": 4
+  "youtube": 5,
+  "tiktok": 10
  },
  "top_terms": [
   [
-   "arsenal",
-   3
-  ],
-  [
    "barça",
-   3
+   4
   ],
   [
    "afcon",
@@ -20,6 +16,14 @@
   ],
   [
    "iraola",
+   2
+  ],
+  [
+   "arsenal",
+   2
+  ],
+  [
+   "sabah",
    2
   ],
   [
@@ -39,11 +43,11 @@
    1
   ],
   [
-   "cherki",
+   "napoli",
    1
   ],
   [
-   "napoli",
+   "cherki",
    1
   ],
   [
@@ -55,7 +59,7 @@
    1
   ],
   [
-   "konsa",
+   "styles",
    1
   ],
   [
@@ -67,11 +71,7 @@
    1
   ],
   [
-   "styles",
-   1
-  ],
-  [
-   "dijk",
+   "konsa",
    1
   ],
   [
@@ -79,39 +79,15 @@
    1
   ],
   [
+   "dijk",
+   1
+  ],
+  [
    "alisson",
    1
   ],
   [
-   "bigger",
-   1
-  ],
-  [
-   "frustration",
-   1
-  ],
-  [
-   "haaland",
-   1
-  ],
-  [
-   "looked",
-   1
-  ],
-  [
-   "sabah",
-   1
-  ],
-  [
    "champions",
-   1
-  ],
-  [
-   "varela",
-   1
-  ],
-  [
-   "intentaría",
    1
   ],
   [
@@ -123,11 +99,19 @@
    1
   ],
   [
+   "intentaría",
+   1
+  ],
+  [
+   "varela",
+   1
+  ],
+  [
    "villarreal",
    1
   ],
   [
-   "nadie",
+   "casi",
    1
   ],
   [
@@ -135,7 +119,7 @@
    1
   ],
   [
-   "casi",
+   "nadie",
    1
   ],
   [
@@ -151,7 +135,7 @@
    1
   ],
   [
-   "personal",
+   "højlund",
    1
   ],
   [
@@ -163,11 +147,47 @@
    1
   ],
   [
-   "højlund",
+   "personal",
+   1
+  ],
+  [
+   "jesus",
+   1
+  ],
+  [
+   "victoria",
+   1
+  ],
+  [
+   "serio",
+   1
+  ],
+  [
+   "gordon",
+   1
+  ],
+  [
+   "adeyemi",
+   1
+  ],
+  [
+   "gabriel",
+   1
+  ],
+  [
+   "gran",
    1
   ]
  ],
  "items": [
+  {
+   "platform": "youtube",
+   "source": "Míster Seitán",
+   "title": "SABAH 1-4 BARÇA | GORDON ADEYEMI Y GABRIEL JESUS DAN UNA GRAN VICTORIA A UN BARÇA MUY SERIO",
+   "engagement": 35378,
+   "published": "2026-11-25T20:42:16+00:00",
+   "url": "https://www.youtube.com/watch?v=JlTUp2Uvj88"
+  },
   {
    "platform": "tiktok",
    "source": "@goallineshorts",
@@ -279,30 +299,6 @@
    "engagement": 28900,
    "published": "2026-11-24T05:05:00+00:00",
    "url": "https://www.tiktok.com/@goallineshorts/video/7711446884853828865"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@goallineshorts",
-   "title": "ARSENAL Fans Feared The Worst #premierleague #arsenal #raya",
-   "engagement": 8812,
-   "published": "2026-11-24T02:05:00+00:00",
-   "url": "https://www.tiktok.com/@goallineshorts/video/7711465112464297268"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@ahmedsgoal",
-   "title": "Things that football fans are finally going to find out",
-   "engagement": 166900,
-   "published": "2026-11-23T23:05:38+00:00",
-   "url": "https://www.tiktok.com/@ahmedsgoal/video/7711506876432731405"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@goallineshorts",
-   "title": "HAALAND’s Reaction To One Throw-In Looked Bigger Than Just Frustration #premierleague #mancity #haaland",
-   "engagement": 6737,
-   "published": "2026-11-23T21:05:00+00:00",
-   "url": "https://www.tiktok.com/@goallineshorts/video/7711409095655378183"
   }
  ]
 }
