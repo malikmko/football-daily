@@ -1,37 +1,25 @@
 {
- "generated": "2026-11-27T12:00:59+00:00",
+ "generated": "2026-11-27T20:03:40+00:00",
  "window_hours": 48,
  "counts": {
-  "tiktok": 8,
-  "youtube": 3
+  "tiktok": 9,
+  "youtube": 5
  },
  "top_terms": [
   [
-   "message",
+   "another",
    2
   ],
   [
-   "questioning",
-   1
+   "flick",
+   2
   ],
   [
-   "awkward",
-   1
+   "might",
+   2
   ],
   [
-   "arsenal",
-   1
-  ],
-  [
-   "højlund",
-   1
-  ],
-  [
-   "city",
-   1
-  ],
-  [
-   "personal",
+   "jesus",
    1
   ],
   [
@@ -39,15 +27,15 @@
    1
   ],
   [
+   "gabriel",
+   1
+  ],
+  [
    "gordon",
    1
   ],
   [
-   "jesus",
-   1
-  ],
-  [
-   "gran",
+   "adeyemi",
    1
   ],
   [
@@ -59,23 +47,11 @@
    1
   ],
   [
+   "gran",
+   1
+  ],
+  [
    "barça",
-   1
-  ],
-  [
-   "adeyemi",
-   1
-  ],
-  [
-   "gabriel",
-   1
-  ],
-  [
-   "terrifying",
-   1
-  ],
-  [
-   "received",
    1
   ],
   [
@@ -83,11 +59,19 @@
    1
   ],
   [
+   "received",
+   1
+  ],
+  [
    "alonso",
    1
   ],
   [
-   "sporting",
+   "terrifying",
+   1
+  ],
+  [
+   "message",
    1
   ],
   [
@@ -95,11 +79,7 @@
    1
   ],
   [
-   "wasn’t",
-   1
-  ],
-  [
-   "green",
+   "sporting",
    1
   ],
   [
@@ -107,11 +87,15 @@
    1
   ],
   [
-   "united",
+   "green",
    1
   ],
   [
-   "senne",
+   "wasn’t",
+   1
+  ],
+  [
+   "united",
    1
   ],
   [
@@ -119,7 +103,7 @@
    1
   ],
   [
-   "disasterclass",
+   "goalkeeping",
    1
   ],
   [
@@ -127,39 +111,11 @@
    1
   ],
   [
-   "another",
+   "senne",
    1
   ],
   [
-   "goalkeeping",
-   1
-  ],
-  [
-   "ataque",
-   1
-  ],
-  [
-   "habla",
-   1
-  ],
-  [
-   "poder",
-   1
-  ],
-  [
-   "flick",
-   1
-  ],
-  [
-   "defensa",
-   1
-  ],
-  [
-   "cargarse",
-   1
-  ],
-  [
-   "prensa",
+   "disasterclass",
    1
   ],
   [
@@ -167,7 +123,51 @@
    1
   ],
   [
+   "cargarse",
+   1
+  ],
+  [
+   "defensa",
+   1
+  ],
+  [
+   "habla",
+   1
+  ],
+  [
+   "ataque",
+   1
+  ],
+  [
+   "prensa",
+   1
+  ],
+  [
+   "poder",
+   1
+  ],
+  [
+   "jugadores",
+   1
+  ],
+  [
    "unieron",
+   1
+  ],
+  [
+   "difícil",
+   1
+  ],
+  [
+   "nadapletes",
+   1
+  ],
+  [
+   "clave",
+   1
+  ],
+  [
+   "esta",
    1
   ],
   [
@@ -179,31 +179,15 @@
    1
   ],
   [
-   "esta",
-   1
-  ],
-  [
-   "clave",
-   1
-  ],
-  [
-   "difícil",
-   1
-  ],
-  [
-   "jugadores",
-   1
-  ],
-  [
-   "nadapletes",
-   1
-  ],
-  [
    "glitch",
    1
   ],
   [
    "bruno",
+   1
+  ],
+  [
+   "existed",
    1
   ],
   [
@@ -215,19 +199,11 @@
    1
   ],
   [
-   "might",
-   1
-  ],
-  [
-   "existed",
-   1
-  ],
-  [
    "coldest",
    1
   ],
   [
-   "backed",
+   "wirtz",
    1
   ],
   [
@@ -239,15 +215,79 @@
    1
   ],
   [
-   "wirtz",
+   "backed",
+   1
+  ],
+  [
+   "underrated",
+   1
+  ],
+  [
+   "playmaker",
    1
   ],
   [
    "liverpool",
    1
+  ],
+  [
+   "pronto",
+   1
+  ],
+  [
+   "guardiola",
+   1
+  ],
+  [
+   "champions",
+   1
+  ],
+  [
+   "echará",
+   1
   ]
  ],
  "items": [
+  {
+   "platform": "tiktok",
+   "source": "@goallineshorts",
+   "title": "FRIMPONG Is Making Kerkez Look Like A Defensive Masterclass #premierleague #liverpool #frimpong",
+   "engagement": 5330,
+   "published": "2026-11-27T18:05:00+00:00",
+   "url": "https://www.tiktok.com/@goallineshorts/video/7712877435351567623"
+  },
+  {
+   "platform": "tiktok",
+   "source": "@ahmedsgoal",
+   "title": "#5minuteplus football players who are one mistake away from going to prison",
+   "engagement": 11900,
+   "published": "2026-11-27T15:22:04+00:00",
+   "url": "https://www.tiktok.com/@ahmedsgoal/video/7712871719098158350"
+  },
+  {
+   "platform": "youtube",
+   "source": "Míster Seitán",
+   "title": "FLICK REVIENTA UN RÉCORD DE GUARDIOLA EN CHAMPIONS, PERO EL BARCELONISMO ECHARÁ PRONTO A FLICK...",
+   "engagement": 13982,
+   "published": "2026-11-27T14:40:59+00:00",
+   "url": "https://www.youtube.com/watch?v=QlUIimnEb18"
+  },
+  {
+   "platform": "tiktok",
+   "source": "@goallineshorts",
+   "title": "PALMER Might Need Competition More Than Another Tactical Excuse #premierleague #chelsea #palmer",
+   "engagement": 1227,
+   "published": "2026-11-27T14:05:00+00:00",
+   "url": "https://www.tiktok.com/@goallineshorts/video/7712823135812308225"
+  },
+  {
+   "platform": "youtube",
+   "source": "Míster Seitán",
+   "title": "FEIJOO: \"CONOZCO A FLORENTINO. EL CASO NEGREIRA ES GRAVE LO INVESTIGAREMOS HASTA EL FINAL\"",
+   "engagement": 22809,
+   "published": "2026-11-27T12:28:40+00:00",
+   "url": "https://www.youtube.com/watch?v=2gdzF0NlQbg"
+  },
   {
    "platform": "tiktok",
    "source": "@goallineshorts",
@@ -319,22 +359,6 @@
    "engagement": 35378,
    "published": "2026-11-25T20:42:16+00:00",
    "url": "https://www.youtube.com/watch?v=JlTUp2Uvj88"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@goallineshorts",
-   "title": "ONE Awkward Hug Has Arsenal Fans Questioning #premierleague #arsenal #arteta",
-   "engagement": 25300,
-   "published": "2026-11-25T18:05:00+00:00",
-   "url": "https://www.tiktok.com/@goallineshorts/video/7712128173349113109"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@goallineshorts",
-   "title": "HØJLUND Had A Very Personal Message For City Fans #championsleague #premierleague #mancity #manchesterunited",
-   "engagement": 2370,
-   "published": "2026-11-25T14:05:00+00:00",
-   "url": "https://www.tiktok.com/@goallineshorts/video/7712095349652966676"
   }
  ]
 }
