@@ -1,17 +1,13 @@
 {
- "generated": "2026-11-26T20:01:36+00:00",
+ "generated": "2026-11-27T04:00:12+00:00",
  "window_hours": 48,
  "counts": {
-  "tiktok": 12,
+  "tiktok": 8,
   "youtube": 4
  },
  "top_terms": [
   [
-   "afcon",
-   2
-  ],
-  [
-   "arsenal",
+   "sabah",
    2
   ],
   [
@@ -19,20 +15,8 @@
    2
   ],
   [
-   "sabah",
-   2
-  ],
-  [
    "message",
    2
-  ],
-  [
-   "morocco",
-   1
-  ],
-  [
-   "senegal",
-   1
   ],
   [
    "isak",
@@ -43,27 +27,11 @@
    1
   ],
   [
-   "napoli",
-   1
-  ],
-  [
-   "cherki",
-   1
-  ],
-  [
-   "maresca",
-   1
-  ],
-  [
-   "gyökeres",
-   1
-  ],
-  [
    "champions",
    1
   ],
   [
-   "awkward",
+   "arsenal",
    1
   ],
   [
@@ -71,11 +39,7 @@
    1
   ],
   [
-   "city",
-   1
-  ],
-  [
-   "personal",
+   "awkward",
    1
   ],
   [
@@ -83,11 +47,15 @@
    1
   ],
   [
-   "jesus",
+   "personal",
    1
   ],
   [
-   "adeyemi",
+   "city",
+   1
+  ],
+  [
+   "jesus",
    1
   ],
   [
@@ -99,19 +67,19 @@
    1
   ],
   [
-   "gabriel",
-   1
-  ],
-  [
-   "victoria",
-   1
-  ],
-  [
    "serio",
    1
   ],
   [
-   "alonso",
+   "gabriel",
+   1
+  ],
+  [
+   "adeyemi",
+   1
+  ],
+  [
+   "victoria",
    1
   ],
   [
@@ -127,7 +95,7 @@
    1
   ],
   [
-   "opponent",
+   "alonso",
    1
   ],
   [
@@ -139,11 +107,15 @@
    1
   ],
   [
-   "united",
+   "wearing",
    1
   ],
   [
-   "wearing",
+   "opponent",
+   1
+  ],
+  [
+   "united",
    1
   ],
   [
@@ -151,15 +123,7 @@
    1
   ],
   [
-   "disasterclass",
-   1
-  ],
-  [
-   "another",
-   1
-  ],
-  [
-   "goalkeeping",
+   "senne",
    1
   ],
   [
@@ -167,11 +131,27 @@
    1
   ],
   [
+   "goalkeeping",
+   1
+  ],
+  [
+   "another",
+   1
+  ],
+  [
+   "disasterclass",
+   1
+  ],
+  [
    "dropped",
    1
   ],
   [
-   "senne",
+   "fallamos",
+   1
+  ],
+  [
+   "ataque",
    1
   ],
   [
@@ -183,15 +163,11 @@
    1
   ],
   [
+   "defensa",
+   1
+  ],
+  [
    "cargarse",
-   1
-  ],
-  [
-   "ataque",
-   1
-  ],
-  [
-   "habla",
    1
   ],
   [
@@ -199,19 +175,11 @@
    1
   ],
   [
-   "fallamos",
+   "habla",
    1
   ],
   [
-   "defensa",
-   1
-  ],
-  [
-   "jugadores",
-   1
-  ],
-  [
-   "difícil",
+   "unieron",
    1
   ],
   [
@@ -223,7 +191,15 @@
    1
   ],
   [
-   "esta",
+   "tras",
+   1
+  ],
+  [
+   "difícil",
+   1
+  ],
+  [
+   "jugadores",
    1
   ],
   [
@@ -231,11 +207,27 @@
    1
   ],
   [
-   "unieron",
+   "esta",
    1
   ],
   [
-   "tras",
+   "discovered",
+   1
+  ],
+  [
+   "might",
+   1
+  ],
+  [
+   "existed",
+   1
+  ],
+  [
+   "glitch",
+   1
+  ],
+  [
+   "bruno",
    1
   ],
   [
@@ -243,7 +235,15 @@
    1
   ],
   [
-   "discovered",
+   "backed",
+   1
+  ],
+  [
+   "words",
+   1
+  ],
+  [
+   "coldest",
    1
   ]
  ],
@@ -343,38 +343,6 @@
    "engagement": 4834,
    "published": "2026-11-25T05:05:00+00:00",
    "url": "https://www.tiktok.com/@goallineshorts/video/7711823282294557953"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@goallineshorts",
-   "title": "MARESCA Should Be Worried About What Cherki Said After Napoli #championsleague #premierleague #mancity #cherki",
-   "engagement": 32500,
-   "published": "2026-11-25T02:05:00+00:00",
-   "url": "https://www.tiktok.com/@goallineshorts/video/7711889052127071508"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@ahmedsgoal",
-   "title": "Can Morocco still be awarded the AFCON even after the courts decision?",
-   "engagement": 14100,
-   "published": "2026-11-25T00:54:45+00:00",
-   "url": "https://www.tiktok.com/@ahmedsgoal/video/7711906114136231182"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@goallineshorts",
-   "title": "ONE Gyökeres Goal, Two VERY Different Reactions At Arsenal #championsleague #arsenal #gyokeres",
-   "engagement": 19300,
-   "published": "2026-11-24T22:51:55+00:00",
-   "url": "https://www.tiktok.com/@goallineshorts/video/7711874512077327637"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@ahmedsgoal",
-   "title": "Why did the court decide that Senegal were AFCON champions #tiktokcampaign #globalfootball",
-   "engagement": 75200,
-   "published": "2026-11-24T20:43:06+00:00",
-   "url": "https://www.tiktok.com/@ahmedsgoal/video/7711841296096218382"
   }
  ]
 }
