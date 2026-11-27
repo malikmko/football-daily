@@ -1,38 +1,14 @@
 {
- "generated": "2026-11-27T04:00:12+00:00",
+ "generated": "2026-11-27T12:00:59+00:00",
  "window_hours": 48,
  "counts": {
   "tiktok": 8,
-  "youtube": 4
+  "youtube": 3
  },
  "top_terms": [
   [
-   "sabah",
-   2
-  ],
-  [
-   "barça",
-   2
-  ],
-  [
    "message",
    2
-  ],
-  [
-   "isak",
-   1
-  ],
-  [
-   "iraola",
-   1
-  ],
-  [
-   "champions",
-   1
-  ],
-  [
-   "arsenal",
-   1
   ],
   [
    "questioning",
@@ -43,11 +19,11 @@
    1
   ],
   [
-   "højlund",
+   "arsenal",
    1
   ],
   [
-   "personal",
+   "højlund",
    1
   ],
   [
@@ -55,7 +31,11 @@
    1
   ],
   [
-   "jesus",
+   "personal",
+   1
+  ],
+  [
+   "sabah",
    1
   ],
   [
@@ -63,19 +43,11 @@
    1
   ],
   [
+   "jesus",
+   1
+  ],
+  [
    "gran",
-   1
-  ],
-  [
-   "serio",
-   1
-  ],
-  [
-   "gabriel",
-   1
-  ],
-  [
-   "adeyemi",
    1
   ],
   [
@@ -83,11 +55,23 @@
    1
   ],
   [
-   "terrifying",
+   "serio",
    1
   ],
   [
-   "xabi",
+   "barça",
+   1
+  ],
+  [
+   "adeyemi",
+   1
+  ],
+  [
+   "gabriel",
+   1
+  ],
+  [
+   "terrifying",
    1
   ],
   [
@@ -95,11 +79,19 @@
    1
   ],
   [
+   "xabi",
+   1
+  ],
+  [
    "alonso",
    1
   ],
   [
-   "green",
+   "sporting",
+   1
+  ],
+  [
+   "wearing",
    1
   ],
   [
@@ -107,7 +99,7 @@
    1
   ],
   [
-   "wearing",
+   "green",
    1
   ],
   [
@@ -119,27 +111,7 @@
    1
   ],
   [
-   "sporting",
-   1
-  ],
-  [
    "senne",
-   1
-  ],
-  [
-   "onana",
-   1
-  ],
-  [
-   "goalkeeping",
-   1
-  ],
-  [
-   "another",
-   1
-  ],
-  [
-   "disasterclass",
    1
   ],
   [
@@ -147,7 +119,19 @@
    1
   ],
   [
-   "fallamos",
+   "disasterclass",
+   1
+  ],
+  [
+   "onana",
+   1
+  ],
+  [
+   "another",
+   1
+  ],
+  [
+   "goalkeeping",
    1
   ],
   [
@@ -155,11 +139,15 @@
    1
   ],
   [
-   "prensa",
+   "habla",
    1
   ],
   [
    "poder",
+   1
+  ],
+  [
+   "flick",
    1
   ],
   [
@@ -171,11 +159,11 @@
    1
   ],
   [
-   "flick",
+   "prensa",
    1
   ],
   [
-   "habla",
+   "fallamos",
    1
   ],
   [
@@ -183,23 +171,7 @@
    1
   ],
   [
-   "clave",
-   1
-  ],
-  [
-   "nadapletes",
-   1
-  ],
-  [
    "tras",
-   1
-  ],
-  [
-   "difícil",
-   1
-  ],
-  [
-   "jugadores",
    1
   ],
   [
@@ -211,15 +183,19 @@
    1
   ],
   [
-   "discovered",
+   "clave",
    1
   ],
   [
-   "might",
+   "difícil",
    1
   ],
   [
-   "existed",
+   "jugadores",
+   1
+  ],
+  [
+   "nadapletes",
    1
   ],
   [
@@ -235,7 +211,27 @@
    1
   ],
   [
+   "discovered",
+   1
+  ],
+  [
+   "might",
+   1
+  ],
+  [
+   "existed",
+   1
+  ],
+  [
+   "coldest",
+   1
+  ],
+  [
    "backed",
+   1
+  ],
+  [
+   "possible",
    1
   ],
   [
@@ -243,11 +239,23 @@
    1
   ],
   [
-   "coldest",
+   "wirtz",
+   1
+  ],
+  [
+   "liverpool",
    1
   ]
  ],
  "items": [
+  {
+   "platform": "tiktok",
+   "source": "@goallineshorts",
+   "title": "Liverpool’s Most Underrated Playmaker #premierleague #liverpool #championsleague #alisson",
+   "engagement": 7252,
+   "published": "2026-11-27T05:05:00+00:00",
+   "url": "https://www.tiktok.com/@goallineshorts/video/7712555255082274049"
+  },
   {
    "platform": "tiktok",
    "source": "@goallineshorts",
@@ -327,22 +335,6 @@
    "engagement": 2370,
    "published": "2026-11-25T14:05:00+00:00",
    "url": "https://www.tiktok.com/@goallineshorts/video/7712095349652966676"
-  },
-  {
-   "platform": "youtube",
-   "source": "Míster Seitán",
-   "title": "SABAH vs BARÇA | ¡VAMOS A POR LA CHAMPIONS EQUIPO!",
-   "engagement": 13377,
-   "published": "2026-11-25T05:46:28+00:00",
-   "url": "https://www.youtube.com/watch?v=-m9YAUH-aVE"
-  },
-  {
-   "platform": "tiktok",
-   "source": "@goallineshorts",
-   "title": "IRAOLA Basically Banned Isak From Playing Football #premierleague #liverpool #isak",
-   "engagement": 4834,
-   "published": "2026-11-25T05:05:00+00:00",
-   "url": "https://www.tiktok.com/@goallineshorts/video/7711823282294557953"
   }
  ]
 }
